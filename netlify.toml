@@ -1,0 +1,7 @@
+# Static site: no build step, published from the repository root.
+# These values override the dashboard build settings, which contained
+# the placeholder text "Leave blank" and caused deploys to fail.
+[build]
+  base = "/"
+  publish = "."
+  command = "echo 'Static site - no build step'"
