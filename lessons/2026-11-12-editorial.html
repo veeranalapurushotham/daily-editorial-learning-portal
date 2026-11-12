@@ -1,0 +1,2905 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="broadsheet">
+  <title>Daily Editorial Reader &amp; Vocab Bank — 12th November 2026</title>
+
+  <!-- Google Fonts: Bitter (Headlines), Source Serif 4 (Body), Source Sans 3 (Labels), Noto Sans Telugu (Regional Vocab) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,500..800;1,400..700&family=Noto+Sans+Telugu:wght@400;600;700&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* -------------------------------------------------------------
+       Broadsheet Design System & Root Tokens
+       ------------------------------------------------------------- */
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces */
+      --background: #f7f3eb;               /* warm ivory newsprint */
+      --surface-container-low: #efe8da;    /* deeper newsprint */
+      --surface-container: #e6ddcc;        /* structured panels */
+      --surface-container-high: #ddd2be;   /* selected / hover panels */
+
+      /* Ink */
+      --on-surface: #1a1817;               /* newsprint black */
+      --on-surface-variant: #4d4845;       /* grey ink: ledes, captions */
+
+      /* Rules */
+      --outline: #33302e;                  /* ink rules */
+      --outline-variant: #cdc3b2;          /* column hairlines */
+
+      /* Accents */
+      --primary: #990f3d;                  /* claret: links, active badges */
+      --on-primary: #ffffff;
+      --primary-container: #f4dce2;        /* pale claret wash */
+      --on-primary-container: #6b0a2a;
+      --secondary: #0d7680;                /* teal topic tags */
+      --tertiary: #0f5499;                 /* oxford blue */
+      --error: #b3261e;
+      --on-error: #ffffff;
+      --positive: #1b6d39;
+      --warning: #9a6312;
+      --focus: #990f3d;
+
+      /* Data voices */
+      --data-1: #990f3d;
+      --data-2: #0d7680;
+      --data-3: #0f5499;
+      --data-4: #9a6312;
+      --data-context: #bfb5a4;
+
+      /* Typography */
+      --font-headline: 'Bitter', Georgia, serif;
+      --font-body: 'Source Serif 4', Charter, serif;
+      --font-label: 'Source Sans 3', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-telugu: 'Noto Sans Telugu', sans-serif;
+
+      /* Shape */
+      --rounded: 0px;
+      --rounded-lg: 0px;
+      --rounded-full: 0px;
+
+      /* Rules & borders */
+      --rule-masthead: 3px double var(--on-surface);
+      --rule-ink: 1px solid var(--on-surface);
+      --rule-section: 2px solid var(--outline);
+      --rule-column: 1px solid var(--outline-variant);
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+
+      /* Type scale (Narrative / Tool Hybrid) */
+      --display-size: clamp(2rem, 1.4rem + 2.5vw, 3.25rem);
+      --headline-size: clamp(1.4rem, 1.1rem + 1.2vw, 1.85rem);
+      --subhead-size: clamp(1.1rem, 1rem + 0.4vw, 1.25rem);
+      --body-size: 1.0625rem;
+      --label-size: 0.75rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 200ms;
+    }
+
+    /* Dark Mode (Night Edition) */
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --background: #1d1a18;
+      --surface-container-low: #26221f;
+      --surface-container: #302b27;
+      --surface-container-high: #3b3530;
+      --on-surface: #f2e8de;
+      --on-surface-variant: #c2b8ae;
+      --outline: #e8ded4;
+      --outline-variant: #4d4845;
+      --primary: #f08aa3;
+      --on-primary: #1d1a18;
+      --primary-container: #4a1222;
+      --on-primary-container: #ffd9e2;
+      --secondary: #5cbcc4;
+      --tertiary: #7fb0e8;
+      --error: #f28b82;
+      --positive: #81c995;
+      --warning: #fdd663;
+      --focus: #f08aa3;
+      --data-1: #f08aa3;
+      --data-2: #5cbcc4;
+      --data-3: #7fb0e8;
+      --data-4: #fdd663;
+      --data-context: #5a524a;
+      --rule-masthead: 3px double var(--outline);
+      --rule-ink: 1px solid var(--outline);
+      --rule-section: 2px solid var(--outline);
+      --rule-column: 1px solid var(--outline-variant);
+    }
+
+    /* Base Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      font-optical-sizing: auto;
+      transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+    }
+
+    /* Focus styling */
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Container */
+    .app-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    /* Masthead */
+    .masthead-top {
+      border-bottom: var(--rule-masthead);
+      padding-bottom: var(--space-sm);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface-variant);
+    }
+
+    .masthead-meta {
+      display: flex;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .masthead-controls {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .control-btn {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      color: var(--on-surface);
+      padding: 0.35rem 0.65rem;
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      border-radius: var(--rounded);
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .control-btn:hover {
+      background: var(--surface-container-high);
+    }
+
+    .masthead-main {
+      padding-top: var(--space-lg);
+      padding-bottom: var(--space-md);
+      border-bottom: var(--rule-ink);
+    }
+
+    .paper-name {
+      font-family: var(--font-headline);
+      font-size: var(--display-size);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin: 0 0 var(--space-xs) 0;
+      text-transform: none;
+    }
+
+    .paper-tagline {
+      font-family: var(--font-body);
+      font-style: italic;
+      color: var(--on-surface-variant);
+      font-size: var(--subhead-size);
+      margin: 0;
+    }
+
+    /* Tab Navigation */
+    .tab-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      border-bottom: 2px solid var(--outline);
+      margin-top: var(--space-md);
+      background: var(--surface-container-low);
+    }
+
+    .tab-item {
+      padding: 0.75rem 1.25rem;
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      background: transparent;
+      border: none;
+      border-right: var(--rule-column);
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: all var(--dur-micro) var(--ease-out);
+      border-radius: var(--rounded);
+    }
+
+    .tab-item:hover {
+      background: var(--surface-container);
+      color: var(--on-surface);
+    }
+
+    .tab-item.active {
+      background: var(--primary);
+      color: var(--on-primary);
+    }
+
+    /* Views */
+    .view-content {
+      display: none;
+      padding-top: var(--space-lg);
+      animation: fadeIn var(--dur-short) var(--ease-out);
+    }
+    .view-content.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Broadsheet Section Headings */
+    .section-header {
+      border-top: var(--rule-section);
+      padding-top: var(--space-sm);
+      margin-top: var(--space-xl);
+      margin-bottom: var(--space-md);
+    }
+    .section-header:first-of-type {
+      margin-top: var(--space-sm);
+    }
+
+    .section-kicker {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-bottom: 0.25rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: var(--font-headline);
+      font-size: var(--headline-size);
+      font-weight: 700;
+      line-height: 1.15;
+      margin: 0 0 var(--space-xs) 0;
+    }
+
+    .section-subtitle {
+      font-family: var(--font-body);
+      color: var(--on-surface-variant);
+      font-size: 1rem;
+      margin: 0;
+    }
+
+    /* Articles Layout */
+    .article-lead {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: var(--space-xl);
+      margin-bottom: var(--space-xl);
+    }
+
+    .article-col-main {
+      border-right: var(--rule-column);
+      padding-right: var(--space-xl);
+    }
+
+    .article-col-side {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .headline-major {
+      font-family: var(--font-headline);
+      font-size: clamp(1.75rem, 1.25rem + 1.8vw, 2.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-top: 0;
+      margin-bottom: var(--space-sm);
+      letter-spacing: -0.015em;
+    }
+
+    .standfirst {
+      font-family: var(--font-body);
+      font-size: 1.15rem;
+      line-height: 1.5;
+      color: var(--on-surface-variant);
+      border-bottom: var(--rule-column);
+      padding-bottom: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .article-paragraph {
+      margin-bottom: var(--space-md);
+      text-align: justify;
+      hyphens: auto;
+    }
+
+    .article-paragraph strong {
+      font-weight: 700;
+    }
+
+    /* Keyword highlight badge */
+    .vocab-hl {
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      padding: 0.1rem 0.35rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 1px dotted var(--primary);
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .vocab-hl:hover {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+
+    /* Side briefing box */
+    .aside-box {
+      border: 1px solid var(--outline);
+      background: var(--surface-container-low);
+      padding: var(--space-md);
+    }
+
+    .aside-title {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-top: 0;
+      margin-bottom: var(--space-xs);
+      border-bottom: 1px solid var(--outline);
+      padding-bottom: var(--space-xs);
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 0.4rem 0;
+      border-bottom: 1px dashed var(--outline-variant);
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+    }
+    .metric-val {
+      font-family: var(--font-headline);
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .tag-teal {
+      color: var(--secondary);
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    /* Comprehension Question Box */
+    .rc-container {
+      margin-top: var(--space-lg);
+      border-top: var(--rule-section);
+      padding-top: var(--space-md);
+    }
+
+    .rc-card {
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline);
+      padding: var(--space-md);
+      margin-bottom: var(--space-md);
+    }
+
+    .rc-prompt {
+      font-family: var(--font-headline);
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: var(--space-sm);
+    }
+
+    .rc-options {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      margin-bottom: var(--space-sm);
+    }
+
+    .rc-option {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      padding: 0.35rem 0.5rem;
+      border: 1px solid transparent;
+      background: transparent;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .rc-option:hover {
+      background: var(--surface-container);
+    }
+    .rc-option.correct-picked {
+      background: #e6f4ea;
+      border-color: var(--positive);
+      color: #0d5325;
+    }
+    [data-theme="dark"] .rc-option.correct-picked {
+      background: #143521;
+      border-color: var(--positive);
+      color: #81c995;
+    }
+    .rc-option.wrong-picked {
+      background: var(--primary-container);
+      border-color: var(--error);
+      color: var(--on-primary-container);
+    }
+
+    .rc-feedback {
+      display: none;
+      padding: var(--space-sm);
+      margin-top: var(--space-xs);
+      font-size: 0.9rem;
+      border-left: 3px solid var(--outline);
+      background: var(--surface-container);
+    }
+
+    /* Short Stories Section */
+    .story-card {
+      border: 1px solid var(--outline-variant);
+      background: var(--surface-container-low);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .story-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      font-weight: 700;
+    }
+
+    .story-title {
+      font-family: var(--font-headline);
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin: 0.25rem 0 var(--space-md) 0;
+    }
+
+    .story-body {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: var(--space-md);
+    }
+
+    .story-moral {
+      border-left: 3px solid var(--primary);
+      padding: var(--space-sm) var(--space-md);
+      background: var(--surface-container);
+      font-style: italic;
+      font-family: var(--font-headline);
+      margin-top: var(--space-md);
+    }
+
+    /* Vocabulary Bank Grid */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      align-items: center;
+      margin-bottom: var(--space-lg);
+      padding: var(--space-sm);
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+    }
+
+    .search-input {
+      flex: 1 1 240px;
+      padding: 0.5rem 0.75rem;
+      font-family: var(--font-label);
+      font-size: 0.9rem;
+      background: var(--background);
+      border: 1px solid var(--outline);
+      color: var(--on-surface);
+      border-radius: var(--rounded);
+    }
+    .search-input:focus {
+      border-color: var(--focus);
+    }
+
+    .filter-chip {
+      padding: 0.35rem 0.75rem;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--outline-variant);
+      background: transparent;
+      color: var(--on-surface);
+      cursor: pointer;
+      border-radius: var(--rounded);
+      transition: all var(--dur-micro) var(--ease-out);
+    }
+    .filter-chip.active {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(360px, 100%), 1fr));
+      gap: var(--space-lg);
+    }
+
+    .vocab-card {
+      border: 1px solid var(--outline);
+      background: var(--surface-container-low);
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow var(--dur-short) var(--ease-out);
+    }
+    .vocab-card:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    }
+
+    .vocab-card-header {
+      padding: var(--space-md);
+      border-bottom: 1px solid var(--outline-variant);
+      background: var(--surface-container);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: var(--space-sm);
+    }
+
+    .vocab-word-title {
+      font-family: var(--font-headline);
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin: 0;
+      color: var(--on-surface);
+    }
+
+    .vocab-phonetic {
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+      color: var(--on-surface-variant);
+      margin-top: 0.15rem;
+    }
+
+    .pronounce-btn {
+      background: var(--primary);
+      color: var(--on-primary);
+      border: none;
+      padding: 0.35rem 0.65rem;
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+      border-radius: var(--rounded);
+      flex-shrink: 0;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+    .pronounce-btn:hover {
+      background: var(--on-primary-container);
+    }
+
+    .vocab-card-body {
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      flex: 1;
+    }
+
+    .telugu-badge {
+      font-family: var(--font-telugu);
+      background: var(--surface-container);
+      border-left: 3px solid var(--secondary);
+      padding: 0.35rem 0.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--on-surface);
+    }
+
+    .vocab-def {
+      font-size: 0.98rem;
+      line-height: 1.5;
+    }
+
+    .memory-hook {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      padding: 0.45rem 0.65rem;
+      font-size: 0.85rem;
+      font-style: italic;
+      border-left: 2px solid var(--primary);
+    }
+
+    .syn-ant-box {
+      font-size: 0.82rem;
+      font-family: var(--font-label);
+      border-top: 1px dashed var(--outline-variant);
+      padding-top: var(--space-xs);
+    }
+    .syn-ant-row {
+      margin-bottom: 0.2rem;
+    }
+    .syn-ant-label {
+      font-weight: 700;
+      color: var(--on-surface-variant);
+    }
+
+    .usage-accordion {
+      border-top: 1px solid var(--outline-variant);
+      margin-top: auto;
+    }
+
+    .usage-toggle {
+      width: 100%;
+      text-align: left;
+      padding: 0.5rem var(--space-md);
+      background: transparent;
+      border: none;
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--primary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .usage-toggle:hover {
+      background: var(--surface-container);
+    }
+
+    .usage-content {
+      display: none;
+      padding: 0 var(--space-md) var(--space-md) var(--space-md);
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+    .usage-content.open {
+      display: block;
+    }
+    .usage-item {
+      margin-bottom: 0.4rem;
+      padding-left: 0.6rem;
+      border-left: 2px solid var(--outline-variant);
+    }
+    .usage-tag {
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--on-surface-variant);
+      display: block;
+    }
+
+    /* 3D Interactive Flashcards View */
+    .flashcard-wrapper {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .flashcard-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: var(--space-md);
+      font-family: var(--font-label);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .flashcard-scene {
+      width: 100%;
+      height: 380px;
+      perspective: 1000px;
+      margin-bottom: var(--space-lg);
+      cursor: pointer;
+    }
+
+    .flashcard-card {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.6s var(--ease-out);
+      border: 2px solid var(--outline);
+      background: var(--surface-container-low);
+    }
+
+    .flashcard-card.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: var(--space-xl);
+    }
+
+    .flashcard-face--back {
+      transform: rotateY(180deg);
+      background: var(--surface-container);
+      overflow-y: auto;
+      text-align: left;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: var(--space-sm);
+    }
+
+    .flashcard-word {
+      font-family: var(--font-headline);
+      font-size: 2.8rem;
+      font-weight: 800;
+      margin: 0;
+      color: var(--on-surface);
+    }
+
+    .flashcard-phonetic {
+      font-family: var(--font-label);
+      color: var(--on-surface-variant);
+      font-size: 1.1rem;
+      margin-top: 0.25rem;
+      margin-bottom: var(--space-md);
+    }
+
+    .flashcard-hint {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .flashcard-actions {
+      display: flex;
+      justify-content: center;
+      gap: var(--space-md);
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      padding: 0.65rem 1.25rem;
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+      border: 1px solid var(--outline);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      border-radius: var(--rounded);
+      transition: all var(--dur-micro) var(--ease-out);
+    }
+    .action-btn:hover {
+      background: var(--surface-container-high);
+    }
+
+    .action-btn.btn-mastered {
+      background: #e6f4ea;
+      color: #0d5325;
+      border-color: #0d5325;
+    }
+    [data-theme="dark"] .action-btn.btn-mastered {
+      background: #143521;
+      color: #81c995;
+      border-color: #81c995;
+    }
+
+    .action-btn.btn-practice {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      border-color: var(--primary);
+    }
+
+    /* Exam Quiz View */
+    .quiz-container {
+      max-width: 860px;
+      margin: 0 auto;
+    }
+
+    .quiz-header-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface-container);
+      border: 1px solid var(--outline);
+      padding: var(--space-md);
+      margin-bottom: var(--space-lg);
+    }
+
+    .quiz-timer {
+      font-family: var(--font-headline);
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .quiz-score-pill {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.95rem;
+    }
+
+    .quiz-question-card {
+      border: 1px solid var(--outline);
+      background: var(--surface-container-low);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    .quiz-q-num {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: var(--label-size);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-bottom: var(--space-xs);
+    }
+
+    .quiz-prompt {
+      font-family: var(--font-headline);
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-top: 0;
+      margin-bottom: var(--space-md);
+      line-height: 1.35;
+    }
+
+    .blank-select {
+      background: var(--background);
+      border: 1px solid var(--outline);
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-weight: 700;
+      padding: 0.35rem 0.5rem;
+      margin: 0 0.25rem;
+      border-radius: var(--rounded);
+    }
+
+    .quiz-explanation {
+      display: none;
+      margin-top: var(--space-md);
+      padding: var(--space-sm) var(--space-md);
+      border-left: 3px solid var(--primary);
+      background: var(--surface-container);
+      font-size: 0.92rem;
+      line-height: 1.5;
+    }
+
+    /* Print & Footer Styles */
+    .footer-block {
+      border-top: var(--rule-masthead);
+      margin-top: var(--space-2xl);
+      padding-top: var(--space-md);
+      padding-bottom: var(--space-xl);
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+      color: var(--on-surface-variant);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: var(--space-md);
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 840px) {
+      .article-lead {
+        grid-template-columns: 1fr;
+      }
+      .article-col-main {
+        border-right: none;
+        padding-right: 0;
+      }
+      .vocab-grid {
+        grid-template-columns: 1fr;
+      }
+      .tab-bar {
+        overflow-x: auto;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- Masthead Section -->
+    <header>
+      <div class="masthead-top">
+        <div class="masthead-meta">
+          <span>THE DAILY EDITORIAL REVIEW</span>
+          <span>•</span>
+          <span>THURSDAY, 12TH NOVEMBER 2026</span>
+          <span>•</span>
+          <span>EDITION NO. 4,812</span>
+        </div>
+        <div class="masthead-controls">
+          <button class="control-btn" id="themeToggleBtn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+            <i data-lucide="sun-moon" style="width:14px;height:14px;"></i>
+            <span id="themeBtnText">Night Edition</span>
+          </button>
+          <button class="control-btn" onclick="adjustFontSize(-1)" title="Decrease text size">A−</button>
+          <button class="control-btn" onclick="adjustFontSize(1)" title="Increase text size">A+</button>
+          <button class="control-btn" onclick="exportStudyNotes()" title="Download vocabulary study sheet">
+            <i data-lucide="download" style="width:14px;height:14px;"></i>
+            Export Notes
+          </button>
+        </div>
+      </div>
+
+      <div class="masthead-main">
+        <h1 class="paper-name">Daily Reading &amp; Vocabulary Gazette</h1>
+        <p class="paper-tagline">Comprehensive Editorial Analysis, Core Linguistic Etymology, Telugu Conceptual Transliterations &amp; Competitive Exam Mastery</p>
+      </div>
+
+      <!-- Navigation Bar -->
+      <nav class="tab-bar" aria-label="Page Sections">
+        <button class="tab-item active" onclick="switchTab('tab-editorial', this)">
+          <i data-lucide="book-open" style="width:16px;height:16px;"></i>
+          Editorial Reader
+        </button>
+        <button class="tab-item" onclick="switchTab('tab-vocab', this)">
+          <i data-lucide="library" style="width:16px;height:16px;"></i>
+          Core Vocabulary Bank
+        </button>
+        <button class="tab-item" onclick="switchTab('tab-phrasal-idioms', this)">
+          <i data-lucide="sparkles" style="width:16px;height:16px;"></i>
+          Idioms &amp; Phrasal Verbs
+        </button>
+        <button class="tab-item" onclick="switchTab('tab-flashcards', this)">
+          <i data-lucide="layers" style="width:16px;height:16px;"></i>
+          3D Flashcards
+        </button>
+        <button class="tab-item" onclick="switchTab('tab-quiz', this)">
+          <i data-lucide="check-circle" style="width:16px;height:16px;"></i>
+          Exam Quiz &amp; PYQs
+        </button>
+      </nav>
+    </header>
+
+    <!-- =========================================================
+         TAB 1: EDITORIAL READER (Primary Editorial + Skimming + Stories)
+         ========================================================= -->
+    <main>
+      <div id="tab-editorial" class="view-content active">
+
+        <!-- PRIMARY EDITORIAL -->
+        <article class="editorial-piece">
+          <div class="section-header">
+            <span class="section-kicker">Lead Economic Analysis — Consumption &amp; Monetary Trends</span>
+            <h2 class="headline-major">Festive Demand Warning</h2>
+            <p class="standfirst">
+              Online sales growth of 13–15% trails optimistic market projections of 20–25%. Beneath headline corporate profitability lurks a deepening K-shaped divergence between affluent premiumisation and debt-stressed mass-market household consumption.
+            </p>
+          </div>
+
+          <div class="article-lead">
+            <!-- Main Editorial Column -->
+            <div class="article-col-main">
+              <p class="article-paragraph">
+                <strong>Paragraph 1:</strong> India’s festive shopping season has raised concerns about the strength of household consumption. Despite deep discounts, easy financing, and promotional offers, online festive sales reportedly grew by only 13–15% this year, below industry expectations of 20–25%. Smartphones, laptops, and large appliances were among the weaker categories. While these figures do not establish a consumption crisis, they raise questions about whether household purchasing power is keeping pace with the country’s growing consumer economy.
+              </p>
+
+              <p class="article-paragraph">
+                <strong>Paragraph 2:</strong> The slowdown also highlights the widening gap between premium and mass-market demand. Affluent consumers continue to spend on expensive devices and upgraded products, <em>while price-sensitive households appear increasingly reluctant to replace basic durables</em>. Companies have relied on premiumisation, higher average selling prices, and improved product mixes to sustain revenues and margins.
+              </p>
+
+              <p class="article-paragraph">
+                <strong>Paragraph 3:</strong> However, rising revenues do not necessarily indicate stronger demand if fewer units are being sold or fewer first-time buyers are entering the market. An economy dependent on domestic consumption needs broader participation across income groups, rather than spending concentrated among affluent households.
+              </p>
+
+              <p class="article-paragraph">
+                <strong>Paragraph 4:</strong> Easy credit is another concern. No-cost instalments, credit cards, and buy-now-pay-later schemes make purchases more accessible, but borrowing shifts expenditure across time rather than creating additional income. Retailers and lenders must distinguish healthy credit adoption from households stretching their budgets to finance routine purchases. Transparent pricing, responsible lending, and monitoring repayment stress are therefore essential. Policymakers should examine consumption beyond headline sales figures and corporate revenues. Unit sales, demand for entry-level products, rural and urban spending, real household earnings, and consumer-credit trends can provide a clearer picture.
+              </p>
+
+              <p class="article-paragraph">
+                <strong>Paragraph 5:</strong> They must also distinguish between weaker online sales and a possible shift towards physical retail stores. The policy response should focus on strengthening purchasing power rather than generating temporary shopping surges through discounts or tax relief. Better-quality employment, stronger real wage growth, improved farm incomes, and stable prices are essential for sustainable consumption. Investment in labour-intensive industries and efficient supply chains can further support household demand. One festive season cannot determine the health of the economy, and the available evidence remains incomplete. <strong>Nevertheless</strong>, disappointing sales should not be dismissed simply because premium brands and corporate profits remain resilient. India’s consumption story will be sustainable only when ordinary households can afford essential purchases, upgrade products when needed, and do so without accumulating unsustainable debt.
+              </p>
+
+              <!-- Editorial Analytical Tone & Theme Note -->
+              <div class="aside-box" style="margin-top: var(--space-lg);">
+                <div class="aside-title">Author’s Tone &amp; Thematic Architecture</div>
+                <div style="font-size: 0.95rem; line-height: 1.55;">
+                  <p><strong>Primary Tone:</strong> <em>Prudent &amp; Empirical</em> (sober, data-grounded, advising vigilance without being prematurely alarmist).</p>
+                  <p><strong>Central Thesis:</strong> Nominal turnover driven by high-ticket items creates a mirage of economic vitality. Real aggregate resilience requires mass unit-volume expansion, genuine wage growth, and non-debt purchasing power.</p>
+                </div>
+              </div>
+
+              <!-- Reading Comprehension Deep-Dive Questions -->
+              <div class="rc-container">
+                <h3 class="section-title" style="font-size: 1.25rem;">Editorial Reading Comprehension Verification</h3>
+
+                <!-- Q1 -->
+                <div class="rc-card">
+                  <p class="rc-prompt">1. Phrase Improvement: Identify the most grammatically and contextually sound replacement for the highlighted sentence: <em>"while price-sensitive households appear increasing reluctant to replace basic durables."</em></p>
+                  <div class="rc-options" id="rc1-options">
+                    <div class="rc-option" onclick="checkRCOption('rc1', 0, false, 'Grammatically incorrect: singular verb \'exhibits\' with plural noun \'households\'.')">
+                      <span>A.</span> While financially constrained households exhibits growing reluctance towards the replacement of essential consumer durables.
+                    </div>
+                    <div class="rc-option" onclick="checkRCOption('rc1', 1, false, 'Distorts passage meaning: states they have a \'decreasing propensity to defer\', which means they are spending MORE eagerly.')">
+                      <span>B.</span> While economically vulnerable consumers demonstrate a decreasing propensity to defer expenditure on fundamental household assets.
+                    </div>
+                    <div class="rc-option" onclick="checkRCOption('rc1', 2, false, 'Contradicts the editorial: asserts price-sensitive consumers have \'increased willingness\' to buy.')">
+                      <span>C.</span> While income-sensitive segments demonstrate increased willingness to undertake replacement purchases of indispensable durable goods.
+                    </div>
+                    <div class="rc-option" onclick="checkRCOption('rc1', 3, true, 'Correct! Accurately conveys the postponement of essential durable purchases with flawless syntax.')">
+                      <span>D.</span> While households facing affordability constraints increasingly postpone the acquisition of essential long-lasting consumer products.
+                    </div>
+                  </div>
+                  <div class="rc-feedback" id="rc1-feedback"></div>
+                </div>
+
+                <!-- Q2 -->
+                <div class="rc-card">
+                  <p class="rc-prompt">2. Based on the passage, which of the following logically follow from the concerns raised regarding India's festive consumption trends?</p>
+                  <div style="font-size: 0.95rem; margin-bottom: 0.5rem; line-height: 1.45;">
+                    <div>I. The underperformance of online festive sales, despite aggressive promotional strategies, suggests that consumer demand may be weaker than industry projections anticipated.</div>
+                    <div>II. Corporate revenue growth can coexist with stagnant or declining sales volumes when businesses increasingly depend on expensive product offerings.</div>
+                    <div>III. The resilience of premium product categories indicates that purchasing power has improved uniformly across different income groups.</div>
+                  </div>
+                  <div class="rc-options" id="rc2-options">
+                    <div class="rc-option" onclick="checkRCOption('rc2', 0, false, 'Incomplete: Statement II is also directly supported by the text.')">
+                      <span>A.</span> Only (I)
+                    </div>
+                    <div class="rc-option" onclick="checkRCOption('rc2', 1, true, 'Correct! Statements I and II are explicitly substantiated. Statement III is false because the passage emphasizes divergent, unequal purchasing power.')">
+                      <span>B.</span> Both (I) and (II)
+                    </div>
+                    <div class="rc-option" onclick="checkRCOption('rc2', 2, false, 'Incorrect: Statement III is contradicted by the text.')">
+                      <span>C.</span> Both (II) and (III)
+                    </div>
+                    <div class="rc-option" onclick="checkRCOption('rc2', 3, false, 'Incorrect: Statement III is completely erroneous.')">
+                      <span>D.</span> Only (III)
+                    </div>
+                  </div>
+                  <div class="rc-feedback" id="rc2-feedback"></div>
+                </div>
+
+                <!-- Q3 -->
+                <div class="rc-card">
+                  <p class="rc-prompt">3. Tone Analysis: How can the author’s perspective and overarching voice throughout the article be best characterized?</p>
+                  <div class="rc-options" id="rc3-options">
+                    <div class="rc-option" onclick="checkRCOption('rc3', 0, false, 'Commiserating means pitying or expressing sorrow, which does not fit this analytical critique.')">
+                      <span>A.</span> Commiserating and Lamenting
+                    </div>
+                    <div class="rc-option" onclick="checkRCOption('rc3', 1, true, 'Correct! The author relies on empirical sales trends while prudently cautioning against superficial optimism.')">
+                      <span>B.</span> Empirical and Prudent
+                    </div>
+                    <div class="rc-option" onclick="checkRCOption('rc3', 2, false, 'The piece avoids alarmism, stating clearly that these figures \'do not establish a consumption crisis\'.')">
+                      <span>C.</span> Cynical and Alarmist
+                    </div>
+                    <div class="rc-option" onclick="checkRCOption('rc3', 3, false, 'The author explicitly cautions against relying on discounts or premature celebrations.')">
+                      <span>D.</span> Euphoric and Complacent
+                    </div>
+                  </div>
+                  <div class="rc-feedback" id="rc3-feedback"></div>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Side Infobox / Key Metrics Column -->
+            <div class="article-col-side">
+              <div class="aside-box">
+                <div class="aside-title">Macroeconomic Indicators</div>
+                <div class="metric-row">
+                  <span>Reported Sales Growth</span>
+                  <span class="metric-val">13–15%</span>
+                </div>
+                <div class="metric-row">
+                  <span>Industry Expectation</span>
+                  <span class="metric-val">20–25%</span>
+                </div>
+                <div class="metric-row">
+                  <span>Weaker Segments</span>
+                  <span style="font-weight: 700;">Laptops, Phones, Appliances</span>
+                </div>
+                <div class="metric-row">
+                  <span>Core Risk Vector</span>
+                  <span style="color: var(--error); font-weight: 700;">BNPL / Routine Debt</span>
+                </div>
+                <div class="metric-row">
+                  <span>Policy Prescription</span>
+                  <span style="font-weight: 700;">Real Wage &amp; Farm Incomes</span>
+                </div>
+              </div>
+
+              <div class="aside-box">
+                <div class="aside-title">Linguistic Apparatus in Text</div>
+                <ul style="padding-left: 1.1rem; margin: 0; font-size: 0.9rem; line-height: 1.5;">
+                  <li><strong>Durable Goods:</strong> Tangible products with long utility cycles (appliances, vehicles).</li>
+                  <li><strong>Premiumisation:</strong> Strategy of selling fewer, higher-priced goods to affluent buyers.</li>
+                  <li><strong>K-Shaped Recovery:</strong> Divergent recovery where upper echelons prosper while lower segments stagnate.</li>
+                  <li><strong>Repayment Stress:</strong> Household strain from servicing multiple consumer micro-loans.</li>
+                </ul>
+              </div>
+
+              <div class="aside-box">
+                <div class="aside-title">Quick Vocabulary Recall</div>
+                <div style="display:flex; flex-wrap:wrap; gap:0.35rem;">
+                  <span class="vocab-hl" onclick="jumpToWord('Vexatious')">Vexatious</span>
+                  <span class="vocab-hl" onclick="jumpToWord('Thwart')">Thwart</span>
+                  <span class="vocab-hl" onclick="jumpToWord('Cajole')">Cajole</span>
+                  <span class="vocab-hl" onclick="jumpToWord('Ignominious')">Ignominious</span>
+                  <span class="vocab-hl" onclick="jumpToWord('Monstrous')">Monstrous</span>
+                  <span class="vocab-hl" onclick="jumpToWord('Fret')">Fret</span>
+                  <span class="vocab-hl" onclick="jumpToWord('Diminutive')">Diminutive</span>
+                  <span class="vocab-hl" onclick="jumpToWord('Sanguine')">Sanguine</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- SKIMMING ARTICLE -->
+        <article class="editorial-piece" style="margin-top: var(--space-xl);">
+          <div class="section-header">
+            <span class="section-kicker">Skimming Article — Literary Culture &amp; Technological Devolution</span>
+            <h2 class="section-title">Visions of the Future: On This Year’s Booker Prize</h2>
+            <p class="section-subtitle">M. John Harrison’s <em>The End of Everything</em>, AI epistemic pollution, and the contested defense of human authorship.</p>
+          </div>
+
+          <div style="background: var(--surface-container-low); border: 1px solid var(--outline); padding: var(--space-lg); margin-top: var(--space-md);">
+            <p class="article-paragraph">
+              A defining feature of the world today is that knowledge is proliferating and societies are struggling to agree on what is happening. AI models have significantly catalysed this devolution, allowing bad actors to flood spaces ranging from the research literature to public airwaves with questionable information, and drawing the attention of governments worldwide to the security implications of such a potent technology.
+            </p>
+            <p class="article-paragraph">
+              The Booker Prize for M. John Harrison’s <em>The End of Everything</em>, a novel about a sense-defying alien invasion and the unsettling prospect of un-understandability it confronts humans with, effectively acknowledges the centrality of the AI question both through the book’s substance and the judges’ choice. A consequence of rampant AI use has been an assault on people’s attention span as well as the ability to make sense of new claims, so much so that reliable, verifiable meaning has become a premium entity.
+            </p>
+            <p class="article-paragraph">
+              The novel, on the other hand, attempts to diagnose a post-meaning world in which people are only left to look inward. The Prize is also a long-overdue victory for the merits of science fiction, a genre that Harrison helped shape from the late 1960s, and one that English literature’s top honours have repeatedly overlooked. That said, the novel itself is far from being its best example, including because Harrison’s diagnosis lets technology and the practice of power off the hook for their failures. One of the judges said she had also sought a book “only a human being could write”, but defending a novel for its ability to thumb its nose at the machines is unfair to the literary enterprise and betrays a wider public anxiety about AI, especially over the lack of consensus about its proper place in society.
+            </p>
+
+            <!-- Skimming Comprehension Questions -->
+            <div style="border-top: 1px solid var(--outline-variant); padding-top: var(--space-md); margin-top: var(--space-md);">
+              <h4 style="font-family: var(--font-headline); margin: 0 0 var(--space-sm) 0;">Skimming Comprehension Verification</h4>
+              
+              <div class="rc-card">
+                <p class="rc-prompt">Q1. Which of the following best captures the central argument of the passage?</p>
+                <div class="rc-options" id="skim1-options">
+                  <div class="rc-option" onclick="checkRCOption('skim1', 0, false, 'The passage does not claim traditional forms are irrelevant, but diagnoses a crisis of verifiable truth.')">
+                    <span>A.</span> The rapid proliferation of AI has made traditional literary forms increasingly irrelevant, necessitating a fundamental reassessment of the purpose of literature.
+                  </div>
+                  <div class="rc-option" onclick="checkRCOption('skim1', 1, true, 'Correct! The article underscores how unchecked AI generates a crisis of reliable knowledge, shared consensus, and epistemic clarity.')">
+                    <span>B.</span> The growing influence of AI has intensified the crisis of reliable knowledge and public consensus, making the preservation of space for social deliberation an urgent concern.
+                  </div>
+                  <div class="rc-option" onclick="checkRCOption('skim1', 2, false, 'The text critiques the defense of literature solely as a counterweight against tech.')">
+                    <span>C.</span> The recognition of science fiction demonstrates that literature can effectively counter technological disruptions by privileging human creativity.
+                  </div>
+                </div>
+                <div class="rc-feedback" id="skim1-feedback"></div>
+              </div>
+
+              <div class="rc-card">
+                <p class="rc-prompt">Q2. What can most reasonably be inferred from the author's criticism of the judges' preference for a book "only a human being could write"?</p>
+                <div class="rc-options" id="skim2-options">
+                  <div class="rc-option" onclick="checkRCOption('skim2', 0, false, 'The author rejects judging literature purely on exclusivity of origin.')">
+                    <span>A.</span> Literary excellence should be evaluated exclusively through the originality of human expression.
+                  </div>
+                  <div class="rc-option" onclick="checkRCOption('skim2', 1, false, 'The author does not say human and machine creativity are identical.')">
+                    <span>B.</span> The distinction between human and machine creativity is completely irrelevant.
+                  </div>
+                  <div class="rc-option" onclick="checkRCOption('skim2', 2, true, 'Correct! Defending literature primarily because machines cannot write it betrays reactive existential dread rather than rigorous critical literary assessment.')">
+                    <span>C.</span> Defending literature primarily on the grounds of its exclusively human origin reflects an apprehensive response to AI rather than a substantive defence of literary merit.
+                  </div>
+                </div>
+                <div class="rc-feedback" id="skim2-feedback"></div>
+              </div>
+
+            </div>
+          </div>
+        </article>
+
+        <!-- MORAL SHORT STORIES -->
+        <section class="moral-stories" style="margin-top: var(--space-xl);">
+          <div class="section-header">
+            <span class="section-kicker">Character &amp; Context — Daily Moral Narratives</span>
+            <h2 class="section-title">Illustrated Moral Case Studies</h2>
+            <p class="section-subtitle">Real-life contextual narratives embodying today's core vocabulary in high-stakes personal discipline.</p>
+          </div>
+
+          <!-- Story 1 -->
+          <div class="story-card">
+            <span class="story-meta">Story I — Competitive Exam Discipline &amp; Boundaries</span>
+            <h3 class="story-title">The Shop Will Open at Ten</h3>
+            <div class="story-body">
+              At nine fifteen, someone knocked on the shutter, right under Viren’s handwritten sign: <em>“Just one packet of tea. You know which one.”</em> Viren did. He also knew exactly where it stood on the shelf. His hand was on the latch before he glanced back at his unfinished practice test. At twenty-six, he could run his father’s grocery shop from memory, yet he had missed the banking prelims cutoff twice. He usually studied after closing, when his eyes ached and the figures seemed to trade places on the page.
+              <br><br>
+              That morning, he had finally carried a chair out of the <span class="vocab-hl" onclick="jumpToWord('Tenebrous')">tenebrous</span> stockroom and into the little courtyard behind the shop. The early light and fresh air made it a more <span class="vocab-hl" onclick="jumpToWord('Salubrious')">salubrious</span> place to study. For one hour, he had decided, the shop could wait. <em>“Viren? Are you there?”</em> He had expected some <span class="vocab-hl" onclick="jumpToWord('Flak')">flak</span> for changing the opening time. He had imagined it coming from a stranger, though; this customer had bought groceries from his father for twenty years. <em>“I’m here, uncle,”</em> he called, surprised by his own <span class="vocab-hl" onclick="jumpToWord('Timorous')">timorous</span> voice. <em>“I’ll open at ten. I’ll keep your tea ready.”</em> After a moment, the footsteps moved away. Viren sat down again, his face hot.
+              <br><br>
+              Each morning that week brought another knock, another <span class="vocab-hl" onclick="jumpToWord('Vexatious')">vexatious</span> interruption just as he found his rhythm. One neighbour tried to <span class="vocab-hl" onclick="jumpToWord('Cajole')">cajole</span> him into opening early with a compliment: <em>“Your father always said you were the quickest boy in the market. How long can a kilo of rice take you?”</em> Viren smiled and pointed to the sign. His hardest morning came on Saturday, when he saw the tea customer buying groceries across the road. In his practice essay that day, he had written a neat, <span class="vocab-hl" onclick="jumpToWord('Aporetic')">aporetic</span> final line: <em>Can anyone know in advance which risks are worth taking?</em>
+              <br><br>
+              Sitting beside the shutter with the week’s accounts on his knee, he wished he had an answer. The rent was due. An hour’s lost trade mattered. So did the exam fee he had saved for, and so did the narrow margin by which he had missed the cutoff. He decided to keep the sign up for one month and record both his sales and his scores. By the end of it, sales were down a little, but customers had begun arriving later, and he was finishing his mock tests on time. The syllabus that had once seemed <span class="vocab-hl" onclick="jumpToWord('Monstrous')">monstrous</span> now fit into a plan he could follow. For the first time, Viren felt <span class="vocab-hl" onclick="jumpToWord('Sanguine')">sanguine</span> about his chances. One difficult morning could still <span class="vocab-hl" onclick="jumpToWord('Thwart')">thwart</span> his plan for that day, but he knew where he would be at nine the next morning. Months later, when he cleared the prelims, he turned the sign over and wrote his mains exam date on the back. Then he hung it up again, opening time facing the street.
+            </div>
+            <div class="story-moral">
+              <strong>Moral of the Story:</strong> Keeping a promise to yourself can feel awkward when other people count on you. Be clear with them, then give your goal the time you promised it.
+            </div>
+          </div>
+
+          <!-- Story 2 -->
+          <div class="story-card">
+            <span class="story-meta">Story II — Responsibility, Precision &amp; Courage</span>
+            <h3 class="story-title">The Last Tray of Biscuits</h3>
+            <div class="story-body">
+              On the morning his father reopened the bakery, Sahil weighed the flour three times. The scales were fine. He just wanted a reason to stay by the window, where he could smell the rain instead of the hot oven. Six months had passed since the fire. A black mark above the back door was its last visible <span class="vocab-hl">vestige</span>, but for Sahil the <span class="vocab-hl">spectre</span> of another fire returned each time the oven clicked on. His <span class="vocab-hl">arsonphobia</span> was something he had told only his father about. <em>“I can weigh the flour,”</em> he said that morning. <em>“Then I’ll count on you for that,”</em> his father answered.
+              <br><br>
+              Before the fire, Sahil had called himself a <span class="vocab-hl">slob</span> and laughed whenever anyone complained about his dirty apron. Preparing his own table each morning taught him how inconvenient his habits had been for everyone else. A missing scoop was often <strong>the tip of the iceberg</strong>. Looking for it one Monday, he found three unwashed bowls and the order slip he had blamed his father for losing. From then on, he washed the bowls, set out the scoop and hung up a clean apron before helping his father <strong>lock up</strong>. He also had to <strong>look up</strong> every new recipe and write down the quantities he actually used. <em>“<strong>A word to the wise</strong>, son,”</em> his father said after an especially good batch: <em>“Weigh the butter even on the days you think you can guess.”</em> Soon Sahil could finish the morning preparation in time for his bookkeeping class. For once, he had <strong>the best of both worlds</strong>.
+              <br><br>
+              At the workbench, he and his father developed <strong>a language of gesture</strong>. An open palm meant “wait,” and a tap on the scales meant “weigh it again.” Learning to speak without words mattered on busy mornings, when customers filled the little shop and his father’s hands were covered in dough. One Saturday, Sahil found a tray of unbaked biscuits on the rack and six boxes already tied for collection. He checked his figures. Each box was four biscuits short. His first impulse was to slip quietly back to the flour sacks. Instead, he untied the boxes. <em>“I counted the last tray before we baked it,”</em> he admitted. His father glanced at the waiting customers: <em>“<strong>The ball is in your court</strong>, son.”</em>
+              <br><br>
+              Once, Sahil would have wanted to <strong>lock out</strong> the customers until the mistake was fixed. This time he told them there would be a short wait. His father tended the oven while Sahil checked every box against the order slip. Weeks later, the smell of hot metal still unsettled him some mornings, but he had begun to <strong>look upon</strong> his place at the workbench as something he had earned. One evening, his father quietly put the order book beside the scales. A customer wanted eighty packets for a school function. Sahil reached for a pencil. <em>“Let me check how many trays we can manage,”</em> he said. His father sat down to drink his tea while it was still hot.
+            </div>
+            <div class="story-moral">
+              <strong>Moral of the Story:</strong> Growth begins when you stop hiding behind past trauma or careless habits, step into accountability, and earn pride through meticulous daily diligence.
+            </div>
+          </div>
+
+        </section>
+
+      </div>
+
+      <!-- =========================================================
+           TAB 2: CORE VOCABULARY BANK
+           ========================================================= -->
+      <div id="tab-vocab" class="view-content">
+        <div class="section-header">
+          <span class="section-kicker">Lexicon of Record — Editorial 12th Nov 2026</span>
+          <h2 class="section-title">Core Editorial Vocabulary Bank</h2>
+          <p class="section-subtitle">Click the pronunciation button to hear the Queen's English diction. Study syllable stress, Telugu conceptual semantics, visual memory hooks, and triple-tiered exam usage.</p>
+        </div>
+
+        <!-- Filter & Search Bar -->
+        <div class="filter-bar">
+          <input type="text" id="vocabSearchInput" class="search-input" placeholder="Search word, Telugu meaning, or synonym…" oninput="filterVocabList()">
+          <button class="filter-chip active" onclick="setVocabCategory('all', this)">All (16 Words)</button>
+          <button class="filter-chip" onclick="setVocabCategory('editorial', this)">Lead Editorial</button>
+          <button class="filter-chip" onclick="setVocabCategory('story', this)">Story Archetypes</button>
+          <button class="filter-chip" onclick="setVocabCategory('classical', this)">High-Register Classics</button>
+        </div>
+
+        <!-- Vocab Cards Grid -->
+        <div class="vocab-grid" id="vocabGridContainer">
+          <!-- Injected dynamically via JS to guarantee complete coverage and clean maintenance -->
+        </div>
+      </div>
+
+      <!-- =========================================================
+           TAB 3: IDIOMS, PHRASAL VERBS & ONE-WORD SUBSTITUTIONS
+           ========================================================= -->
+      <div id="tab-phrasal-idioms" class="view-content">
+        <div class="section-header">
+          <span class="section-kicker">Stylistic Idioms, Verb Particles &amp; Root Derivatives</span>
+          <h2 class="section-title">Editorial Idioms &amp; Linguistic Apparatus</h2>
+          <p class="section-subtitle">Exam-tested phrasal combinations, one-word substitutions, Latin mortality roots, and high-frequency idioms.</p>
+        </div>
+
+        <!-- One Word Substitutions -->
+        <div style="margin-bottom: var(--space-xl);">
+          <h3 class="section-title" style="font-size: 1.3rem; border-bottom: 2px solid var(--outline); padding-bottom: 0.35rem;">
+            One-Word Substitutions
+          </h3>
+          <div class="vocab-grid" style="margin-top: var(--space-md);">
+            <div class="vocab-card">
+              <div class="vocab-card-header">
+                <div>
+                  <h4 class="vocab-word-title">Slob</h4>
+                  <div class="vocab-phonetic">/slɒb/ • Noun</div>
+                </div>
+                <button class="pronounce-btn" onclick="speakText('slob')">🔊 Speak</button>
+              </div>
+              <div class="vocab-card-body">
+                <div class="telugu-badge">సోమరిపోతు, అపరిశుభ్రంగా ఉండే వ్యక్తి</div>
+                <div class="vocab-def">A lazy, untidy, or boorish person with careless domestic habits.</div>
+                <div class="syn-ant-box">
+                  <div class="syn-ant-row"><span class="syn-ant-label">Context:</span> Sahil called himself a slob prior to mastering kitchen discipline.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="vocab-card">
+              <div class="vocab-card-header">
+                <div>
+                  <h4 class="vocab-word-title">Vestige</h4>
+                  <div class="vocab-phonetic">/ˈvɛs.tɪdʒ/ • Noun</div>
+                </div>
+                <button class="pronounce-btn" onclick="speakText('vestige')">🔊 Speak</button>
+              </div>
+              <div class="vocab-card-body">
+                <div class="telugu-badge">అవశేషం, గతించిన గుర్తులు, ఆనవాలు</div>
+                <div class="vocab-def">A visible trace, mark, or remnant of something that once existed but is now lost or destroyed.</div>
+                <div class="syn-ant-box">
+                  <div class="syn-ant-row"><span class="syn-ant-label">Context:</span> The scorch mark above the bakery door was the last vestige of the blaze.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="vocab-card">
+              <div class="vocab-card-header">
+                <div>
+                  <h4 class="vocab-word-title">Spectre</h4>
+                  <div class="vocab-phonetic">/ˈspɛk.tə/ • Noun</div>
+                </div>
+                <button class="pronounce-btn" onclick="speakText('spectre')">🔊 Speak</button>
+              </div>
+              <div class="vocab-card-body">
+                <div class="telugu-badge">భయం కలిగించే ఛాయ, భవిష్యత్తు ముప్పు లేదా ప్రేతాత్మ</div>
+                <div class="vocab-def">A haunting phantom or a source of terror and dread that looms over the future.</div>
+                <div class="syn-ant-box">
+                  <div class="syn-ant-row"><span class="syn-ant-label">Context:</span> The spectre of persistent inflation haunts retail bondholders.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="vocab-card">
+              <div class="vocab-card-header">
+                <div>
+                  <h4 class="vocab-word-title">Arsonphobia</h4>
+                  <div class="vocab-phonetic">/ˌɑː.sənˈfəʊ.bi.ə/ • Noun</div>
+                </div>
+                <button class="pronounce-btn" onclick="speakText('arsonphobia')">🔊 Speak</button>
+              </div>
+              <div class="vocab-card-body">
+                <div class="telugu-badge">అగ్ని ప్రమాదాలు లేదా దహనం పట్ల తీవ్ర భయం</div>
+                <div class="vocab-def">An intense, morbid, or irrational psychological dread of fire and incendiary disaster.</div>
+                <div class="syn-ant-box">
+                  <div class="syn-ant-row"><span class="syn-ant-label">Roots:</span> <em>Arson</em> (criminal burning) + <em>Phobia</em> (morbid dread).</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="vocab-card">
+              <div class="vocab-card-header">
+                <div>
+                  <h4 class="vocab-word-title">Pacifism</h4>
+                  <div class="vocab-phonetic">/ˈpæs.ɪ.fɪ.zəm/ • Noun</div>
+                </div>
+                <button class="pronounce-btn" onclick="speakText('pacifism')">🔊 Speak</button>
+              </div>
+              <div class="vocab-card-body">
+                <div class="telugu-badge">శాంతివాదం, యుద్ధ విముఖత</div>
+                <div class="vocab-def">The philosophical conviction that war, armed conflict, and physical violence are entirely unjustifiable.</div>
+                <div class="syn-ant-box"><span class="syn-ant-label">Root:</span> Latin <em>paci-</em> (peace) + <em>facere</em> (to make).</div>
+              </div>
+            </div>
+
+            <div class="vocab-card">
+              <div class="vocab-card-header">
+                <div>
+                  <h4 class="vocab-word-title">Emissary</h4>
+                  <div class="vocab-phonetic">/ˈɛm.ɪ.sər.i/ • Noun</div>
+                </div>
+                <button class="pronounce-btn" onclick="speakText('emissary')">🔊 Speak</button>
+              </div>
+              <div class="vocab-card-body">
+                <div class="telugu-badge">దూత, ప్రత్యేక రాయబారి</div>
+                <div class="vocab-def">A person sent on a sensitive diplomatic mission or representing a government or monarch.</div>
+                <div class="syn-ant-box"><span class="syn-ant-label">Synonyms:</span> Envoy, delegate, legate, nuncio.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Phrasal Verbs Matrix -->
+        <div style="margin-bottom: var(--space-xl);">
+          <h3 class="section-title" style="font-size: 1.3rem; border-bottom: 2px solid var(--outline); padding-bottom: 0.35rem;">
+            Essential Phrasal Verbs: 'Look', 'Lock' &amp; 'Luck'
+          </h3>
+          <div class="vocab-grid" style="margin-top: var(--space-md);">
+            <div class="aside-box">
+              <div class="aside-title">Look Up</div>
+              <p><strong>Meaning:</strong> 1. To search for information in an index/reference book. 2. To improve in condition or prospect.</p>
+              <p class="tag-teal">"Sales were down in June, but business is beginning to look up."</p>
+            </div>
+            <div class="aside-box">
+              <div class="aside-title">Look Upon</div>
+              <p><strong>Meaning:</strong> To regard, evaluate, or consider someone/something in a specific light.</p>
+              <p class="tag-teal">"He had begun to look upon his workbench as something he had truly earned."</p>
+            </div>
+            <div class="aside-box">
+              <div class="aside-title">Lock Up</div>
+              <p><strong>Meaning:</strong> 1. To make a building or premise secure by fastening locks. 2. To imprison someone.</p>
+              <p class="tag-teal">"Always lock up the cash drawer before leaving the premises for lunch."</p>
+            </div>
+            <div class="aside-box">
+              <div class="aside-title">Lock Out</div>
+              <p><strong>Meaning:</strong> To prevent someone from entering a building, system, or market by securing entrances.</p>
+              <p class="tag-teal">"Tenants were locked out of the warehouse after missing two consecutive quarters of rent."</p>
+            </div>
+            <div class="aside-box">
+              <div class="aside-title">Luck Into</div>
+              <p><strong>Meaning:</strong> To acquire or attain something highly desirable purely through good fortune.</p>
+              <p class="tag-teal">"They lucked into prime real estate right before the industrial corridor was sanctioned."</p>
+            </div>
+            <div class="aside-box">
+              <div class="aside-title">Luck Out</div>
+              <p><strong>Meaning:</strong> To be exceptionally fortunate, especially in an unpredictable or tight situation.</p>
+              <p class="tag-teal">"We lucked out when the thunderstorm passed just thirty minutes before the outdoor concert."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- High-Frequency Editorial Idioms -->
+        <div style="margin-bottom: var(--space-xl);">
+          <h3 class="section-title" style="font-size: 1.3rem; border-bottom: 2px solid var(--outline); padding-bottom: 0.35rem;">
+            Core Editorial Idioms &amp; Figurative Expressions
+          </h3>
+          <div class="vocab-grid" style="margin-top: var(--space-md);">
+            <div class="aside-box">
+              <div class="aside-title">The ball is in your court</div>
+              <div class="telugu-badge" style="margin-bottom: 0.4rem;">ఇక నిర్ణయం తీసుకోవాల్సింది నీవే / నీ వంతు వచ్చింది</div>
+              <p><strong>Definition:</strong> It is now your distinct responsibility to take the next action or make a decisive choice.</p>
+              <p class="tag-teal">"Management made their final compensation offer; the ball is now in the union's court."</p>
+            </div>
+
+            <div class="aside-box">
+              <div class="aside-title">The best of both worlds</div>
+              <div class="telugu-badge" style="margin-bottom: 0.4rem;">రెండు వైపుల లాభాలను ఏకకాలంలో పొందడం</div>
+              <p><strong>Definition:</strong> Benefiting simultaneously from two contradictory or distinct opportunities.</p>
+              <p class="tag-teal">"Working remotely while retaining city corporate wages offers the best of both worlds."</p>
+            </div>
+
+            <div class="aside-box">
+              <div class="aside-title">The tip of the iceberg</div>
+              <div class="telugu-badge" style="margin-bottom: 0.4rem;">కనిపించే చిన్న భాగం మాత్రమే (భారీ సమస్యలో భాగం)</div>
+              <p><strong>Definition:</strong> A tiny discernible manifestation of a vastly larger concealed complication.</p>
+              <p class="tag-teal">"The initial auditing irregularity was merely the tip of the iceberg."</p>
+            </div>
+
+            <div class="aside-box">
+              <div class="aside-title">When pigs fly</div>
+              <div class="telugu-badge" style="margin-bottom: 0.4rem;">ఎప్పటికీ జరగని విషయం, అసాధ్యమైనది</div>
+              <p><strong>Definition:</strong> An adynaton indicating an event that is utterly impossible and will never occur.</p>
+              <p class="tag-teal">"He will volunteer to do weekend overtime when pigs fly."</p>
+            </div>
+
+            <div class="aside-box">
+              <div class="aside-title">You scratch my back, I’ll scratch yours</div>
+              <div class="telugu-badge" style="margin-bottom: 0.4rem;">ఒకరికొకరు పరస్పరం లాభం చేకూర్చుకోవడం (క్విడ్ ప్రో క్వో)</div>
+              <p><strong>Definition:</strong> Mutual cooperation or favours performed between parties for mutual benefit.</p>
+              <p class="tag-teal">"In parliamentary coalitions, the principle of 'you scratch my back' frequently decides committee seats."</p>
+            </div>
+
+            <div class="aside-box">
+              <div class="aside-title">A word to the wise</div>
+              <div class="telugu-badge" style="margin-bottom: 0.4rem;">తెలివైన వారికి ఒక్క మాట చాలు / ముందుజాగ్రత్త సలహా</div>
+              <p><strong>Definition:</strong> A discreet cautionary hint that an intelligent person will heed without further explanation.</p>
+              <p class="tag-teal">"A word to the wise: back up your data repositories before installing the firmware patch."</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Latin Root Focus: Mor- -->
+        <div class="aside-box" style="margin-top: var(--space-lg); border-left: 4px solid var(--primary);">
+          <div class="aside-title">Etymology Deep-Dive: Latin Root <em>Mor-</em> (Death, Decay, Dissolution)</div>
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--space-md); font-size: 0.95rem;">
+            <div>
+              <strong>Obsequies (/ˈɒb.sɪ.kwiz/):</strong> Funeral rites or burial ceremonies. (Distinct from <em>obsequious</em>, which means servile or fawning).
+            </div>
+            <div>
+              <strong>Moribund (/ˈmɒr.ɪ.bʌnd/):</strong> At the point of death, terminal stagnation, or in terminal decline.
+            </div>
+            <div>
+              <strong>Mortifying (/ˈmɔː.tɪ.faɪ.ɪŋ/):</strong> Causing someone to feel deeply embarrassed or humiliated (literally 'killing with shame').
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- =========================================================
+           TAB 4: 3D INTERACTIVE FLASHCARDS
+           ========================================================= -->
+      <div id="tab-flashcards" class="view-content">
+        <div class="section-header">
+          <span class="section-kicker">Kinetic Spaced Repetition</span>
+          <h2 class="section-title">3D Interactive Editorial Flashcards</h2>
+          <p class="section-subtitle">Click the card to flip between word and definition. Mark your learning state to focus on words that require further retention.</p>
+        </div>
+
+        <div class="flashcard-wrapper">
+          <!-- Filter and Counter Controls -->
+          <div class="flashcard-controls">
+            <div style="display: flex; gap: var(--space-xs);">
+              <button class="filter-chip active" id="fc-filter-all" onclick="filterFlashcards('all', this)">All (16)</button>
+              <button class="filter-chip" id="fc-filter-practice" onclick="filterFlashcards('practice', this)">Needs Practice (<span id="count-practice">0</span>)</button>
+              <button class="filter-chip" id="fc-filter-mastered" onclick="filterFlashcards('mastered', this)">Mastered (<span id="count-mastered">0</span>)</button>
+            </div>
+            <div>
+              Card <span id="fc-current-index" style="color:var(--primary); font-family:var(--font-headline); font-size:1.15rem;">1</span> of <span id="fc-total-count">16</span>
+            </div>
+          </div>
+
+          <!-- 3D Card Scene -->
+          <div class="flashcard-scene" onclick="flipFlashcard()">
+            <div class="flashcard-card" id="flashcardElement">
+              <!-- FRONT -->
+              <div class="flashcard-face flashcard-face--front">
+                <span class="tag-teal" id="fc-front-tag">CORE EDITORIAL</span>
+                <h3 class="flashcard-word" id="fc-front-word">Mellifluous</h3>
+                <div class="flashcard-phonetic" id="fc-front-phonetic">mel•lif•lu•ous • /məˈlɪf.lu.əs/</div>
+                <div class="flashcard-hint">
+                  <i data-lucide="rotate-cw" style="width:14px;height:14px;"></i> Click anywhere to flip &amp; reveal definition
+                </div>
+              </div>
+
+              <!-- BACK -->
+              <div class="flashcard-face flashcard-face--back">
+                <div style="display: flex; justify-content: space-between; width: 100%; align-items: baseline;">
+                  <h4 style="font-family: var(--font-headline); font-size: 1.5rem; margin: 0;" id="fc-back-word">Mellifluous</h4>
+                  <button class="pronounce-btn" onclick="event.stopPropagation(); speakCurrentFlashcard();">🔊 Pronounce</button>
+                </div>
+                <div class="telugu-badge" id="fc-back-telugu" style="width: 100%;">తేనె వంటి మధురమైన ధ్వని గల, సుమధురమైన</div>
+                <div style="font-size: 0.98rem; line-height: 1.45;" id="fc-back-def">
+                  Having a smooth, sweet, and pleasing sound; delightful to hear.
+                </div>
+                <div class="memory-hook" id="fc-back-hook" style="width: 100%;">
+                  <strong>Hook:</strong> Flowing like sweet golden honey into your ear canal.
+                </div>
+                <div style="font-size: 0.85rem; font-family: var(--font-label); width: 100%;">
+                  <div><strong>Synonyms:</strong> <span id="fc-back-syn">Dulcet, euphonious, melodious</span></div>
+                  <div><strong>Antonyms:</strong> <span id="fc-back-ant">Cacophonous, discordant, strident</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Flashcard Navigation Buttons -->
+          <div class="flashcard-actions">
+            <button class="action-btn" onclick="prevFlashcard()">
+              <i data-lucide="arrow-left" style="width:16px;height:16px;"></i> Previous
+            </button>
+            <button class="action-btn btn-practice" onclick="markCardStatus('practice')">
+              <i data-lucide="bookmark" style="width:16px;height:16px;"></i> Needs Practice
+            </button>
+            <button class="action-btn btn-mastered" onclick="markCardStatus('mastered')">
+              <i data-lucide="check" style="width:16px;height:16px;"></i> Mark Mastered
+            </button>
+            <button class="action-btn" onclick="nextFlashcard()">
+              Next <i data-lucide="arrow-right" style="width:16px;height:16px;"></i>
+            </button>
+            <button class="action-btn" onclick="shuffleFlashcards()" title="Shuffle order">
+              <i data-lucide="shuffle" style="width:16px;height:16px;"></i> Shuffle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- =========================================================
+           TAB 5: EXAM QUIZ & PREVIOUS YEAR QUESTIONS (PYQs)
+           ========================================================= -->
+      <div id="tab-quiz" class="view-content">
+        <div class="section-header">
+          <span class="section-kicker">Competitive Exam Testing Suite</span>
+          <h2 class="section-title">Daily Fill-In-The-Blanks &amp; SSC CGL PYQ Sprint</h2>
+          <p class="section-subtitle">Test vocabulary precision with 10 contextual cloze sentences from 'The Shop Will Open at Ten' and 10 verified SSC CGL / Banking questions.</p>
+        </div>
+
+        <div class="quiz-container">
+          <!-- Quiz Dashboard Bar -->
+          <div class="quiz-header-bar">
+            <div class="quiz-timer">
+              <i data-lucide="clock" style="width:18px;height:18px;"></i>
+              <span id="quiz-stopwatch">00:00</span>
+            </div>
+            <div class="quiz-score-pill">
+              Score: <span id="quizScoreDisplay" style="color:var(--primary); font-family:var(--font-headline); font-size:1.3rem;">0</span> / 20
+            </div>
+            <div>
+              <button class="control-btn" onclick="resetAllQuizAnswers()">Reset Quiz</button>
+            </div>
+          </div>
+
+          <!-- Section A: 10 Contextual Blanks (Story Words) -->
+          <h3 class="section-title" style="font-size: 1.25rem; border-bottom: 2px solid var(--outline); padding-bottom: 0.35rem; margin-bottom: var(--space-md);">
+            Part A: Story Context Cloze Test (10 Items)
+          </h3>
+          <p style="font-size: 0.95rem; color: var(--on-surface-variant); margin-bottom: var(--space-md);">
+            Select the word that accurately completes the official editorial context from the word bank:
+            <em>Tenebrous, Timorous, Aporetic, Salubrious, Flak, Vexatious, Cajole, Monstrous, Thwart, Sanguine</em>.
+          </p>
+
+          <div id="story-quiz-items">
+            <!-- 10 Cloze blanks generated via JS -->
+          </div>
+
+          <!-- Section B: SSC CGL / Banking Exam PYQs (10 Items) -->
+          <h3 class="section-title" style="font-size: 1.25rem; border-bottom: 2px solid var(--outline); padding-bottom: 0.35rem; margin-top: var(--space-xl); margin-bottom: var(--space-md);">
+            Part B: Official SSC CGL &amp; Banking PYQ Sprint (10 Items)
+          </h3>
+          <p style="font-size: 0.95rem; color: var(--on-surface-variant); margin-bottom: var(--space-md);">
+            Select the exact synonym or meaning for each verified past exam question. Instant answer feedback and rationale are displayed.
+          </p>
+
+          <div id="pyq-quiz-items">
+            <!-- 10 PYQ items generated via JS -->
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Broadsheet Footer -->
+    <footer class="footer-block">
+      <div>
+        <strong>THE DAILY EDITORIAL &amp; VOCABULARY DIGEST</strong> • Vol. XLVIII
+        <div>Self-contained offline reading experience compiled for banking &amp; civil services aspirants.</div>
+      </div>
+      <div style="text-align: right;">
+        <div>Designed in the Broadsheet Register • English (United Kingdom)</div>
+        <div>Content parsed from 12th November 2026 Academic Sources.</div>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- State Persistence Shim Tag -->
+  <api-shim></api-shim>
+
+  <!-- =========================================================
+       JavaScript Application Code
+       ========================================================= -->
+  <script>
+    /* -------------------------------------------------------------
+       1. Core Data Repository (Editorial Vocabulary, PYQs & Cloze)
+       ------------------------------------------------------------- */
+    const VOCAB_DATA = [
+      {
+        id: `Mellifluous`,
+        word: `Mellifluous`,
+        syllables: `mel•lif•lu•ous`,
+        phonetic: `/məˈlɪf.lu.əs/`,
+        partOfSpeech: `Adjective`,
+        category: `classical`,
+        telugu: `తేనె వంటి మధురమైన ధ్వని గల, సుమధురమైన, కర్ణపేయమైన`,
+        definition: `Having a smooth, sweet, and musical sound; exceptionally pleasant to hear.`,
+        hook: `Think of golden honey (Latin 'mel') flowing ('fluere') smoothly like cello music.`,
+        synonyms: `Dulcet, euphonious, melodious, tuneful, silver-toned`,
+        antonyms: `Cacophonous, discordant, strident, harsh, grating`,
+        usages: {
+          everyday: `The mellifluous voice of the radio presenter brightened our morning commute.`,
+          editorial: `Critics commended the envoy's mellifluous cadence, though his policy proposals lacked substantive depth.`,
+          banking: `The governor delivered his monetary statement in a mellifluous tone, temporarily calming volatile equity desks.`
+        }
+      },
+      {
+        id: `Vexatious`,
+        word: `Vexatious`,
+        syllables: `vex•a•tious`,
+        phonetic: `/vɛkˈseɪ.ʃəs/`,
+        partOfSpeech: `Adjective`,
+        category: `editorial`,
+        telugu: `చిరాకు పుట్టించే, విసిగించే, వేదన లేదా సమస్యలు కలిగించే`,
+        definition: `Causing annoyance, frustration, distress, or persistent unwarranted trouble.`,
+        hook: `A pesky mosquito buzzing in the bedroom darkness right next to your ear.`,
+        synonyms: `Irksome, galling, exasperating, troublesome, aggravating`,
+        antonyms: `Soothing, agreeable, delightful, pacifying, pleasant`,
+        usages: {
+          everyday: `The vexatious flight delay forced travellers to spend nine hours on airport lounge benches.`,
+          editorial: `Repeated technical outages during the advance tax filing deadline proved highly vexatious for small merchants.`,
+          banking: `Applicants abandoned loan claims after confronting a vexatious array of redundant document verifications.`
+        }
+      },
+      {
+        id: `Thwart`,
+        word: `Thwart`,
+        syllables: `thwart`,
+        phonetic: `/θwɔːt/`,
+        partOfSpeech: `Verb`,
+        category: `editorial`,
+        telugu: `అడ్డుకొను, భగ్నం చేయు, విఫలం చేయు`,
+        definition: `To prevent someone from accomplishing something; to foil or obstruct an intended design or plan.`,
+        hook: `A colossal iron gate slamming shut right as the bank thief reaches the perimeter wall.`,
+        synonyms: `Foil, stymie, frustrate, impede, obstruct, derail`,
+        antonyms: `Facilitate, expedite, abet, foster, assist, encourage`,
+        usages: {
+          everyday: `Sudden torrential monsoon rain thwarted our weekend trekking expedition.`,
+          editorial: `The intelligence apparatus successfully thwarted a sophisticated digital conspiracy before transaction execution.`,
+          banking: `Rigorous multi-factor biometric checks are deployed to thwart unauthorized treasury transfers.`
+        }
+      },
+      {
+        id: `Cajole`,
+        word: `Cajole`,
+        syllables: `ca•jole`,
+        phonetic: `/kəˈdʒoʊl/`,
+        partOfSpeech: `Verb`,
+        category: `editorial`,
+        telugu: `బుజ్జగించి ఒప్పించు, లాలించు, ముఖస్తుతితో వశపరచుకొను`,
+        definition: `To persuade someone to do something through persistent flattery or gentle coaxing.`,
+        hook: `Whispering warm compliments and stroking an aloof cat until it purrs and leaves your chair.`,
+        synonyms: `Coax, wheedle, inveigle, sweet-talk, blandish`,
+        antonyms: `Dissuade, deter, discourage, intimidate, coerce`,
+        usages: {
+          everyday: `We attempted to cajole our grandfather into recounting his wartime naval adventures.`,
+          editorial: `The ministry sought to cajole commercial lenders into transmitting benchmark policy cuts directly to borrowers.`,
+          banking: `The debt restructuring officer sought to cajole the defaulting firm into accepting an equity conversion formula.`
+        }
+      },
+      {
+        id: `Ignominious`,
+        word: `Ignominious`,
+        syllables: `ig•no•min•i•ous`,
+        phonetic: `/ˌɪɡ.nəˈmɪn.i.əs/`,
+        partOfSpeech: `Adjective`,
+        category: `classical`,
+        telugu: `అవమానకరమైన, సిగ్గుచేటైన, కలంకపూరితమైన`,
+        definition: `Deserving or causing public shame, humiliation, or dishonour.`,
+        hook: `An arrogant heavyweight champion getting knocked out in three seconds by a novice.`,
+        synonyms: `Disgraceful, opprobrious, disreputable, mortifying, shameful`,
+        antonyms: `Glorious, illustrious, honourable, commendable, exalted`,
+        usages: {
+          everyday: `The defending champions suffered an ignominious defeat in the tournament opener.`,
+          editorial: `The rogue chairman made an ignominious departure following forensic disclosures of siphoned balance-sheet funds.`,
+          banking: `Hiding stressed non-performing assets resulted in an ignominious regulatory suspension for the credit society.`
+        }
+      },
+      {
+        id: `Monstrous`,
+        word: `Monstrous`,
+        syllables: `mon•strous`,
+        phonetic: `/ˈmɒn.strəs/`,
+        partOfSpeech: `Adjective`,
+        category: `editorial`,
+        telugu: `అత్యంత భారీ, విపరీతమైన పరిమాణం గల, లేదా క్రూరమైన`,
+        definition: `Extremely large in physical scale or degree; shocking, atrocious, or unnatural.`,
+        hook: `A twenty-storey sea surge rising like a mountain over tiny seaside huts.`,
+        synonyms: `Colossal, gargantuan, mammoth, titanic, atrocious, whopping`,
+        antonyms: `Diminutive, minuscule, tiny, modest, humane`,
+        usages: {
+          everyday: `A monstrous wave swept across the harbour wall and tossed fishing trawlers ashore.`,
+          editorial: `The conglomerate incurred monstrous trading losses after speculative energy bets turned sour.`,
+          banking: `Clearing the monstrous backlog of insolvency petitions requires permanent judicial benches.`
+        }
+      },
+      {
+        id: `Fret`,
+        word: `Fret`,
+        syllables: `fret`,
+        phonetic: `/frɛt/`,
+        partOfSpeech: `Verb`,
+        category: `classical`,
+        telugu: `దిగులు చెందు, ఆందోళనపడు, విలవిలలాడు`,
+        definition: `To feel or express anxiety, irritation, or worry about situations beyond immediate control.`,
+        hook: `Someone pacing wooden floorboards late at night, nervously biting their fingernails.`,
+        synonyms: `Brood, agonise, ruminate, worry, stew`,
+        antonyms: `Rejoice, exult, relax, placate, appease`,
+        usages: {
+          everyday: `Do not fret over incidental typographical errors; the conceptual substance of your paper is exemplary.`,
+          editorial: `Founders should not fret over transitory exchange ripples but secure stable supply lines.`,
+          banking: `Novice retail investors who fret over intraday index swings frequently forfeit long-term yield compounding.`
+        }
+      },
+      {
+        id: `Interlude`,
+        word: `Interlude`,
+        syllables: `in•ter•lude`,
+        phonetic: `/ˈɪn.tə.luːd/`,
+        partOfSpeech: `Noun`,
+        category: `classical`,
+        telugu: `విరామ సమయం, మధ్యంతర వ్యవధి, రంగస్థల విరామం`,
+        definition: `A brief intervening period or temporary pause between two events, activities, or acts.`,
+        hook: `The calming cello and flute melody played between dramatic theatre acts while props are moved.`,
+        synonyms: `Interval, recess, respite, hiatus, lull`,
+        antonyms: `Continuation, persistence, perpetuity, uninterruptedness`,
+        usages: {
+          everyday: `The acoustic guitar recital offered a charming interlude between the two technical seminars.`,
+          editorial: `The serene third quarter was merely a deceptive interlude before international tariff disputes reignited.`,
+          banking: `Following a brief interlude of fiscal calm, seasonal liquidity deficits pushed interbank call rates higher.`
+        }
+      },
+      {
+        id: `Diminutive`,
+        word: `Diminutive`,
+        syllables: `di•min•u•tive`,
+        phonetic: `/dɪˈmɪn.jʊ.tɪv/`,
+        partOfSpeech: `Adjective`,
+        category: `editorial`,
+        telugu: `అతి చిన్నదైన, సూక్ష్మమైన, మరుగుజ్జు వంటి`,
+        definition: `Extremely or unusually small in physical size, stature, or appearance.`,
+        hook: `A minuscule microchip the size of a sesame seed powering an entire smart wristwatch.`,
+        synonyms: `Minuscule, Lilliputian, petite, tiny, microscopic`,
+        antonyms: `Colossal, gargantuan, immense, mammoth, towering`,
+        usages: {
+          everyday: `Despite its diminutive size, the newly developed nano-satellite transmits high-resolution telemetry.`,
+          editorial: `The diminutive enclave wields extraordinary maritime influence across the busy strait.`,
+          banking: `Even with diminutive starting equity, the regional credit cooperative achieved full solvency in eighteen months.`
+        }
+      },
+      {
+        id: `Bumble`,
+        word: `Bumble`,
+        syllables: `bum•ble`,
+        phonetic: `/ˈbʌm.bəl/`,
+        partOfSpeech: `Verb`,
+        category: `classical`,
+        telugu: `తొట్రుపడు, పొరపాట్లు చేస్తూ తడబడు, అనైపుణ్యంగా ప్రవర్తించు`,
+        definition: `To speak, act, or move clumsily, awkwardly, or incompetently; making repeated blunders.`,
+        hook: `A waiter carrying four bowls of hot soup tripping over his own shoelaces.`,
+        synonyms: `Bungle, blunder, flounder, stumble, fumble`,
+        antonyms: `Excel, execute, accomplish, master, succeed`,
+        usages: {
+          everyday: `Flustered by the panel, the candidate began to bumble through his prepared slides.`,
+          editorial: `The inexperienced negotiator continued to bumble through the summit, weakening his nation's treaty position.`,
+          banking: `Branch staff bumble through complex international trade sanctions without comprehensive operational training.`
+        }
+      },
+      {
+        id: `Tenebrous`,
+        word: `Tenebrous`,
+        syllables: `ten•e•brous`,
+        phonetic: `/ˈtɛn.ə.brəs/`,
+        partOfSpeech: `Adjective`,
+        category: `story`,
+        telugu: `చీకటిమయమైన, మసకబారిన, అంధకారపు`,
+        definition: `Dark, shadowy, gloomy, or murky; obscure and difficult to decipher.`,
+        hook: `A stone-vaulted dungeon archive lit only by the flickering flame of a dying tallow candle.`,
+        synonyms: `Gloomy, murky, somber, caliginous, twilight, obscure`,
+        antonyms: `Luminous, radiant, pellucid, lucent, illuminated`,
+        usages: {
+          everyday: `He carried his bicycle out from the tenebrous recesses of the unused cellar.`,
+          editorial: `The investigative report pierced the tenebrous offshore accounts shielding political campaign finances.`,
+          banking: `Even at midday, the archive's windowless room was so tenebrous that analysts required high-powered lamps.`
+        }
+      },
+      {
+        id: `Salubrious`,
+        word: `Salubrious`,
+        syllables: `sa•lu•bri•ous`,
+        phonetic: `/səˈluː.bri.əs/`,
+        partOfSpeech: `Adjective`,
+        category: `story`,
+        telugu: `ఆరోగ్యదాయకమైన, శ్రేయస్కరమైన, పుష్టినిచ్చే`,
+        definition: `Favourable to or promoting health, cleanliness, and physical well-being.`,
+        hook: `Breathing crisp, invigorating pine-scented morning air on a misty mountain sanctuary.`,
+        synonyms: `Wholesome, healthful, beneficial, sanitary, invigorating`,
+        antonyms: `Insalubrious, noxious, deleterious, unwholesome, harmful`,
+        usages: {
+          everyday: `The hill-station sanatorium was selected for its clean spring water and salubrious climate.`,
+          editorial: `A predictable corporate tax code fosters a salubrious environment for direct manufacturing investment.`,
+          banking: `Prudent provisioning during market upswings creates a salubrious balance sheet capable of absorbing bad debts.`
+        }
+      },
+      {
+        id: `Flak`,
+        word: `Flak`,
+        syllables: `flak`,
+        phonetic: `/flæk/`,
+        partOfSpeech: `Noun`,
+        category: `story`,
+        telugu: `తీవ్ర విమర్శ, వ్యతిరేకత, మాటల దాడి`,
+        definition: `Strong, harsh criticism, hostile opposition, or abuse for a policy decision or action.`,
+        hook: `Anti-aircraft explosive shells bursting loudly in the sky all around a soaring aircraft.`,
+        synonyms: `Censure, criticism, hostility, brickbats, disapproval`,
+        antonyms: `Commendation, praise, accolades, eulogy, plaudits`,
+        usages: {
+          everyday: `The transit department took intense flak from commuters for cancelling morning suburban trains.`,
+          editorial: `The central bank absorbed political flak after raising key lending rates right before general elections.`,
+          banking: `Fintech lenders drew regulatory flak after charging aggressive penalty fees on overdue student micro-loans.`
+        }
+      },
+      {
+        id: `Timorous`,
+        word: `Timorous`,
+        syllables: `tim•or•ous`,
+        phonetic: `/ˈtɪm.ər.əs/`,
+        partOfSpeech: `Adjective`,
+        category: `story`,
+        telugu: `భయస్తుడైన, పిరికితనం గల, సంకోచించే`,
+        definition: `Showing or suffering from nervousness, fear, or a pronounced lack of self-confidence.`,
+        hook: `A tiny field mouse trembling under dry autumn leaves as a hawk's shadow glides above.`,
+        synonyms: `Trepidatious, timid, fearful, skittish, diffident`,
+        antonyms: `Bold, audacious, intrepid, dauntless, stalwart`,
+        usages: {
+          everyday: `The new apprentice offered a timorous whisper when asked to inspect the high-voltage fuse.`,
+          editorial: `A timorous monetary committee that delays decisive action risks letting cost-push inflation entrench itself.`,
+          banking: `Though confident the audit ratios were distorted, the junior analyst was too timorous to contradict the partner.`
+        }
+      },
+      {
+        id: `Aporetic`,
+        word: `Aporetic`,
+        syllables: `ap•o•ret•ic`,
+        phonetic: `/ˌæp.əˈrɛt.ɪk/`,
+        partOfSpeech: `Adjective`,
+        category: `story`,
+        telugu: `సందేహాస్పదమైన, సందిగ్ధావస్థలో ఉన్న, తేల్చుకోలేని సంశయంతో కూడిన`,
+        definition: `Pertaining to or characterized by philosophical doubt, irresolvable hesitation, or an intellectual impasse.`,
+        hook: `A philosopher scratching his beard at a four-way crossroad where each signpost leads in a circle.`,
+        synonyms: `Perplexed, skeptical, irresolute, dubious, paradoxical`,
+        antonyms: `Conclusive, definitive, unequivocal, decisive, dogmatic`,
+        usages: {
+          everyday: `The monograph terminates on an aporetic note, demonstrating how both historical theories lead to contradictions.`,
+          editorial: `Faced with contradictory econometric projections, policymakers adopted an aporetic stance on rate cuts.`,
+          banking: `The investment committee remained in an aporetic deadlock regarding whether to hedge European currency risks.`
+        }
+      },
+      {
+        id: `Sanguine`,
+        word: `Sanguine`,
+        syllables: `san•guine`,
+        phonetic: `/ˈsæŋ.ɡwɪn/`,
+        partOfSpeech: `Adjective`,
+        category: `story`,
+        telugu: `ఆశావాద దృక్పథం గల, భవిష్యత్తుపై ధీమా గల, ఉత్సాహభరితమైన`,
+        definition: `Optimistic, cheerful, or confident regarding future outcomes, especially under challenging circumstances.`,
+        hook: `A sea captain watching dark storm clouds part as the golden dawn illuminates calm waters ahead.`,
+        synonyms: `Optimistic, buoyant, confident, hopeful, positive`,
+        antonyms: `Pessimistic, morose, despondent, despairing, cynical`,
+        usages: {
+          everyday: `With advance bookings surpassing targets, the event organisers felt sanguine regarding revenues.`,
+          editorial: `While manufacturing numbers contracted, industrial exporters remained sanguine about overseas replenishment orders.`,
+          banking: `With gross non-performing advances falling to multi-year lows, the board was sanguine about higher dividend payouts.`
+        }
+      }
+    ];
+
+    /* -------------------------------------------------------------
+       2. Story Cloze Practice Test Items (10 Items)
+       ------------------------------------------------------------- */
+    const CLOZE_QUIZ_DATA = [
+      {
+        num: 1,
+        sentence: `With advance bookings already covering most of the festival’s costs, the organisers were [BLANK] about its financial prospects.`,
+        correctWord: `Sanguine`,
+        rationale: `'Sanguine' means hopeful and optimistic about future prospects.`
+      },
+      {
+        num: 2,
+        sentence: `The railway board drew [BLANK] from commuters after it withdrew the only morning train without consulting local residents.`,
+        correctWord: `Flak`,
+        rationale: `'Draw flak' is an idiom meaning to receive intense criticism or hostility.`
+      },
+      {
+        num: 3,
+        sentence: `The historian ends her essay on an [BLANK] note, showing that two equally credible accounts of the uprising lead to opposite conclusions.`,
+        correctWord: `Aporetic`,
+        rationale: `'Aporetic' signifies an intellectual state of unresolved doubt or paradox.`
+      },
+      {
+        num: 4,
+        sentence: `All evening, the children tried to [BLANK] their camera-shy aunt into joining the family photograph by telling her she had the best smile in the room.`,
+        correctWord: `Cajole`,
+        rationale: `'Cajole' means to persuade someone using sweet-talk or pleasant compliments.`
+      },
+      {
+        num: 5,
+        sentence: `Even at midday, the archive’s windowless reading room was so [BLANK] that visitors needed a lamp to read the catalogue.`,
+        correctWord: `Tenebrous`,
+        rationale: `'Tenebrous' means dark, murky, and poorly lit.`
+      },
+      {
+        num: 6,
+        sentence: `With its clean air, safe drinking water, and uncrowded streets, the hill town offered a more [BLANK] environment for the recovery centre.`,
+        correctWord: `Salubrious`,
+        rationale: `'Salubrious' means wholesome and conducive to health and recovery.`
+      },
+      {
+        num: 7,
+        sentence: `Each cabin had two independent emergency exits so that a single jammed door could never [BLANK] an escape attempt.`,
+        correctWord: `Thwart`,
+        rationale: `'Thwart' means to foil, block, or prevent an attempt from succeeding.`
+      },
+      {
+        num: 8,
+        sentence: `Although she knew the figures were wrong, the junior analyst was too [BLANK] to challenge the director in front of the board.`,
+        correctWord: `Timorous`,
+        rationale: `'Timorous' means timid, fearful, or lacking courage.`
+      },
+      {
+        num: 9,
+        sentence: `A pumpkin of such [BLANK] proportions that it had to be lifted by a crane won first prize at the district fair.`,
+        correctWord: `Monstrous`,
+        rationale: `'Monstrous' denotes extraordinarily huge, gigantic, or colossal proportions.`
+      },
+      {
+        num: 10,
+        sentence: `The clerk found it particularly [BLANK] to receive daily reminders about a report she had already submitted and her supervisor had acknowledged.`,
+        correctWord: `Vexatious`,
+        rationale: `'Vexatious' describes something that causes persistent annoyance and frustration.`
+      }
+    ];
+
+    /* -------------------------------------------------------------
+       3. Official SSC CGL & Banking PYQ Items (10 Items)
+       ------------------------------------------------------------- */
+    const PYQ_QUIZ_DATA = [
+      {
+        id: `pyq1`,
+        title: `Q1. Select the most appropriate SYNONYM of the given word (SSC CGL · 22 Oct 2026 · Shift 2)`,
+        term: `OBEISANCE`,
+        options: [
+          { text: `Allegiance`, correct: false },
+          { text: `Acquiescence`, correct: false },
+          { text: `Clemency`, correct: false },
+          { text: `Homage`, correct: true }
+        ],
+        explanation: `Answer: D (Homage). 'Obeisance' refers to deference, respect, or a bow/curtsy shown to an authority or sacred power. 'Homage' is its closest synonym.`
+      },
+      {
+        id: `pyq2`,
+        title: `Q2. Select the most appropriate SYNONYM of the given word (SSC CGL · 24 Oct 2026 · Shift 2)`,
+        term: `TACIT`,
+        options: [
+          { text: `Tentative`, correct: false },
+          { text: `Implicit`, correct: true },
+          { text: `Confidential`, correct: false },
+          { text: `Unanimous`, correct: false }
+        ],
+        explanation: `Answer: B (Implicit). 'Tacit' refers to something understood or implied without being stated aloud in direct words.`
+      },
+      {
+        id: `pyq3`,
+        title: `Q3. Select the most appropriate SYNONYM of the given word (SSC CGL · 27 Oct 2026 · Shift 1)`,
+        term: `BANTER`,
+        options: [
+          { text: `Ridicule`, correct: false },
+          { text: `Reprimand`, correct: false },
+          { text: `Raillery`, correct: true },
+          { text: `Dispute`, correct: false }
+        ],
+        explanation: `Answer: C (Raillery). 'Banter' refers to playful, good-humoured teasing or witty repartee. 'Raillery' is its precise literary synonym.`
+      },
+      {
+        id: `pyq4`,
+        title: `Q4. Select the most appropriate SYNONYM of the given word (SSC CGL · 12 Oct 2026 · Shift 2)`,
+        term: `OBSTREPEROUS`,
+        options: [
+          { text: `Unruly`, correct: true },
+          { text: `Resolute`, correct: false },
+          { text: `Impetuous`, correct: false },
+          { text: `Petulant`, correct: false }
+        ],
+        explanation: `Answer: A (Unruly). 'Obstreperous' means noisy, defiant, and difficult to control or discipline.`
+      },
+      {
+        id: `pyq5`,
+        title: `Q5. Select the most appropriate SYNONYM of the given word (SSC CGL · 6 Oct 2026 · Shift 2)`,
+        term: `IMBRUE`,
+        options: [
+          { text: `Dilute`, correct: false },
+          { text: `Distil`, correct: false },
+          { text: `Decant`, correct: false },
+          { text: `Saturate`, correct: true }
+        ],
+        explanation: `Answer: D (Saturate). 'Imbrue' means to stain, soak, or drench thoroughly (especially with blood or moisture).`
+      },
+      {
+        id: `pyq6`,
+        title: `Q6. Select the correct meaning of the given IDIOM (SSC CGL · 08 Oct 2026 · Shift 3)`,
+        term: `BREAK OUT IN HIVES`,
+        options: [
+          { text: `To lose consciousness briefly`, correct: false },
+          { text: `To recover from an acute illness`, correct: false },
+          { text: `To react angrily to unprovoked criticism`, correct: false },
+          { text: `To develop an itchy rash or become intensely anxious`, correct: true }
+        ],
+        explanation: `Answer: D. 'Break out in hives' literally refers to developing allergic skin welts (urticaria) and figuratively indicates an acute panic reaction.`
+      },
+      {
+        id: `pyq7`,
+        title: `Q7. Select the correct meaning of the given IDIOM (SSC CGL · 24 Oct 2026 · Shift 3)`,
+        term: `TO FLY A KITE`,
+        options: [
+          { text: `To test public opinion by introducing a speculative trial idea`, correct: true },
+          { text: `To formally announce an approved government policy`, correct: false },
+          { text: `To privately renegotiate commercial terms`, correct: false },
+          { text: `To evade public accountability by fleeing overseas`, correct: false }
+        ],
+        explanation: `Answer: A. 'To fly a kite' is a political/editorial idiom meaning to float a controversial trial balloon to gauge collective reception.`
+      },
+      {
+        id: `pyq8`,
+        title: `Q8. Select the correct meaning of the given IDIOM (SSC CGL · 05 Oct 2026 · Shift 2)`,
+        term: `CRIED UP`,
+        options: [
+          { text: `Ignored intentionally by peers`, correct: false },
+          { text: `Praised extravagantly or loudly promoted`, correct: true },
+          { text: `Exposed harshly in public records`, correct: false },
+          { text: `Rejected summarily at the border`, correct: false }
+        ],
+        explanation: `Answer: B. 'To cry up' means to overstate or extravagantly praise the worth or virtues of something in public.`
+      },
+      {
+        id: `pyq9`,
+        title: `Q9. Select the correct meaning of the given IDIOM (SSC CGL · 24 Oct 2026 · Shift 1)`,
+        term: `CLUTCH AT STRAWS`,
+        options: [
+          { text: `Succeed against impossible odds`, correct: false },
+          { text: `Handle extremely fragile porcelain`, correct: false },
+          { text: `To desperately resort to futile or flimsy expedients in an emergency`, correct: true },
+          { text: `Refuse to help a drowning partner`, correct: false }
+        ],
+        explanation: `Answer: C. 'Clutch at straws' (from a drowning person grasping floating straws) means to try any desperate, hopeless measure to save oneself.`
+      },
+      {
+        id: `pyq10`,
+        title: `Q10. Select the correct meaning of the given IDIOM (SSC CGL · 10 Oct 2026 · Shift 2)`,
+        term: `TO THROW ONE’S CAP OVER THE WINDMILL`,
+        options: [
+          { text: `To construct agricultural infrastructure`, correct: false },
+          { text: `To abandon caution, prudence, or conventions in pursuit of a reckless desire`, correct: true },
+          { text: `To celebrate an unexpected academic achievement`, correct: false },
+          { text: `To concede defeat in a legal suit`, correct: false }
+        ],
+        explanation: `Answer: B. 'To throw one's cap over the windmill' (derived from French 'jeter son bonnet par-dessus les moulins') signifies casting off all social restraint or conventional prudence.`
+      }
+    ];
+
+    /* -------------------------------------------------------------
+       4. State Management (Storage & Defaults)
+       ------------------------------------------------------------- */
+    let appState = {
+      theme: 'light',
+      fontSizeDelta: 0,
+      activeTab: 'tab-editorial',
+      vocabCategory: 'all',
+      flashcardIndex: 0,
+      flashcardFilter: 'all',
+      cardStatus: {}, // { [wordId]: 'mastered' | 'practice' }
+      clozeAnswers: {}, // { [clozeIndex]: selectedWord }
+      pyqAnswers: {}, // { [pyqId]: selectedOptionIndex }
+      quizScore: 0
+    };
+
+    let timerInterval = null;
+    let timerSeconds = 0;
+    let activeFlashcardList = [...VOCAB_DATA];
+
+    /* -------------------------------------------------------------
+       5. App Lifecycle & Shim Persistence
+       ------------------------------------------------------------- */
+    document.addEventListener('DOMContentLoaded', async function() {
+      // 1. Initialise Icons
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+
+      // 2. Render Static-Dynamic Content
+      renderVocabBank();
+      renderStoryClozeQuiz();
+      renderPYQQuiz();
+
+      // 3. Restore persisted state from notebookAppApi
+      await restorePersistentState();
+
+      // 4. Update UI Components
+      updateFlashcardView();
+      updateFlashcardCounters();
+      recalculateQuizScore();
+
+      // 5. Start Quiz Stopwatch
+      startQuizTimer();
+
+      // 6. Signal App Ready
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+        window.notebookAppApi.notifyAppReady();
+      }
+    });
+
+    async function restorePersistentState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+        try {
+          const savedState = await window.notebookAppApi.getAppState();
+          if (savedState && typeof savedState === 'object') {
+            appState = { ...appState, ...savedState };
+          }
+        } catch (err) {
+          console.warn('Could not read persistent state:', err);
+        }
+      }
+
+      // Apply restored theme
+      if (appState.theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark');
+        const themeBtnText = document.getElementById('themeBtnText');
+        if (themeBtnText) themeBtnText.textContent = 'Day Edition';
+      }
+
+      // Apply restored font delta
+      if (appState.fontSizeDelta !== 0) {
+        applyFontSize(appState.fontSizeDelta);
+      }
+
+      // Restore Cloze Answers
+      if (appState.clozeAnswers) {
+        Object.keys(appState.clozeAnswers).forEach(function(qIdx) {
+          const sel = document.getElementById(`cloze-select-${qIdx}`);
+          if (sel) {
+            sel.value = appState.clozeAnswers[qIdx];
+            validateSingleCloze(parseInt(qIdx, 10), false);
+          }
+        });
+      }
+
+      // Restore PYQ Answers
+      if (appState.pyqAnswers) {
+        Object.keys(appState.pyqAnswers).forEach(function(pyqId) {
+          const optIdx = appState.pyqAnswers[pyqId];
+          selectPYQOption(pyqId, optIdx, false);
+        });
+      }
+    }
+
+    async function persistState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+        try {
+          await window.notebookAppApi.setAppState(appState);
+        } catch (err) {
+          console.warn('Failed to save state:', err);
+        }
+      }
+    }
+
+    /* -------------------------------------------------------------
+       6. Pronunciation Engine (Web Speech API)
+       ------------------------------------------------------------- */
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) {
+        console.warn('Web Speech API is not supported in this environment.');
+        return;
+      }
+      window.speechSynthesis.cancel(); // Stop prior speech
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'en-GB';
+      utterance.rate = 0.9; // clear, steady instructional tempo
+      utterance.pitch = 1.0;
+
+      // Select high quality UK or English voice if available
+      const voices = window.speechSynthesis.getVoices();
+      const britishVoice = voices.find(v => v.lang === 'en-GB' || v.name.includes('UK') || v.name.includes('British'));
+      if (britishVoice) {
+        utterance.voice = britishVoice;
+      }
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function speakCurrentFlashcard() {
+      const current = activeFlashcardList[appState.flashcardIndex];
+      if (current) {
+        speakText(current.word);
+      }
+    }
+
+    /* -------------------------------------------------------------
+       7. Tab & Navigation System
+       ------------------------------------------------------------- */
+    function switchTab(tabId, triggerBtn) {
+      document.querySelectorAll('.tab-item').forEach(b => b.classList.remove('active'));
+      document.querySelectorAll('.view-content').forEach(v => v.classList.remove('active'));
+
+      if (triggerBtn) {
+        triggerBtn.classList.add('active');
+      }
+
+      const target = document.getElementById(tabId);
+      if (target) {
+        target.classList.add('active');
+      }
+
+      appState.activeTab = tabId;
+      persistState();
+
+      // Refresh icons in tab
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    }
+
+    function jumpToWord(wordId) {
+      switchTab('tab-vocab', document.querySelectorAll('.tab-item')[1]);
+      const searchBox = document.getElementById('vocabSearchInput');
+      if (searchBox) {
+        searchBox.value = wordId;
+        filterVocabList();
+      }
+      setTimeout(() => {
+        const target = document.getElementById(`word-card-${wordId}`);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          target.style.outline = '3px solid var(--primary)';
+          setTimeout(() => { target.style.outline = '1px solid var(--outline)'; }, 2000);
+        }
+      }, 150);
+    }
+
+    /* -------------------------------------------------------------
+       8. Theme & Font Size Controls
+       ------------------------------------------------------------- */
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme') || 'light';
+      const next = current === 'light' ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', next);
+      appState.theme = next;
+
+      const themeBtnText = document.getElementById('themeBtnText');
+      if (themeBtnText) {
+        themeBtnText.textContent = next === 'dark' ? 'Day Edition' : 'Night Edition';
+      }
+
+      persistState();
+    }
+
+    function adjustFontSize(delta) {
+      appState.fontSizeDelta = Math.max(-2, Math.min(3, appState.fontSizeDelta + delta));
+      applyFontSize(appState.fontSizeDelta);
+      persistState();
+    }
+
+    function applyFontSize(delta) {
+      const basePx = 17;
+      const newPx = basePx + (delta * 1.5);
+      document.body.style.fontSize = `${newPx}px`;
+    }
+
+    function exportStudyNotes() {
+      const lines = [
+        `============================================================`,
+        `THE DAILY EDITORIAL & VOCABULARY DIGEST — 12th NOVEMBER 2026`,
+        `============================================================\n`,
+        `PRIMARY EDITORIAL: Festive Demand Warning (13-15% growth vs 20-25% expected)`,
+        `CENTRAL THEME: K-shaped consumption divergence, premiumisation vs mass market debt.`,
+        `AUTHOR'S TONE: Empirical & Prudent.\n`,
+        `------------------------------------------------------------`,
+        `CORE EDITORIAL VOCABULARY BANK (16 KEY WORDS)`,
+        `------------------------------------------------------------`
+      ];
+
+      VOCAB_DATA.forEach((w, idx) => {
+        lines.push(`\n[${idx + 1}] ${w.word.toUpperCase()} (${w.phonetic}) — ${w.partOfSpeech}`);
+        lines.push(`Telugu: ${w.telugu}`);
+        lines.push(`Meaning: ${w.definition}`);
+        lines.push(`Memory Hook: ${w.hook}`);
+        lines.push(`Synonyms: ${w.synonyms}`);
+        lines.push(`Antonyms: ${w.antonyms}`);
+        lines.push(`Everyday Context: ${w.usages.everyday}`);
+        lines.push(`Editorial Context: ${w.usages.editorial}`);
+        lines.push(`Banking/Cloze Context: ${w.usages.banking}`);
+      });
+
+      lines.push(`\n------------------------------------------------------------`);
+      lines.push(`ONE-WORD SUBSTITUTIONS & IDIOMS`);
+      lines.push(`- Slob: A lazy, untidy person with dirty habits.`);
+      lines.push(`- Vestige: A visible trace of something that once existed.`);
+      lines.push(`- Spectre: A haunting phantom or looming threat of catastrophe.`);
+      lines.push(`- Arsonphobia: Extreme or irrational fear of fire.`);
+      lines.push(`- The ball is in your court: It is your turn/duty to take the next action.`);
+      lines.push(`- The tip of the iceberg: A small visible fraction of a larger hidden problem.`);
+      lines.push(`- The best of both worlds: Enjoying advantages of two distinct situations.`);
+      lines.push(`- When pigs fly: Something impossible that will never happen.`);
+      lines.push(`- A word to the wise: A prudent hint that a sensible person will heed.`);
+      lines.push(`\nGenerated offline from the Daily Reading & Vocabulary Gazette.`);
+
+      const textOutput = lines.join('\n');
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === 'function') {
+        window.notebookAppApi.triggerFileDownload({
+          content: textOutput,
+          contentType: 'text/plain',
+          encoding: 'UTF-8',
+          filename: 'Editorial_Vocab_Notes_12Nov2026.txt'
+        });
+      } else {
+        // Fallback for direct browser testing
+        const blob = new Blob([textOutput], { type: 'text/plain;charset=utf-8' });
+        const dummyLink = document.createElement('a');
+        dummyLink.href = URL.createObjectURL(blob);
+        dummyLink.download = 'Editorial_Vocab_Notes_12Nov2026.txt';
+        dummyLink.click();
+      }
+    }
+
+    /* -------------------------------------------------------------
+       9. Vocabulary Bank Rendering & Dynamic Filters
+       ------------------------------------------------------------- */
+    function renderVocabBank() {
+      const container = document.getElementById('vocabGridContainer');
+      if (!container) return;
+
+      container.innerHTML = VOCAB_DATA.map(w => `
+        <article class="vocab-card" id="word-card-${w.id}" data-category="${w.category}">
+          <div class="vocab-card-header">
+            <div>
+              <h3 class="vocab-word-title">${w.word}</h3>
+              <div class="vocab-phonetic">${w.syllables} • ${w.phonetic} • <em>${w.partOfSpeech}</em></div>
+            </div>
+            <button class="pronounce-btn" onclick="speakText('${w.word}')" title="Listen to pronunciation">
+              🔊 Pronounce
+            </button>
+          </div>
+          <div class="vocab-card-body">
+            <div class="telugu-badge">${w.telugu}</div>
+            <div class="vocab-def"><strong>Definition:</strong> ${w.definition}</div>
+            <div class="memory-hook"><strong>Memory Hook:</strong> ${w.hook}</div>
+            <div class="syn-ant-box">
+              <div class="syn-ant-row"><span class="syn-ant-label">Synonyms:</span> ${w.synonyms}</div>
+              <div class="syn-ant-row"><span class="syn-ant-label">Antonyms:</span> ${w.antonyms}</div>
+            </div>
+          </div>
+          <div class="usage-accordion">
+            <button class="usage-toggle" onclick="toggleUsage('${w.id}')">
+              <span>Exam Usage Sentences (3 Contexts)</span>
+              <span id="usage-arrow-${w.id}">▾</span>
+            </button>
+            <div class="usage-content" id="usage-panel-${w.id}">
+              <div class="usage-item">
+                <span class="usage-tag">Everyday Conversation</span>
+                ${w.usages.everyday}
+              </div>
+              <div class="usage-item">
+                <span class="usage-tag">Editorial Analysis</span>
+                ${w.usages.editorial}
+              </div>
+              <div class="usage-item">
+                <span class="usage-tag">Banking / Cloze Test</span>
+                ${w.usages.banking}
+              </div>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function toggleUsage(id) {
+      const panel = document.getElementById(`usage-panel-${id}`);
+      const arrow = document.getElementById(`usage-arrow-${id}`);
+      if (panel) {
+        panel.classList.toggle('open');
+        if (arrow) {
+          arrow.textContent = panel.classList.contains('open') ? '▴' : '▾';
+        }
+      }
+    }
+
+    function setVocabCategory(cat, btn) {
+      document.querySelectorAll('.filter-bar .filter-chip').forEach(c => c.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+      appState.vocabCategory = cat;
+      filterVocabList();
+    }
+
+    function filterVocabList() {
+      const query = (document.getElementById('vocabSearchInput')?.value || '').toLowerCase().trim();
+      const cat = appState.vocabCategory || 'all';
+
+      VOCAB_DATA.forEach(w => {
+        const el = document.getElementById(`word-card-${w.id}`);
+        if (!el) return;
+
+        const matchesCat = (cat === 'all' || w.category === cat);
+        const matchesQuery = query === '' ||
+          w.word.toLowerCase().includes(query) ||
+          w.telugu.toLowerCase().includes(query) ||
+          w.definition.toLowerCase().includes(query) ||
+          w.synonyms.toLowerCase().includes(query);
+
+        if (matchesCat && matchesQuery) {
+          el.style.display = 'flex';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    }
+
+    /* -------------------------------------------------------------
+       10. 3D Interactive Flashcard Engine
+       ------------------------------------------------------------- */
+    function filterFlashcards(filterType, btn) {
+      document.querySelectorAll('.flashcard-controls .filter-chip').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+
+      appState.flashcardFilter = filterType;
+
+      if (filterType === 'all') {
+        activeFlashcardList = [...VOCAB_DATA];
+      } else if (filterType === 'mastered') {
+        activeFlashcardList = VOCAB_DATA.filter(w => appState.cardStatus[w.id] === 'mastered');
+      } else if (filterType === 'practice') {
+        activeFlashcardList = VOCAB_DATA.filter(w => appState.cardStatus[w.id] === 'practice');
+      }
+
+      if (activeFlashcardList.length === 0) {
+        // Fallback to all if category empty
+        activeFlashcardList = [...VOCAB_DATA];
+      }
+
+      appState.flashcardIndex = 0;
+      updateFlashcardView();
+    }
+
+    function flipFlashcard() {
+      const card = document.getElementById('flashcardElement');
+      if (card) {
+        card.classList.toggle('is-flipped');
+      }
+    }
+
+    function updateFlashcardView() {
+      const card = document.getElementById('flashcardElement');
+      if (card) {
+        card.classList.remove('is-flipped');
+      }
+
+      const total = activeFlashcardList.length;
+      if (total === 0) return;
+
+      const current = activeFlashcardList[appState.flashcardIndex] || activeFlashcardList[0];
+
+      // Update Front
+      const elFrontWord = document.getElementById('fc-front-word');
+      const elFrontPhonetic = document.getElementById('fc-front-phonetic');
+      const elFrontTag = document.getElementById('fc-front-tag');
+      if (elFrontWord) elFrontWord.textContent = current.word;
+      if (elFrontPhonetic) elFrontPhonetic.textContent = `${current.syllables} • ${current.phonetic}`;
+      if (elFrontTag) elFrontTag.textContent = current.category.toUpperCase();
+
+      // Update Back
+      const elBackWord = document.getElementById('fc-back-word');
+      const elBackTelugu = document.getElementById('fc-back-telugu');
+      const elBackDef = document.getElementById('fc-back-def');
+      const elBackHook = document.getElementById('fc-back-hook');
+      const elBackSyn = document.getElementById('fc-back-syn');
+      const elBackAnt = document.getElementById('fc-back-ant');
+
+      if (elBackWord) elBackWord.textContent = current.word;
+      if (elBackTelugu) elBackTelugu.textContent = current.telugu;
+      if (elBackDef) elBackDef.textContent = current.definition;
+      if (elBackHook) elBackHook.innerHTML = `<strong>Memory Hook:</strong> ${current.hook}`;
+      if (elBackSyn) elBackSyn.textContent = current.synonyms;
+      if (elBackAnt) elBackAnt.textContent = current.antonyms;
+
+      // Update Counters
+      const elIndex = document.getElementById('fc-current-index');
+      const elTotal = document.getElementById('fc-total-count');
+      if (elIndex) elIndex.textContent = (appState.flashcardIndex + 1);
+      if (elTotal) elTotal.textContent = total;
+    }
+
+    function prevFlashcard() {
+      const total = activeFlashcardList.length;
+      if (total <= 1) return;
+      appState.flashcardIndex = (appState.flashcardIndex - 1 + total) % total;
+      updateFlashcardView();
+    }
+
+    function nextFlashcard() {
+      const total = activeFlashcardList.length;
+      if (total <= 1) return;
+      appState.flashcardIndex = (appState.flashcardIndex + 1) % total;
+      updateFlashcardView();
+    }
+
+    function shuffleFlashcards() {
+      for (let i = activeFlashcardList.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [activeFlashcardList[i], activeFlashcardList[j]] = [activeFlashcardList[j], activeFlashcardList[i]];
+      }
+      appState.flashcardIndex = 0;
+      updateFlashcardView();
+    }
+
+    function markCardStatus(status) {
+      const current = activeFlashcardList[appState.flashcardIndex];
+      if (!current) return;
+
+      appState.cardStatus[current.id] = status;
+      updateFlashcardCounters();
+      persistState();
+
+      // Automatically advance smoothly to next card
+      setTimeout(() => {
+        nextFlashcard();
+      }, 250);
+    }
+
+    function updateFlashcardCounters() {
+      let masteredCount = 0;
+      let practiceCount = 0;
+
+      VOCAB_DATA.forEach(w => {
+        if (appState.cardStatus[w.id] === 'mastered') masteredCount++;
+        if (appState.cardStatus[w.id] === 'practice') practiceCount++;
+      });
+
+      const elM = document.getElementById('count-mastered');
+      const elP = document.getElementById('count-practice');
+      if (elM) elM.textContent = masteredCount;
+      if (elP) elP.textContent = practiceCount;
+    }
+
+    /* -------------------------------------------------------------
+       11. Reading Comprehension Verification Handlers
+       ------------------------------------------------------------- */
+    function checkRCOption(qId, selectedIdx, isCorrect, explanationText) {
+      const optionsContainer = document.getElementById(`${qId}-options`);
+      const feedbackEl = document.getElementById(`${qId}-feedback`);
+      if (!optionsContainer || !feedbackEl) return;
+
+      const allOptions = optionsContainer.querySelectorAll('.rc-option');
+      allOptions.forEach((opt, idx) => {
+        opt.classList.remove('correct-picked', 'wrong-picked');
+        if (idx === selectedIdx) {
+          opt.classList.add(isCorrect ? 'correct-picked' : 'wrong-picked');
+        }
+      });
+
+      feedbackEl.style.display = 'block';
+      feedbackEl.innerHTML = `<strong>${isCorrect ? '✓ Correct Choice!' : '✗ Needs Attention:'}</strong> ${explanationText}`;
+    }
+
+    /* -------------------------------------------------------------
+       12. Exam Practice Quiz (Cloze & PYQ)
+       ------------------------------------------------------------- */
+    function renderStoryClozeQuiz() {
+      const container = document.getElementById('story-quiz-items');
+      if (!container) return;
+
+      const wordList = [
+        `Tenebrous`, `Timorous`, `Aporetic`, `Salubrious`, `Flak`,
+        `Vexatious`, `Cajole`, `Monstrous`, `Thwart`, `Sanguine`
+      ].sort();
+
+      container.innerHTML = CLOZE_QUIZ_DATA.map((item, idx) => {
+        const sentenceParts = item.sentence.split('[BLANK]');
+        return `
+          <div class="quiz-question-card" id="cloze-card-${idx}">
+            <div class="quiz-q-num">Cloze Question ${item.num} of 10</div>
+            <div class="quiz-prompt">
+              ${sentenceParts[0]}
+              <select class="blank-select" id="cloze-select-${idx}" onchange="handleClozeSelect(${idx}, this.value)">
+                <option value="">— Select Word —</option>
+                ${wordList.map(w => `<option value="${w}">${w}</option>`).join('')}
+              </select>
+              ${sentenceParts[1] || ''}
+            </div>
+            <div class="quiz-explanation" id="cloze-exp-${idx}">
+              <strong>Correct Answer: ${item.correctWord}</strong> — ${item.rationale}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function handleClozeSelect(qIdx, selectedValue) {
+      appState.clozeAnswers[qIdx] = selectedValue;
+      validateSingleCloze(qIdx, true);
+      recalculateQuizScore();
+      persistState();
+    }
+
+    function validateSingleCloze(qIdx, showAnimation) {
+      const item = CLOZE_QUIZ_DATA[qIdx];
+      const sel = document.getElementById(`cloze-select-${qIdx}`);
+      const exp = document.getElementById(`cloze-exp-${qIdx}`);
+      if (!sel || !item || !exp) return;
+
+      const selected = sel.value;
+      if (!selected) {
+        sel.style.borderColor = 'var(--outline)';
+        sel.style.backgroundColor = 'var(--background)';
+        exp.style.display = 'none';
+        return;
+      }
+
+      exp.style.display = 'block';
+      if (selected.toLowerCase() === item.correctWord.toLowerCase()) {
+        sel.style.borderColor = 'var(--positive)';
+        sel.style.backgroundColor = '#e6f4ea';
+        sel.style.color = '#0d5325';
+      } else {
+        sel.style.borderColor = 'var(--error)';
+        sel.style.backgroundColor = 'var(--primary-container)';
+        sel.style.color = 'var(--on-primary-container)';
+      }
+    }
+
+    function renderPYQQuiz() {
+      const container = document.getElementById('pyq-quiz-items');
+      if (!container) return;
+
+      container.innerHTML = PYQ_QUIZ_DATA.map(q => `
+        <div class="quiz-question-card" id="pyq-card-${q.id}">
+          <div class="quiz-q-num">${q.title}</div>
+          <div class="quiz-prompt">${q.term}</div>
+          <div class="rc-options" id="options-${q.id}">
+            ${q.options.map((opt, oIdx) => `
+              <div class="rc-option" id="opt-${q.id}-${oIdx}" onclick="handlePYQClick('${q.id}', ${oIdx})">
+                <span style="font-weight:700;">${String.fromCharCode(65 + oIdx)}.</span>
+                <span>${opt.text}</span>
+              </div>
+            `).join('')}
+          </div>
+          <div class="quiz-explanation" id="exp-${q.id}">
+            ${q.explanation}
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function handlePYQClick(qId, optionIdx) {
+      appState.pyqAnswers[qId] = optionIdx;
+      selectPYQOption(qId, optionIdx, true);
+      recalculateQuizScore();
+      persistState();
+    }
+
+    function selectPYQOption(qId, optionIdx, animate) {
+      const q = PYQ_QUIZ_DATA.find(item => item.id === qId);
+      if (!q) return;
+
+      const container = document.getElementById(`options-${qId}`);
+      const exp = document.getElementById(`exp-${qId}`);
+      if (!container || !exp) return;
+
+      container.querySelectorAll('.rc-option').forEach((el, idx) => {
+        el.classList.remove('correct-picked', 'wrong-picked');
+        if (idx === optionIdx) {
+          const isCorrect = q.options[optionIdx].correct;
+          el.classList.add(isCorrect ? 'correct-picked' : 'wrong-picked');
+        }
+      });
+
+      exp.style.display = 'block';
+    }
+
+    function recalculateQuizScore() {
+      let score = 0;
+
+      // Score Part A (Cloze)
+      CLOZE_QUIZ_DATA.forEach((item, idx) => {
+        if (appState.clozeAnswers[idx] &&
+            appState.clozeAnswers[idx].toLowerCase() === item.correctWord.toLowerCase()) {
+          score++;
+        }
+      });
+
+      // Score Part B (PYQs)
+      PYQ_QUIZ_DATA.forEach(q => {
+        const picked = appState.pyqAnswers[q.id];
+        if (picked !== undefined && q.options[picked] && q.options[picked].correct) {
+          score++;
+        }
+      });
+
+      appState.quizScore = score;
+      const display = document.getElementById('quizScoreDisplay');
+      if (display) display.textContent = score;
+    }
+
+    function resetAllQuizAnswers() {
+      appState.clozeAnswers = {};
+      appState.pyqAnswers = {};
+      appState.quizScore = 0;
+
+      // Reset Part A DOM
+      CLOZE_QUIZ_DATA.forEach((_, idx) => {
+        const sel = document.getElementById(`cloze-select-${idx}`);
+        const exp = document.getElementById(`cloze-exp-${idx}`);
+        if (sel) {
+          sel.value = '';
+          sel.style.borderColor = 'var(--outline)';
+          sel.style.backgroundColor = 'var(--background)';
+          sel.style.color = 'var(--on-surface)';
+        }
+        if (exp) exp.style.display = 'none';
+      });
+
+      // Reset Part B DOM
+      PYQ_QUIZ_DATA.forEach(q => {
+        const container = document.getElementById(`options-${q.id}`);
+        const exp = document.getElementById(`exp-${q.id}`);
+        if (container) {
+          container.querySelectorAll('.rc-option').forEach(el => {
+            el.classList.remove('correct-picked', 'wrong-picked');
+          });
+        }
+        if (exp) exp.style.display = 'none';
+      });
+
+      recalculateQuizScore();
+      persistState();
+    }
+
+    function startQuizTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerSeconds = 0;
+      timerInterval = setInterval(() => {
+        timerSeconds++;
+        const mins = Math.floor(timerSeconds / 60).toString().padStart(2, '0');
+        const secs = (timerSeconds % 60).toString().padStart(2, '0');
+        const el = document.getElementById('quiz-stopwatch');
+        if (el) el.textContent = `${mins}:${secs}`;
+      }, 1000);
+    }
+  </script>
+</body>
+</html>
