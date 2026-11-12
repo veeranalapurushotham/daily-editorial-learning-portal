@@ -1,0 +1,3435 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="tool">
+  <meta name="design-style" content="broadsheet">
+  <title>Editorial Vocabulary Master | Banking &amp; Government Exams</title>
+
+  <!-- Google Fonts for Broadsheet Design Style -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bitter:ital,wght@0,500..800;1,400..700&family=Source+Sans+3:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons (Exact Pinned CDN) -->
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    /* ==========================================================================
+       Broadsheet Design System Tokens
+       ========================================================================== */
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces */
+      --background: #f7f3eb;               /* warm ivory newsprint */
+      --surface-container-low: #efe8da;    /* deeper newsprint */
+      --surface-container: #e6ddcc;        /* filled panel / card */
+      --surface-container-high: #ddd2be;   /* hover on panels */
+
+      /* Ink */
+      --on-surface: #1a1817;               /* newsprint black */
+      --on-surface-variant: #4d4845;       /* grey ink */
+
+      /* Rules */
+      --outline: #33302e;                  /* ink rules */
+      --outline-variant: #cdc3b2;          /* column hairlines */
+
+      /* Accents */
+      --primary: #990f3d;                  /* claret: signature editorial accent */
+      --on-primary: #ffffff;
+      --primary-container: #f4dce2;        /* pale claret wash */
+      --on-primary-container: #6b0a2a;
+      --secondary: #0d7680;                /* bare teal: tags, topics */
+      --tertiary: #0f5499;                 /* oxford blue: supplementary data */
+      --error: #b3261e;
+      --on-error: #ffffff;
+
+      /* Semantic UI */
+      --positive: #1b7340;
+      --on-positive: #ffffff;
+      --positive-container: #d9f2e3;
+      --warning: #9a6312;
+      --warning-container: #fdf3d8;
+
+      /* Data series */
+      --data-1: #990f3d;
+      --data-2: #0d7680;
+      --data-3: #0f5499;
+      --data-4: #9a6312;
+      --data-context: #bfb5a4;
+
+      /* Typography */
+      --font-headline: 'Bitter', serif;
+      --font-body: 'Source Serif 4', serif;
+      --font-label: 'Source Sans 3', sans-serif;
+
+      /* Shape - Strict Broadsheet rules: square edges */
+      --rounded: 0px;
+      --rounded-lg: 0px;
+      --rounded-full: 0px;
+
+      /* Style effects */
+      --rule-masthead: 3px double var(--on-surface);
+      --rule-ink: 1px solid var(--on-surface);
+      --rule-section: 2px solid var(--outline);
+      --rule-column: 1px solid var(--outline-variant);
+
+      /* Spacing scale */
+      --space-3xs: 0.125rem;
+      --space-2xs: 0.25rem;
+      --space-xs: 0.5rem;
+      --space-sm: 0.75rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2rem;
+      --space-2xl: 3rem;
+
+      /* Transitions */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-short: 160ms;
+      --dur-med: 260ms;
+    }
+
+    [data-theme="dark"] {
+      color-scheme: dark;
+      --background: #1d1a18;
+      --surface-container-low: #26221f;
+      --surface-container: #302b28;
+      --surface-container-high: #3b3531;
+      --on-surface: #f2e8de;
+      --on-surface-variant: #c2b8ae;
+      --outline: #e8ded4;
+      --outline-variant: #4d4845;
+      --primary: #f08aa3;
+      --on-primary: #1d1a18;
+      --primary-container: #471321;
+      --on-primary-container: #ffd9e2;
+      --secondary: #5cbcc4;
+      --tertiary: #7fb0e8;
+      --error: #ffb4ab;
+      --on-error: #690005;
+      --positive: #78dc96;
+      --on-positive: #1d1a18;
+      --positive-container: #173823;
+      --warning: #f5c065;
+      --warning-container: #3d2f10;
+      --data-1: #f08aa3;
+      --data-2: #5cbcc4;
+      --data-3: #7fb0e8;
+      --data-4: #f5c065;
+      --data-context: #59534e;
+      --rule-masthead: 3px double var(--on-surface);
+      --rule-ink: 1px solid var(--outline);
+      --rule-section: 2px solid var(--outline);
+      --rule-column: 1px solid var(--outline-variant);
+    }
+
+    /* ==========================================================================
+       Reset & Base Layout
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      overflow-x: clip;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin-inline: auto;
+      padding-inline: var(--space-md);
+    }
+
+    h1, h2, h3, h4 {
+      font-family: var(--font-headline);
+      color: var(--on-surface);
+      line-height: 1.15;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      letter-spacing: -0.015em;
+    }
+
+    h2 {
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      font-weight: 700;
+    }
+
+    h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+
+    p {
+      margin-bottom: var(--space-xs);
+    }
+
+    button {
+      font-family: var(--font-label);
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid transparent;
+      background: none;
+      color: inherit;
+      border-radius: var(--rounded);
+      transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+    }
+
+    button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 2px solid var(--primary);
+      outline-offset: 2px;
+    }
+
+    input, select {
+      font-family: var(--font-label);
+      font-size: 0.95rem;
+      border-radius: var(--rounded);
+      border: 1px solid var(--outline);
+      background: var(--background);
+      color: var(--on-surface);
+      padding: var(--space-xs) var(--space-sm);
+    }
+
+    /* ==========================================================================
+       Broadsheet Defining Treatments
+       ========================================================================== */
+    .masthead-top {
+      border-bottom: var(--rule-masthead);
+      padding-block: var(--space-xs);
+      font-family: var(--font-label);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+    }
+
+    .masthead {
+      border-bottom: var(--rule-ink);
+      padding-block: var(--space-md) var(--space-md);
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: end;
+      gap: var(--space-md);
+    }
+
+    .masthead-title-group h1 {
+      margin-bottom: var(--space-2xs);
+    }
+
+    .masthead-lede {
+      font-family: var(--font-body);
+      font-size: 1.05rem;
+      color: var(--on-surface-variant);
+      max-width: 72ch;
+    }
+
+    .masthead-stats {
+      display: flex;
+      gap: 0;
+      border-left: var(--rule-column);
+    }
+
+    .stat-col {
+      padding: var(--space-xs) var(--space-md);
+      border-right: var(--rule-column);
+      text-align: left;
+    }
+
+    .stat-label {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      display: block;
+    }
+
+    .stat-val {
+      font-family: var(--font-headline);
+      font-size: 1.6rem;
+      font-weight: 700;
+      font-variant-numeric: lining-nums tabular-nums;
+      color: var(--primary);
+    }
+
+    .tag-bare {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--secondary);
+      background: transparent;
+      padding: 0;
+    }
+
+    .claret-label {
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+    }
+
+    /* Navigation & Tabs */
+    .nav-bar {
+      border-bottom: var(--rule-section);
+      display: flex;
+      justify-content: space-between;
+      align-items: stretch;
+      flex-wrap: wrap;
+      background: var(--background);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+
+    .tab-group {
+      display: flex;
+      gap: 0;
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: var(--space-sm) var(--space-md);
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      border-right: var(--rule-column);
+      border-bottom: 3px solid transparent;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      background: transparent;
+      color: var(--on-surface-variant);
+    }
+
+    .tab-btn:hover {
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: var(--surface-container-low);
+    }
+
+    .utility-group {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      padding: var(--space-2xs) 0;
+    }
+
+    .btn-secondary {
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      border: 1px solid var(--outline-variant);
+      padding: var(--space-2xs) var(--space-sm);
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2xs);
+      min-height: 38px;
+    }
+
+    .btn-secondary:hover {
+      background: var(--surface-container-high);
+      border-color: var(--outline);
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: var(--on-primary);
+      border: 1px solid var(--primary);
+      padding: var(--space-2xs) var(--space-sm);
+      font-size: 0.8rem;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2xs);
+      min-height: 38px;
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.1);
+    }
+
+    /* Content Area */
+    .main-content {
+      padding-block: var(--space-lg) var(--space-2xl);
+      flex: 1;
+    }
+
+    .mode-view {
+      display: none;
+    }
+
+    .mode-view.active {
+      display: block;
+      animation: fadeIn var(--dur-short) var(--ease-out);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(3px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ==========================================================================
+       Mode 1: Vocabulary Cards View
+       ========================================================================== */
+    .control-deck {
+      border-bottom: var(--rule-column);
+      padding-bottom: var(--space-md);
+      margin-bottom: var(--space-lg);
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .search-box-wrapper {
+      position: relative;
+      flex: 1 1 280px;
+      max-width: 480px;
+    }
+
+    .search-box-wrapper input {
+      width: 100%;
+      padding-left: 2.2rem;
+      height: 42px;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--on-surface-variant);
+      pointer-events: none;
+    }
+
+    .filter-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2xs);
+    }
+
+    .chip-btn {
+      padding: var(--space-2xs) var(--space-xs);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      border: 1px solid var(--outline-variant);
+      background: var(--background);
+      color: var(--on-surface-variant);
+    }
+
+    .chip-btn.active {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    .vocab-card {
+      background: var(--background);
+      border-top: var(--rule-section);
+      border-bottom: var(--rule-column);
+      border-left: var(--rule-column);
+      border-right: var(--rule-column);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      position: relative;
+    }
+
+    .vocab-card.mastered {
+      background: var(--surface-container-low);
+      border-top-color: var(--positive);
+    }
+
+    .card-top-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: var(--space-xs);
+      border-bottom: var(--rule-column);
+      padding-bottom: var(--space-2xs);
+    }
+
+    .word-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .word-title {
+      font-family: var(--font-headline);
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--on-surface);
+      line-height: 1.1;
+    }
+
+    .phonetic-badge {
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+      color: var(--on-surface-variant);
+      font-style: italic;
+    }
+
+    .btn-pronounce {
+      padding: var(--space-2xs) var(--space-xs);
+      border: 1px solid var(--outline);
+      background: var(--surface-container-low);
+      color: var(--on-surface);
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2xs);
+      font-size: 0.75rem;
+      border-radius: var(--rounded);
+      cursor: pointer;
+    }
+
+    .btn-pronounce:hover {
+      background: var(--primary);
+      color: var(--on-primary);
+      border-color: var(--primary);
+    }
+
+    .btn-pronounce.speaking {
+      background: var(--primary);
+      color: var(--on-primary);
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from { opacity: 0.8; }
+      to { opacity: 1; }
+    }
+
+    .telugu-block {
+      background: var(--surface-container-low);
+      border-left: 3px solid var(--primary);
+      padding: var(--space-xs) var(--space-sm);
+      font-size: 0.95rem;
+    }
+
+    .telugu-script {
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: var(--space-3xs);
+      font-size: 1.05rem;
+    }
+
+    .telugu-trans {
+      font-size: 0.82rem;
+      color: var(--on-surface-variant);
+      font-family: var(--font-label);
+      letter-spacing: 0.02em;
+    }
+
+    .beginner-callout {
+      border: 1px dashed var(--outline-variant);
+      padding: var(--space-xs);
+      font-size: 0.9rem;
+      color: var(--on-surface-variant);
+      background: var(--surface-container-low);
+    }
+
+    .beginner-callout strong {
+      color: var(--on-surface);
+      font-family: var(--font-label);
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      display: block;
+      margin-bottom: var(--space-3xs);
+    }
+
+    .lexical-tags {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-xs);
+      font-size: 0.82rem;
+      border-top: var(--rule-column);
+      padding-top: var(--space-xs);
+    }
+
+    .lex-col strong {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      margin-bottom: var(--space-3xs);
+    }
+
+    .lex-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3xs);
+    }
+
+    .lex-pill {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      padding: 1px 5px;
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      color: var(--on-surface);
+    }
+
+    .example-sentence {
+      font-size: 0.92rem;
+      font-style: italic;
+      color: var(--on-surface);
+      border-left: 2px solid var(--secondary);
+      padding-left: var(--space-xs);
+      margin-top: auto;
+    }
+
+    .exam-relevance-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: var(--rule-column);
+      padding-top: var(--space-xs);
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+    }
+
+    .mastery-check-label {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2xs);
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 0.78rem;
+    }
+
+    /* ==========================================================================
+       Mode 2: Visual Memory Hooks View
+       ========================================================================== */
+    .visual-subnav {
+      border-bottom: var(--rule-column);
+      margin-bottom: var(--space-lg);
+      padding-bottom: var(--space-xs);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+    }
+
+    .visual-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: var(--space-xl);
+    }
+
+    .visual-card {
+      border-top: var(--rule-section);
+      border-left: var(--rule-column);
+      border-right: var(--rule-column);
+      border-bottom: var(--rule-column);
+      background: var(--background);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .svg-artwork-container {
+      width: 100%;
+      height: 200px;
+      background: var(--surface-container-low);
+      border: 1px solid var(--outline-variant);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .svg-artwork-container svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    .visual-mnemonic-box {
+      background: var(--surface-container-low);
+      border-left: 3px solid var(--warning);
+      padding: var(--space-xs) var(--space-sm);
+      font-size: 0.88rem;
+    }
+
+    .visual-mnemonic-box strong {
+      display: block;
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--warning);
+      margin-bottom: var(--space-3xs);
+    }
+
+    /* Visual Drill Mini Game */
+    .drill-panel {
+      border: var(--rule-section);
+      background: var(--surface-container-low);
+      padding: var(--space-lg);
+      margin-bottom: var(--space-xl);
+    }
+
+    .drill-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+      align-items: center;
+    }
+
+    .drill-options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+    }
+
+    .drill-opt-btn {
+      padding: var(--space-sm) var(--space-md);
+      background: var(--background);
+      border: 1px solid var(--outline);
+      text-align: left;
+      font-family: var(--font-headline);
+      font-size: 1.1rem;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .drill-opt-btn:hover {
+      background: var(--surface-container-high);
+    }
+
+    .drill-opt-btn.correct {
+      background: var(--positive-container);
+      border-color: var(--positive);
+      color: var(--positive);
+    }
+
+    .drill-opt-btn.wrong {
+      background: var(--primary-container);
+      border-color: var(--error);
+      color: var(--error);
+    }
+
+    /* ==========================================================================
+       Mode 3: Interactive Flashcards View
+       ========================================================================== */
+    .flashcard-stage {
+      max-width: 680px;
+      margin-inline: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-lg);
+    }
+
+    .flashcard-header-bar {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: var(--rule-column);
+      padding-bottom: var(--space-xs);
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+    }
+
+    .flashcard-progress-outer {
+      width: 100%;
+      height: 6px;
+      background: var(--surface-container);
+      border: 1px solid var(--outline-variant);
+      position: relative;
+    }
+
+    .flashcard-progress-inner {      height: 100%;
+      background: var(--primary);
+      width: 10%;
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    /* 3D Flip Card Container */
+    .flip-card-wrapper {
+      perspective: 1200px;
+      width: 100%;
+      height: 420px;
+      cursor: pointer;
+    }
+
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: left;
+      transition: transform 0.5s cubic-bezier(0.4, 0.2, 0.2, 1);
+      transform-style: preserve-3d;
+    }
+
+    .flip-card-inner.is-flipped {
+      transform: rotateY(180deg);
+    }
+
+    .flip-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-top: var(--rule-section);
+      border-left: var(--rule-column);
+      border-right: var(--rule-column);
+      border-bottom: var(--rule-column);
+      background: var(--background);
+      padding: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .flip-face-back {
+      transform: rotateY(180deg);
+      background: var(--surface-container-low);
+      overflow-y: auto;
+    }
+
+    .flip-cue {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--on-surface-variant);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
+      border-top: var(--rule-column);
+      padding-top: var(--space-xs);
+    }
+
+    .flashcard-controls {
+      display: flex;
+      gap: var(--space-sm);
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .btn-revision-grade {
+      min-height: 42px;
+      padding: var(--space-xs) var(--space-md);
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    /* ==========================================================================
+       Mode 4: Banking Exam Quiz View
+       ========================================================================== */
+    .quiz-container {
+      max-width: 820px;
+      margin-inline: auto;
+    }
+
+    .quiz-top-bar {
+      border-bottom: var(--rule-masthead);
+      padding-bottom: var(--space-xs);
+      margin-bottom: var(--space-md);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: var(--font-label);
+      font-size: 0.85rem;
+    }
+
+    .quiz-timer {
+      font-variant-numeric: tabular-nums;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
+    }
+
+    .quiz-progress-bar {
+      width: 100%;
+      height: 4px;
+      background: var(--surface-container);
+      margin-bottom: var(--space-lg);
+    }
+
+    .quiz-progress-fill {
+      height: 100%;
+      background: var(--primary);
+      width: 10%;
+      transition: width var(--dur-short) var(--ease-out);
+    }
+
+    .question-card {
+      border-top: var(--rule-section);
+      border-left: var(--rule-column);
+      border-right: var(--rule-column);
+      border-bottom: var(--rule-column);
+      background: var(--background);
+      padding: var(--space-xl);
+      margin-bottom: var(--space-lg);
+    }
+
+    .question-source-tag {
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--secondary);
+      margin-bottom: var(--space-2xs);
+      display: block;
+    }
+
+    .question-text {
+      font-size: 1.15rem;
+      line-height: 1.45;
+      font-family: var(--font-headline);
+      font-weight: 600;
+      margin-bottom: var(--space-lg);
+    }
+
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-lg);
+    }
+
+    .quiz-option {
+      border: 1px solid var(--outline);
+      background: var(--background);
+      padding: var(--space-sm) var(--space-md);
+      text-align: left;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      transition: background-color var(--dur-short) var(--ease-out), border-color var(--dur-short) var(--ease-out);
+    }
+
+    .quiz-option:hover:not(:disabled) {
+      background: var(--surface-container-low);
+      border-color: var(--primary);
+    }
+
+    .opt-letter {
+      width: 28px;
+      height: 28px;
+      border: 1px solid var(--outline);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-label);
+      font-weight: 700;
+      font-size: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .quiz-option.selected {
+      border-color: var(--on-surface);
+      background: var(--surface-container-low);
+    }
+
+    .quiz-option.correct-answer {
+      background: var(--positive-container);
+      border-color: var(--positive);
+      color: var(--positive);
+    }
+
+    .quiz-option.correct-answer .opt-letter {
+      background: var(--positive);
+      color: var(--on-positive);
+      border-color: var(--positive);
+    }
+
+    .quiz-option.wrong-answer {
+      background: var(--primary-container);
+      border-color: var(--error);
+      color: var(--error);
+    }
+
+    .quiz-option.wrong-answer .opt-letter {
+      background: var(--error);
+      color: var(--on-error);
+      border-color: var(--error);
+    }
+
+    .quiz-explanation-box {
+      border-left: 3px solid var(--primary);
+      background: var(--surface-container-low);
+      padding: var(--space-md);
+      margin-top: var(--space-md);
+      display: none;
+    }
+
+    .quiz-explanation-box.active {
+      display: block;
+      animation: fadeIn var(--dur-short) var(--ease-out);
+    }
+
+    .explanation-title {
+      font-family: var(--font-label);
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--primary);
+      margin-bottom: var(--space-2xs);
+      display: flex;
+      align-items: center;
+      gap: var(--space-2xs);
+    }
+
+    .quiz-nav-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    /* Scorecard */
+    .scorecard-view {
+      border-top: var(--rule-section);
+      border-bottom: var(--rule-ink);
+      background: var(--background);
+      padding: var(--space-xl);
+      text-align: center;
+    }
+
+    .score-headline {
+      font-size: 3rem;
+      font-family: var(--font-headline);
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: var(--space-2xs);
+    }
+
+    .score-breakdown-row {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      border-top: var(--rule-column);
+      border-bottom: var(--rule-column);
+      margin-block: var(--space-lg);
+    }
+
+    .score-stat {
+      padding: var(--space-md) var(--space-xl);
+      border-right: var(--rule-column);
+    }
+
+    .score-stat:first-child {
+      border-left: var(--rule-column);
+    }
+
+    /* ==========================================================================
+       Modals / Drawers (Confusing Words & Quick Revision)
+       ========================================================================== */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(26, 24, 23, 0.6);
+      backdrop-filter: blur(2px);
+      z-index: 100;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-md);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-window {
+      background: var(--background);
+      border-top: var(--rule-section);
+      border-left: var(--rule-column);
+      border-right: var(--rule-column);
+      border-bottom: var(--rule-column);
+      width: 100%;
+      max-width: 900px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: var(--space-lg);
+      position: relative;
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      border-bottom: var(--rule-masthead);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .btn-close-modal {
+      font-size: 1.25rem;
+      border: 1px solid var(--outline);
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .revision-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      text-align: left;
+    }
+
+    .revision-table th {
+      border-top: var(--rule-ink);
+      border-bottom: var(--rule-ink);
+      padding: var(--space-xs) var(--space-sm);
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--on-surface-variant);
+      background: var(--surface-container-low);
+    }
+
+    .revision-table td {
+      border-bottom: var(--rule-column);
+      padding: var(--space-xs) var(--space-sm);
+      vertical-align: top;
+    }
+
+    .revision-table tr:hover td {
+      background: var(--surface-container-low);
+    }
+
+    .confusing-pair-card {
+      border-top: 2px solid var(--outline);
+      border-bottom: var(--rule-column);
+      padding-block: var(--space-md);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+
+    .confusing-col {
+      padding-right: var(--space-md);
+    }
+
+    .confusing-col:first-child {
+      border-right: var(--rule-column);
+    }
+
+    /* Footer */
+    .site-footer {
+      border-top: var(--rule-masthead);
+      padding-block: var(--space-md);
+      font-family: var(--font-label);
+      font-size: 0.8rem;
+      color: var(--on-surface-variant);
+      background: var(--background);
+      margin-top: auto;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+    }
+
+    /* Responsive Adaptation */
+    @media (max-width: 768px) {
+      .masthead {
+        grid-template-columns: 1fr;
+      }
+      .masthead-stats {
+        border-left: 0;
+        border-top: var(--rule-column);
+        padding-top: var(--space-xs);
+      }
+      .drill-grid {
+        grid-template-columns: 1fr;
+      }
+      .confusing-pair-card {
+        grid-template-columns: 1fr;
+      }
+      .confusing-col:first-child {
+        border-right: 0;
+        border-bottom: var(--rule-column);
+        padding-bottom: var(--space-md);
+      }
+    }
+
+    @media (max-width: 640px) {
+      .vocab-grid, .visual-grid {
+        grid-template-columns: 1fr;
+      }
+      .tab-btn {
+        padding: var(--space-xs) var(--space-sm);
+        font-size: 0.75rem;
+      }
+      .nav-bar {
+        position: relative;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Masthead Top Banner -->
+  <div class="container">
+    <div class="masthead-top">
+      <div>
+        <span>THE EDITORIAL LEXICON</span> &bull; 
+        <span>BANKING &amp; REGULATORY EXAM DESK (IBPS PO, SBI PO, RBI GRADE B, SSC CGL)</span>
+      </div>
+      <div>
+        <span>EDITION: FRIDAY, 6 NOVEMBER 2026</span> &bull; 
+        <span class="claret-label">CURATED FROM EDITORIAL CLASS SOURCES</span>
+      </div>
+    </div>
+
+    <!-- Newspaper Header Block -->
+    <header class="masthead">
+      <div class="masthead-title-group">
+        <span class="claret-label">DAILY EDITORIAL VOCABULARY MASTER</span>
+        <h1>The Editorial Lexicon &amp; Grammar Examiner</h1>
+        <p class="masthead-lede">
+          A pedagogical master tool engineered for high-stakes banking and government examinations. Featuring four interactive study dimensions: phonetic audio pronunciation, Telugu conceptual cognition, natural visual memory hooks, active recall flashcards, and authentic banking exam mock drills.
+        </p>
+      </div>
+      <div class="masthead-stats">
+        <div class="stat-col">
+          <span class="stat-label">Total Words</span>
+          <span class="stat-val" id="totalWordsStat">16</span>
+        </div>
+        <div class="stat-col">
+          <span class="stat-label">Mastered</span>
+          <span class="stat-val" id="masteredStat">0</span>
+        </div>
+        <div class="stat-col">
+          <span class="stat-label">Exam Accuracy</span>
+          <span class="stat-val" id="accuracyStat">--</span>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- Primary Navigation & Tab Bar -->
+  <nav class="nav-bar">
+    <div class="container" style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; width:100%;">
+      <div class="tab-group" role="tablist">
+        <button class="tab-btn active" id="tabBtnCards" onclick="switchTab('cards')" role="tab" aria-selected="true">
+          <i data-lucide="book-open"></i> 1. Vocabulary Cards
+        </button>
+        <button class="tab-btn" id="tabBtnVisual" onclick="switchTab('visual')" role="tab" aria-selected="false">
+          <i data-lucide="image"></i> 2. Visual Memory Hooks
+        </button>
+        <button class="tab-btn" id="tabBtnFlashcards" onclick="switchTab('flashcards')" role="tab" aria-selected="false">
+          <i data-lucide="layers"></i> 3. Interactive Flashcards
+        </button>
+        <button class="tab-btn" id="tabBtnQuiz" onclick="switchTab('quiz')" role="tab" aria-selected="false">
+          <i data-lucide="check-circle-2"></i> 4. Exam Quiz
+        </button>
+      </div>
+      <div class="utility-group">
+        <button class="btn-secondary" onclick="openRevisionSheet()">
+          <i data-lucide="table"></i> Quick Revision
+        </button>
+        <button class="btn-secondary" onclick="openConfusingWords()">
+          <i data-lucide="split"></i> Confusing Pairs
+        </button>
+        <button class="btn-secondary" onclick="exportStudyNotes()" title="Export notes to CSV">
+          <i data-lucide="download"></i> Export Notes
+        </button>
+        <button class="btn-secondary" onclick="toggleTheme()" id="themeToggleBtn" title="Switch between Day and Night Newsprint">
+          <i data-lucide="moon"></i> Night Edition
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Multi-Mode Content -->
+  <main class="main-content container">
+
+    <!-- ========================================================================
+         MODE 1: VOCABULARY CARDS
+         ======================================================================== -->
+    <section id="viewCards" class="mode-view active" role="tabpanel" aria-labelledby="tabBtnCards">
+      <div class="control-deck">
+        <div class="search-box-wrapper">
+          <i data-lucide="search" class="search-icon"></i>
+          <input type="text" id="vocabSearchInput" placeholder="Search words, Telugu meanings, synonyms, or roots…" oninput="filterVocabCards()">
+        </div>
+        <div class="filter-chips" id="categoryFilterContainer">
+          <button class="chip-btn active" onclick="setCategoryFilter('all', this)">All (16)</button>
+          <button class="chip-btn" onclick="setCategoryFilter('Sadness & Hope', this)">Sadness &amp; Hope</button>
+          <button class="chip-btn" onclick="setCategoryFilter('Appearance & Beauty', this)">Beauty</button>
+          <button class="chip-btn" onclick="setCategoryFilter('Freedom & Control', this)">Freedom &amp; Limits</button>
+          <button class="chip-btn" onclick="setCategoryFilter('Strategy & Conflict', this)">Strategy</button>
+          <button class="chip-btn" onclick="setCategoryFilter('Temperament & Stability', this)">Temperament</button>
+          <button class="chip-btn" onclick="setCategoryFilter('Industry & Law', this)">Industry &amp; Law</button>
+          <button class="chip-btn" onclick="setCategoryFilter('mastered_only', this)">Mastered Only</button>
+        </div>
+      </div>
+
+      <!-- Vocab Card Grid -->
+      <div class="vocab-grid" id="vocabGrid">
+        <!-- Rendered dynamically via JavaScript -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         MODE 2: VISUAL MEMORY HOOKS
+         ======================================================================== -->
+    <section id="viewVisual" class="mode-view" role="tabpanel" aria-labelledby="tabBtnVisual">
+      <div class="visual-subnav">
+        <div>
+          <span class="claret-label">NIMISHA BANSAL TEACHING METHODOLOGY</span>
+          <h2>Visual Memory Hooks &amp; Mnemonic Anchor Gallery</h2>
+          <p class="masthead-lede">
+            The human brain retains abstract editorial vocabulary up to 7&times; longer when anchored to vivid, sensory visual stories and contextual situations.
+          </p>
+        </div>
+        <div>
+          <button class="btn-primary" onclick="startVisualDrill()">
+            <i data-lucide="play"></i> Take Visual Recall Drill
+          </button>
+        </div>
+      </div>
+
+      <!-- Interactive Visual Recall Drill Area (Toggleable) -->
+      <div id="visualDrillPanel" class="drill-panel" style="display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-md);">
+          <span class="claret-label">INTERACTIVE VISUAL DRILL &bull; QUESTION <span id="drillStepNum">1</span> OF 5</span>
+          <button class="btn-secondary" onclick="closeVisualDrill()">Exit Drill</button>
+        </div>
+        <div class="drill-grid">
+          <div class="svg-artwork-container" id="drillSvgContainer" style="height:260px;">
+            <!-- Injected dynamically -->
+          </div>
+          <div>
+            <h3 style="margin-bottom:var(--space-sm);">Which editorial word matches this visual memory hook?</h3>
+            <p id="drillPromptHint" style="font-size:0.9rem; color:var(--on-surface-variant); margin-bottom:var(--space-md);"></p>
+            <div class="drill-options" id="drillOptionsContainer">
+              <!-- Rendered options -->
+            </div>
+            <div id="drillFeedback" style="margin-top:var(--space-sm); font-size:0.95rem; font-weight:600; display:none;"></div>
+            <div style="margin-top:var(--space-md); text-align:right;">
+              <button class="btn-primary" id="drillNextBtn" onclick="nextDrillStep()" style="display:none;">Next Visual Challenge &rarr;</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Visual Hook Cards Grid -->
+      <div class="visual-grid" id="visualGridContainer">
+        <!-- Injected dynamically -->
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         MODE 3: INTERACTIVE FLASHCARDS
+         ======================================================================== -->
+    <section id="viewFlashcards" class="mode-view" role="tabpanel" aria-labelledby="tabBtnFlashcards">
+      <div class="flashcard-stage">
+        <div class="flashcard-header-bar">
+          <div>
+            <span class="claret-label">ACTIVE RECALL DECK</span> &bull; 
+            <span id="flashcardDeckCount">Card 1 of 16</span>
+          </div>
+          <div style="display:flex; align-items:center; gap:var(--space-xs);">
+            <button class="btn-secondary" onclick="shuffleFlashcards()" title="Shuffle the deck order">
+              <i data-lucide="shuffle"></i> Shuffle
+            </button>
+            <button class="btn-secondary" onclick="resetFlashcardProgress()" title="Restart deck from beginning">
+              <i data-lucide="rotate-ccw"></i> Reset
+            </button>
+          </div>
+        </div>
+
+        <div class="flashcard-progress-outer">
+          <div class="flashcard-progress-inner" id="flashcardProgressBar"></div>
+        </div>
+
+        <!-- 3D Flipping Card -->
+        <div class="flip-card-wrapper" onclick="toggleCardFlip()" id="flashcardWrapper" tabindex="0" role="button" aria-label="Vocabulary flashcard. Click or press Enter to flip.">
+          <div class="flip-card-inner" id="flashcardInner">
+            
+            <!-- FRONT FACE -->
+            <div class="flip-face flip-face-front">
+              <div class="card-top-meta">
+                <span class="tag-bare" id="fcCategoryTag">CATEGORY</span>
+                <span class="claret-label" id="fcExamTag">EXAM RELEVANCE</span>
+              </div>
+              <div style="text-align:center; margin-block:auto;">
+                <div class="word-title" id="fcWord" style="font-size:2.8rem; margin-bottom:var(--space-2xs);">Bleakness</div>
+                <div class="phonetic-badge" id="fcPhonetic" style="font-size:1.1rem; margin-bottom:var(--space-sm);">/ BLEEK-nis /</div>
+                <div style="margin-bottom:var(--space-md);">
+                  <button class="btn-pronounce" id="fcPronounceBtn" onclick="event.stopPropagation(); playCurrentFlashcardAudio();">
+                    <i data-lucide="volume-2"></i> Listen Pronunciation
+                  </button>
+                </div>
+                <div class="tag-bare" id="fcPos" style="font-size:0.85rem; color:var(--on-surface-variant);">Noun</div>
+              </div>
+              <div class="flip-cue">
+                <i data-lucide="flip-horizontal"></i> Click card or press [Space] to reveal Telugu meaning, synonyms &amp; sentence
+              </div>
+            </div>
+
+            <!-- BACK FACE -->
+            <div class="flip-face flip-face-back">
+              <div class="card-top-meta">
+                <span class="claret-label">MEANING &amp; COGNITION</span>
+                <span class="tag-bare" id="fcBackWord">Word</span>
+              </div>
+              <div style="display:flex; flex-direction:column; gap:var(--space-xs);">
+                <div class="telugu-block">
+                  <div class="telugu-script" id="fcTelugu">నిరాశ, చీకటి మయమైన పరిస్థితి</div>
+                  <div class="telugu-trans" id="fcTeluguTrans">Nirāśa, cīkaṭimayamaina paristhiti</div>
+                </div>
+                <div>
+                  <strong style="font-family:var(--font-label); font-size:0.75rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--on-surface-variant); display:block;">Plain English Meaning:</strong>
+                  <p id="fcMeaning" style="font-size:0.95rem; font-weight:600; margin-bottom:var(--space-2xs);"></p>
+                  <p id="fcBeginner" style="font-size:0.88rem; color:var(--on-surface-variant);"></p>
+                </div>
+                <div class="lexical-tags" style="border-top:var(--rule-column); padding-top:var(--space-xs);">
+                  <div>
+                    <strong style="font-family:var(--font-label); font-size:0.72rem; text-transform:uppercase; color:var(--on-surface-variant);">Key Synonyms:</strong>
+                    <div id="fcSynonyms" class="lex-pills"></div>
+                  </div>
+                  <div>
+                    <strong style="font-family:var(--font-label); font-size:0.72rem; text-transform:uppercase; color:var(--on-surface-variant);">Key Antonyms:</strong>
+                    <div id="fcAntonyms" class="lex-pills"></div>
+                  </div>
+                </div>
+                <div class="example-sentence" id="fcExample" style="margin-top:var(--space-xs);">
+                  "The bleakness of the economic outlook discouraged investors from making fresh capital commitments."
+                </div>
+              </div>
+              <div class="flip-cue">
+                <i data-lucide="flip-horizontal"></i> Click again to flip back
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Controls Row -->
+        <div class="flashcard-controls">
+          <button class="btn-secondary" onclick="prevFlashcard()">
+            <i data-lucide="chevron-left"></i> Previous
+          </button>
+          <button class="btn-revision-grade btn-secondary" style="border-color:var(--warning); color:var(--warning);" onclick="markCardRevision()">
+            <i data-lucide="clock"></i> Needs Revision
+          </button>
+          <button class="btn-revision-grade btn-primary" style="background:var(--positive); border-color:var(--positive);" onclick="markCardMastered()">
+            <i data-lucide="check"></i> I Know This (Mastered)
+          </button>
+          <button class="btn-secondary" onclick="nextFlashcard()">
+            Next <i data-lucide="chevron-right"></i>
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         MODE 4: BANKING EXAM QUIZ
+         ======================================================================== -->
+    <section id="viewQuiz" class="mode-view" role="tabpanel" aria-labelledby="tabBtnQuiz">
+      <div class="quiz-container">
+        
+        <!-- Live Quiz View -->
+        <div id="quizActiveBlock">
+          <div class="quiz-top-bar">
+            <div>
+              <span class="claret-label">BANKING &amp; REGULATORY MOCK DRILL</span> &bull; 
+              <span id="quizQuestionCounter">Question 1 of 10</span>
+            </div>
+            <div style="display:flex; align-items:center; gap:var(--space-md);">
+              <div class="quiz-timer" id="quizTimerDisplay">
+                <i data-lucide="timer"></i> <span id="timerVal">15:00</span>
+              </div>
+              <button class="btn-secondary" style="padding:var(--space-3xs) var(--space-xs); font-size:0.72rem;" onclick="toggleQuizTimer()">
+                Toggle Timer
+              </button>
+            </div>
+          </div>
+
+          <div class="quiz-progress-bar">
+            <div class="quiz-progress-fill" id="quizProgressFill"></div>
+          </div>
+
+          <div class="question-card" id="quizQuestionCard">
+            <span class="question-source-tag" id="qSourceTag">TOPIC &bull; SYNONYM-ANTONYM PAIR</span>
+            <div class="question-text" id="qText">Loading question…</div>
+            <div class="options-grid" id="qOptionsContainer">
+              <!-- Rendered options -->
+            </div>
+
+            <!-- Deep Editorial Pedagogical Explanation -->
+            <div class="quiz-explanation-box" id="qExplanationBox">
+              <div class="explanation-title">
+                <i data-lucide="lightbulb"></i> Nimisha Ma'am's Editorial &amp; Grammatical Analysis
+              </div>
+              <div id="qExplanationText" style="font-size:0.92rem; line-height:1.55;">
+                Explanation details...
+              </div>
+            </div>
+          </div>
+
+          <div class="quiz-nav-row">
+            <button class="btn-secondary" id="btnPrevQuizQ" onclick="prevQuizQuestion()">
+              <i data-lucide="arrow-left"></i> Previous Question
+            </button>
+            <div style="display:flex; gap:var(--space-xs);">
+              <button class="btn-secondary" onclick="resetQuiz()">
+                <i data-lucide="rotate-ccw"></i> Restart Test
+              </button>
+              <button class="btn-primary" id="btnNextQuizQ" onclick="nextQuizQuestion()">
+                Next Question <i data-lucide="arrow-right"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quiz Final Scorecard View (Hidden initially) -->
+        <div id="quizScorecardBlock" class="scorecard-view" style="display:none;">
+          <span class="claret-label">TEST COMPLETION CERTIFICATE</span>
+          <h2 style="font-size:2rem; margin-top:var(--space-2xs); margin-bottom:var(--space-md);">Banking Vocabulary &amp; Grammar Exam Scorecard</h2>
+          
+          <div class="score-headline" id="scorePercent">0%</div>
+          <p id="scoreGradeLede" style="font-size:1.1rem; font-weight:600; max-width:60ch; margin-inline:auto;">
+            Evaluation completed.
+          </p>
+
+          <div class="score-breakdown-row">
+            <div class="score-stat">
+              <span class="stat-label">Total Questions</span>
+              <span class="stat-val" id="statTotalQ">10</span>
+            </div>
+            <div class="score-stat">
+              <span class="stat-label">Correct Answers</span>
+              <span class="stat-val" style="color:var(--positive);" id="statCorrectQ">0</span>
+            </div>
+            <div class="score-stat">
+              <span class="stat-label">Incorrect</span>
+              <span class="stat-val" style="color:var(--error);" id="statIncorrectQ">0</span>
+            </div>
+            <div class="score-stat">
+              <span class="stat-label">Time Spent</span>
+              <span class="stat-val" style="color:var(--secondary);" id="statTimeSpent">--</span>
+            </div>
+          </div>
+
+          <div style="display:flex; justify-content:center; gap:var(--space-sm); margin-top:var(--space-lg);">
+            <button class="btn-primary" onclick="restartQuizFromScorecard()">              <i data-lucide="repeat"></i> Retake Examination
+            </button>
+            <button class="btn-secondary" onclick="reviewQuizAnswers()">
+              <i data-lucide="file-text"></i> Review Questions
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================================
+       MODAL 1: QUICK REVISION TABLE DRAWER
+       ======================================================================== -->
+  <div class="modal-overlay" id="revisionModal" onclick="closeRevisionSheetOnBackdrop(event)">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div>
+          <span class="claret-label">RAPID REVISION CHEAT SHEET</span>
+          <h2>Editorial Master Lexicon Table</h2>
+        </div>
+        <button class="btn-close-modal" onclick="closeRevisionSheet()" aria-label="Close revision sheet">&times;</button>
+      </div>
+      <p style="font-size:0.9rem; color:var(--on-surface-variant); margin-bottom:var(--space-md);">
+        Complete consolidated view of 16 editorial words with Telugu meanings, parts of speech, synonyms, antonyms, and exam importance. Ideal for last-minute 5-minute pre-exam revision.
+      </p>
+      <div style="overflow-x:auto;">
+        <table class="revision-table">
+          <thead>
+            <tr>
+              <th>Word &amp; Phonetics</th>
+              <th>POS</th>
+              <th>Telugu Cognition</th>
+              <th>English Meaning</th>
+              <th>Top Synonyms</th>
+              <th>Top Antonyms</th>
+              <th>Exam Weight</th>
+            </tr>
+          </thead>
+          <tbody id="revisionTableBody">
+            <!-- Injected via JavaScript -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================================
+       MODAL 2: CONFUSING WORDS COMPARATOR
+       ======================================================================== -->
+  <div class="modal-overlay" id="confusingModal" onclick="closeConfusingWordsOnBackdrop(event)">
+    <div class="modal-window">
+      <div class="modal-header">
+        <div>
+          <span class="claret-label">HIGH TRAP EXAM COMPARATOR</span>
+          <h2>Confusing &amp; Frequently Mistaken Editorial Words</h2>
+        </div>
+        <button class="btn-close-modal" onclick="closeConfusingWords()" aria-label="Close confusing pairs">&times;</button>
+      </div>
+      <p style="font-size:0.9rem; color:var(--on-surface-variant); margin-bottom:var(--space-md);">
+        Examiners in SBI PO and IBPS PO often design fillers and cloze tests around pairs that sound similar or represent sharp thematic opposites. Study the operational differences below.
+      </p>
+      <div id="confusingPairsContainer">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>
+        <strong>The Editorial Lexicon</strong> &bull; Curated for Banking, SSC, and Civil Services English Aspirants.
+      </div>
+      <div>
+        Source Material: Nimisha Bansal Editorial Analysis (6th Nov 2026 Edition) &bull; Built with Broadsheet Design System
+      </div>
+    </div>
+  </footer>
+
+  <!-- Gemini Notebook Shim API for State Persistence -->
+  <api-shim></api-shim>
+
+  <!-- ========================================================================
+       APPLICATION LOGIC & DATASET
+       ======================================================================== -->
+  <script>
+    /* ------------------------------------------------------------------------
+       1. Master Vocabulary Dataset (16 Editorial Words from Nimisha Bansal)
+       ------------------------------------------------------------------------ */
+    const VOCAB_DATA = [
+      {
+        id: `bleakness`,
+        word: `Bleakness`,
+        phonetic: `BLEEK-nis`,
+        pos: `Noun`,
+        category: `Sadness & Hope`,
+        meaning: `A state of sadness, gloom, cold desolation, or lack of hope.`,
+        beginner: `Think of a freezing, grey winter landscape where nothing grows and no light breaks through. In financial terms, an outlook with zero optimism.`,
+        telugu: `నిరాశ, చీకటి మయమైన పరిస్థితి, శూన్యత`,
+        teluguTrans: `Nirāśa, cīkaṭimayamaina paristhiti`,
+        synonyms: [`Desolation`, `Dreariness`, `Despondency`, `Dejection`, `Melancholy`],
+        antonyms: [`Optimism`, `Exuberance`, `Cheerfulness`, `Bliss`],
+        example: `The bleakness of the economic outlook discouraged investors from making fresh capital commitments.`,
+        relevance: { banking: `High`, ssc: `High`, editorial: `Very High` },
+        visualConcept: `A stark, solitary leafless tree standing on a windswept hill against heavy overcast grey skies with cold rolling mist.`,
+        mnemonic: `BLEAK = "Black + Leak" -> all light and joy has leaked away, leaving cold black darkness.`
+      },
+      {
+        id: `comely`,
+        word: `Comely`,
+        phonetic: `KUM-lee`,
+        pos: `Adjective`,
+        category: `Appearance & Beauty`,
+        meaning: `Pleasant, agreeable, or attractive in appearance; delicate and graceful.`,
+        beginner: `Someone or something with dignified, pleasing beauty—not loud or flashy, but charming like a traditional classical portrait.`,
+        telugu: `అందమైన, చూడముచ్చటైన, ఆకర్షణీయమైన`,
+        teluguTrans: `Andamaina, cūḍamuccaṭaina`,
+        synonyms: [`Beautiful`, `Attractive`, `Lovely`, `Pretty`, `Alluring`, `Stunning`],
+        antonyms: [`Unattractive`, `Ugly`, `Unappealing`, `Repulsive`],
+        example: `The painting depicted a comely woman in traditional attire, drawing admirers at the regional cultural gallery.`,
+        relevance: { banking: `Medium`, ssc: `High`, editorial: `High` },
+        visualConcept: `An elegant classical portrait silhouette adorned with delicate lotus flowers and traditional ornamental attire.`,
+        mnemonic: `COMELY = "Welcome to look at" -> pleasing and lovely to behold.`
+      },
+      {
+        id: `untrammelled`,
+        word: `Untrammelled`,
+        phonetic: `un-TRAM-uhld`,
+        pos: `Adjective`,
+        category: `Freedom & Control`,
+        meaning: `Free from restrictions, limitations, shackles, or outside interference.`,
+        beginner: `A horse galloping without a bridle, or a market operating without restrictive bureaucratic red tape. Completely unconstrained.`,
+        telugu: `స్వేచ్ఛాయుతమైన, నిర్బంధం లేని, ఆటంకం లేని`,
+        teluguTrans: `Svēcchāyutamaina, nirbandhaṁ lēni`,
+        synonyms: [`Unfettered`, `Unrestricted`, `Unimpeded`, `Unbridled`, `Unshackled`],
+        antonyms: [`Constrained`, `Fettered`, `Circumscribed`, `Hampered`],
+        example: `Untrammelled industrial expansion can cause severe environmental degradation if adequate safeguards are absent.`,
+        relevance: { banking: `Very High`, ssc: `High`, editorial: `Very High` },
+        visualConcept: `A wild stallion bursting forward across an open plain with shattered iron chains falling to the ground.`,
+        mnemonic: `UNTRAMMELLED = Un + Trammel (net/trap) -> freed completely from the trapping net.`
+      },
+      {
+        id: `manoeuvre`,
+        word: `Manoeuvre`,
+        phonetic: `muh-NOO-vuh`,
+        pos: `Noun & Verb`,
+        category: `Strategy & Conflict`,
+        meaning: `A planned movement or skilful action taken to achieve a goal or outsmart an obstacle.`,
+        beginner: `When you get stuck on a difficult math problem in an exam, skipping it and scoring easy marks first is a smart tactical manoeuvre.`,
+        telugu: `ఎత్తుగడ, వ్యూహాత్మక చర్య, నైపుణ్యంతో కూడిన కదలిక`,
+        teluguTrans: `Ettugaḍa, vyūhātmaka carya`,
+        synonyms: [`Stratagem`, `Tactic`, `Ploy`, `Artifice`, `Machination`],
+        antonyms: [`Blunder`, `Bungle`, `Misstep`, `Inaction`],
+        example: `Marking the question for review and moving ahead was a simple manoeuvre, but it preserved Dhruv's composure under exam pressure.`,
+        relevance: { banking: `Very High`, ssc: `High`, editorial: `Very High` },
+        visualConcept: `A chess knight leaping tactically over pawns on a chessboard to fork the opponent's king and queen.`,
+        mnemonic: `MANOEUVRE = Manual Clever Movement -> a deliberate, calculated play.`
+      },
+      {
+        id: `diaphanous`,
+        word: `Diaphanous`,
+        phonetic: `dye-AF-uh-nuhs`,
+        pos: `Adjective`,
+        category: `Appearance & Beauty`,
+        meaning: `Light, delicate, and translucent; sheer enough to see light or silhouettes through.`,
+        beginner: `Like a chiffony scarf or thin morning fog that is so fine and airy you can see the sun right through it.`,
+        telugu: `పలచని, పారదర్శకమైన, అతి సున్నితమైన`,
+        teluguTrans: `Palacani, pāradarśakamaina`,
+        synonyms: [`Gossamer`, `Sheer`, `Chiffony`, `Translucent`, `Gauzy`],
+        antonyms: [`Opaque`, `Coarse`, `Rugged`, `Dense`],
+        example: `A diaphanous veil of river mist enveloped the campus at dawn, dissolving as the temperature climbed.`,
+        relevance: { banking: `High`, ssc: `Very High`, editorial: `High` },
+        visualConcept: `Floating gossamer silk fabric billowing gently in golden morning sunlight filtering through an open window.`,
+        mnemonic: `DIAPHANOUS = Dia (through) + Phan (appear) -> allowing light to shine right through.`
+      },
+      {
+        id: `mercurial`,
+        word: `Mercurial`,
+        phonetic: `mur-KYOOR-ee-uhl`,
+        pos: `Adjective`,
+        category: `Temperament & Stability`,
+        meaning: `Changing quickly and unpredictably in mood, policy, or temperament; volatile.`,
+        beginner: `Derived from liquid mercury in thermometers: quick to shoot up or plummet with the slightest change in environment.`,
+        telugu: `చపలచిత్తంగల, అస్థిరమైన, త్వరగా మారే స్వభావం`,
+        teluguTrans: `Capalacittaṅgala, asthiramaina`,
+        synonyms: [`Volatile`, `Capricious`, `Erratic`, `Fickle`, `Unpredictable`],
+        antonyms: [`Stable`, `Steady`, `Consistent`, `Equable`],
+        example: `Because of the mercurial swings in commodity indices, RBI monetary policy committee members remained vigilant.`,
+        relevance: { banking: `Very High`, ssc: `High`, editorial: `Very High` },
+        visualConcept: `A tall brass mercury thermometer fluctuating rapidly between blizzard snowflakes and blazing sun rays.`,
+        mnemonic: `MERCURIAL = Like Mercury metal -> slippery, restless, and constantly in rapid motion.`
+      },
+      {
+        id: `lambent`,
+        word: `Lambent`,
+        phonetic: `LAM-buhnt`,
+        pos: `Adjective`,
+        category: `Appearance & Beauty`,
+        meaning: `Glowing softly or flickering gently without burning heat; radiantly subtle.`,
+        beginner: `Not a harsh high-beam searchlight, but the soft, soothing golden glow of a traditional brass diya or candle.`,
+        telugu: `మసక వెలుగునిచ్చే, మృదువైన కాంతి, మెరిసే`,
+        teluguTrans: `Masaka veluguniccē, mr̥duvaina kānti`,
+        synonyms: [`Refulgent`, `Glimmering`, `Effulgent`, `Radiant`, `Luminous`],
+        antonyms: [`Lacklustre`, `Dim`, `Gloomy`, `Drab`, `Obscure`],
+        example: `The lambent glow of the brass desk lamp illuminated Dhruv's notes well into the quiet midnight hours.`,
+        relevance: { banking: `Medium`, ssc: `High`, editorial: `High` },
+        visualConcept: `A traditional brass oil lamp radiating warm concentric rings of soft amber light across vintage manuscripts.`,
+        mnemonic: `LAMBENT = Lamp + Gentle -> the tender, soft light of an oil lamp.`
+      },
+      {
+        id: `persnickety`,
+        word: `Persnickety`,
+        phonetic: `pur-SNIK-ih-tee`,
+        pos: `Adjective`,
+        category: `Strategy & Conflict`,
+        meaning: `Too concerned with small, insignificant details or exact trivial standards; fussy.`,
+        beginner: `An examiner who deducts marks if your margin is half a centimetre off, or an editor who rejects an article for a misplaced hyphen.`,
+        telugu: `చిన్న విషయాల్లో పట్టింపులు గల, అతి జాగ్రత్త గల, సులభంగా సంతృప్తి చెందని`,
+        teluguTrans: `Cinna viṣayāllō paṭṭimpulu gala`,
+        synonyms: [`Fastidious`, `Finicky`, `Particular`, `Choosy`, `Punctilious`],
+        antonyms: [`Easygoing`, `Undemanding`, `Unfussy`, `Carefree`],
+        example: `The chief editor was persnickety regarding paragraph formatting and rejected drafts containing minor alignment discrepancies.`,
+        relevance: { banking: `High`, ssc: `High`, editorial: `High` },
+        visualConcept: `An inspector holding a magnifying glass and measuring precision punctuation with a tiny vernier caliper.`,
+        mnemonic: `PERSNICKETY = "Particular to the nick" -> obsesses over every tiny nick and dot.`
+      },
+      {
+        id: `delectable`,
+        word: `Delectable`,
+        phonetic: `dih-LEK-tuh-buhl`,
+        pos: `Adjective`,
+        category: `Appearance & Beauty`,
+        meaning: `Extremely pleasant to taste, smell, or experience; delicious or delightful.`,
+        beginner: `Food that tastes so heavenly you savour every single bite, or an experience that brings complete pure enjoyment.`,
+        telugu: `అత్యంత రుచికరమైన, నోరూరించే, ఆనందకరమైన`,
+        teluguTrans: `Atyanta rucikaramaina, nōrūrin̄cē`,
+        synonyms: [`Ambrosial`, `Luscious`, `Scrumptious`, `Palatable`, `Succulent`],
+        antonyms: [`Unpalatable`, `Distasteful`, `Insipid`, `Bland`],
+        example: `As Dhruv ate the first delectable bite of warm paratha, his stress eased and he regained exam concentration.`,
+        relevance: { banking: `Medium`, ssc: `High`, editorial: `Medium` },
+        visualConcept: `A steaming cloche platter revealing golden, spiced delicacies with aromatic swirls wafting upward.`,
+        mnemonic: `DELECTABLE = Delicious + Delightful -> food that brings delightful taste.`
+      },
+      {
+        id: `hubris`,
+        word: `Hubris`,
+        phonetic: `HYOO-bris`,
+        pos: `Noun`,
+        category: `Strategy & Conflict`,
+        meaning: `Excessive pride, arrogance, or overconfidence that blinds one and leads to downfall.`,
+        beginner: `The classic tragic mistake of believing you are too powerful to ever fail—which directly causes your ultimate collapse.`,
+        telugu: `మితిమీరిన అహంకారం, వినాశనానికి దారితీసే గర్వం`,
+        teluguTrans: `Mitimīrina ahaṅkāraṁ, garvaṁ`,
+        synonyms: [`Arrogance`, `Haughtiness`, `Vanity`, `Conceit`, `Presumption`],
+        antonyms: [`Humility`, `Modesty`, `Meekness`, `Diffidence`],
+        example: `The investment bank fell victim to managerial hubris, ignoring clear market indicators of an impending liquidity crunch.`,
+        relevance: { banking: `Very High`, ssc: `High`, editorial: `Very High` },
+        visualConcept: `The mythic figure of Icarus soaring towards the blazing sun with wax wings melting and feathers falling away.`,
+        mnemonic: `HUBRIS = "Huge + Bragging" -> giant ego that leads to a giant fall.`
+      },
+      {
+        id: `punitive`,
+        word: `Punitive`,
+        phonetic: `PYOO-nih-tiv`,
+        pos: `Adjective`,
+        category: `Industry & Law`,
+        meaning: `Inflicting, involving, or aiming at punishment; imposing severe penalties.`,
+        beginner: `Measures meant to punish wrongdoers with heavy fines or imprisonment, rather than just warning them gently.`,
+        telugu: `శిక్షార్హమైన, దండించే, కఠిన జరిమానాలతో కూడిన`,
+        teluguTrans: `Śikṣārhamaina, daṇḍin̄cē`,
+        synonyms: [`Penalising`, `Retributive`, `Disciplinary`, `Castigating`],
+        antonyms: [`Lenient`, `Permissive`, `Exonerating`, `Pardoning`],
+        example: `The editorial argued that punitive enforcement fines alone will not eliminate stubble burning without viable straw collection machinery.`,
+        relevance: { banking: `Very High`, ssc: `Very High`, editorial: `Very High` },
+        visualConcept: `A judge's heavy wooden gavel striking a sounding block beside official penalty decree scrolls.`,
+        mnemonic: `PUNITIVE = Root "Punish" -> actions designed strictly to punish.`
+      },
+      {
+        id: `slackening`,
+        word: `Slackening`,
+        phonetic: `SLAK-uh-ning`,
+        pos: `Noun & Verb`,
+        category: `Industry & Law`,
+        meaning: `Becoming slower, less active, or diminishing in pace, strength, or tension.`,
+        beginner: `Like pulling back on the accelerator of a vehicle, or a tight rope losing tension and becoming loose and slack.`,
+        telugu: `మందగించడం, వేగం తగ్గడం, సడలడం`,
+        teluguTrans: `Mandagin̄caḍaṁ, vēgaṁ taggaḍaṁ`,
+        synonyms: [`Diminishing`, `Waning`, `Decelerating`, `Subsiding`, `Abating`],
+        antonyms: [`Accelerating`, `Intensifying`, `Strengthening`, `Surging`],
+        example: `A noticeable slackening in retail credit demand prompted financial institutions to re-evaluate their annual lending targets.`,
+        relevance: { banking: `Very High`, ssc: `High`, editorial: `Very High` },
+        visualConcept: `A thick marine mooring rope loosening and easing its coiled tension around an iron dock bollard.`,
+        mnemonic: `SLACKENING = Becoming "Slack" (loose/slow) -> losing speed and tightness.`
+      },
+      {
+        id: `wrangling`,
+        word: `Wrangling`,
+        phonetic: `RANG-gling`,
+        pos: `Noun & Verb`,
+        category: `Strategy & Conflict`,
+        meaning: `Engaging in a long, complicated, noisy, or dispute-ridden argument; bickering.`,
+        beginner: `When two opposing parties argue back and forth for weeks over minor contract terms without reaching an agreement.`,
+        telugu: `తీవ్ర వివాదం, వాగ్వివాదం, జగడం, ఘర్షణ`,
+        teluguTrans: `Tīvra vivādaṁ, vāgvivādaṁ`,
+        synonyms: [`Bickering`, `Squabbling`, `Altercation`, `Contending`, `Disputing`],
+        antonyms: [`Reconciling`, `Harmonising`, `Collaborating`, `Concurring`],
+        example: `Protracted inter-state wrangling over water rights prevented the operationalisation of the regional canal infrastructure.`,
+        relevance: { banking: `High`, ssc: `High`, editorial: `Very High` },
+        visualConcept: `Two debaters gesturing intensely across a split negotiating table over a contested treaty document.`,
+        mnemonic: `WRANGLING = "Wrestle + Angle" -> two sides wrestling over their own stubborn angles.`
+      },
+      {
+        id: `despondency`,
+        word: `Despondency`,
+        phonetic: `dih-SPON-duhn-see`,
+        pos: `Noun`,
+        category: `Sadness & Hope`,
+        meaning: `A state of deep dejection, loss of hope, or heavy discouragement.`,
+        beginner: `The sinking feeling when an unexpected roadblock occurs and you feel completely unmotivated to continue.`,
+        telugu: `తీవ్రమైన నైరాశ్యం, నిరుత్సాహం, కుంగుబాటు`,
+        teluguTrans: `Tīvramaina nairāśyaṁ, nirutsāhaṁ`,
+        synonyms: [`Dejection`, `Depression`, `Disconsolateness`, `Melancholy`],
+        antonyms: [`Exuberance`, `Elation`, `Hopefulness`, `Buoyancy`],
+        example: `Rather than giving in to despondency after a disappointing mock exam, he methodically catalogued his grammatical mistakes.`,
+        relevance: { banking: `High`, ssc: `High`, editorial: `High` },
+        visualConcept: `A solitary student seated with chin on hands in a dimly lit study room, with a subtle single ray of dawn peeking through.`,
+        mnemonic: `DESPONDENCY = Despondent -> total loss of respond / hope in the spirit.`
+      },
+      {
+        id: `exuberance`,
+        word: `Exuberance`,
+        phonetic: `ig-ZOO-bur-uhns`,
+        pos: `Noun`,
+        category: `Sadness & Hope`,
+        meaning: `The quality of being full of high energy, joyful excitement, and lively cheer.`,
+        beginner: `The pure explosion of joy when you check your result and find your roll number in the final selection merit list.`,
+        telugu: `మితిమీరిన ఉత్సాహం, ఆనందోత్సాహం, అమితానందం`,
+        teluguTrans: `Mitimīrina utsāhaṁ, ānandōtsāhaṁ`,
+        synonyms: [`Buoyancy`, `Ebullience`, `Vivacity`, `Elation`, `Vitality`],
+        antonyms: [`Apathy`, `Lethargy`, `Desolation`, `Dreariness`],
+        example: `Candidate forums erupted in exuberant celebration when the final banking recruitment cut-offs were officially published.`,
+        relevance: { banking: `High`, ssc: `High`, editorial: `High` },
+        visualConcept: `A brilliant cascade of golden celebratory fireworks and sparkling light rays reaching up into clear skies.`,
+        mnemonic: `EXUBERANCE = "Extra + Super + Abundant" -> overflowing with joyful energy.`
+      },
+      {
+        id: `circumscribed`,
+        word: `Circumscribed`,
+        phonetic: `sur-kuhm-SKRYBD`,
+        pos: `Adjective`,
+        category: `Freedom & Control`,
+        meaning: `Restricted within narrow, clearly demarcated limits; strictly bounded.`,
+        beginner: `Imagine drawing a tight boundary circle around someone and prohibiting them from crossing the border.`,
+        telugu: `పరిమితమైన, నిర్దిష్ట పరిధిలో ఉంచబడిన, కట్టడి చేయబడిన`,
+        teluguTrans: `Parimitamaina, nirdiṣṭa paridhilō un̄cabaḍina`,
+        synonyms: [`Restricted`, `Confined`, `Bounded`, `Constrained`, `Delimited`],
+        antonyms: [`Untrammelled`, `Boundless`, `Unfettered`, `Expansive`],
+        example: `The lending latitude of regional rural banks remained circumscribed by strict RBI capital adequacy benchmarks.`,
+        relevance: { banking: `Very High`, ssc: `High`, editorial: `Very High` },
+        visualConcept: `A brass draughtsman's compass drawing a sharp circular boundary around an island of text, prohibiting outward movement.`,
+        mnemonic: `CIRCUMSCRIBED = Circum (circle) + Scribed (written/drawn) -> drawn within a strict circle.`
+      }
+    ];
+
+    /* ------------------------------------------------------------------------
+       2. Confusing Words Pairs Dataset
+       ------------------------------------------------------------------------ */
+    const CONFUSING_PAIRS = [
+      {
+        word1: `Untrammelled`,
+        pos1: `Adj`,
+        meaning1: `Completely unrestricted, free from rules, bounds, or chains.`,
+        word2: `Circumscribed`,
+        pos2: `Adj`,
+        meaning2: `Strictly confined within narrow, rigid boundaries or legal limits.`,
+        examTrap: `Examiners test these as exact antonyms in cloze tests regarding industrial expansion vs regulatory constraints.`
+      },
+      {
+        word1: `Hubris`,
+        pos1: `Noun`,
+        meaning1: `Overweening, excessive pride that leads to blindness and ruin.`,
+        word2: `Humility`,
+        pos2: `Noun`,
+        meaning2: `A modest, balanced view of one's own standing and openness to caution.`,
+        examTrap: `Look for sentences detailing executive failure: hubris brings disaster, while humility invites sustainable stewardship.`
+      },
+      {
+        word1: `Mercurial`,
+        pos1: `Adj`,
+        meaning1: `Erratic, unpredictable, changing temperament swiftly like liquid mercury.`,
+        word2: `Equable`,
+        pos2: `Adj`,
+        meaning2: `Calm, steady, not easily disturbed or fluctuating in mood or condition.`,
+        examTrap: `Used frequently in editorial assessments of volatile financial markets vs steady macroeconomic fundamentals.`
+      },
+      {
+        word1: `Persnickety`,
+        pos1: `Adj`,
+        meaning1: `Excessively fastidious, obsessing over minor, petty details.`,
+        word2: `Easygoing`,
+        pos2: `Adj`,
+        meaning2: `Relaxed, accommodating, and unbothered by trivial discrepancies.`,
+        examTrap: `Appears in reading comprehension descriptions of editors, evaluators, and regulatory supervisors.`
+      }
+    ];
+
+    /* ------------------------------------------------------------------------
+       3. Authentic Banking Exam Quiz Questions (From Class Sources)
+       ------------------------------------------------------------------------ */
+    const QUIZ_QUESTIONS = [
+      {
+        id: 1,
+        source: `Editorial Class 6th Nov &bull; Vocabulary in Context`,
+        text: `“In a climate of ecological and economic uncertainty for farmers, punitive measures alone will not lead to tangible behavioural change.”\n\nSelect the option that presents a SYNONYM and ANTONYM of the highlighted word 'PUNITIVE' respectively.`,
+        options: [
+          `Reformatory, permissive`,
+          `Penalising, lenient`,
+          `Crippling, coercive`,
+          `Draconian, crushing`,
+          `None of the above`
+        ],
+        correct: 1,
+        explanation: `Correct Answer: B (Penalising, lenient).\n\nPedagogical Analysis: 'Punitive' means inflicting or intending punishment (Synonyms: penalising, disciplinary, retributive). Its antonym must represent mercy or lack of severity, which is 'lenient' (or permissive). Options C and D contain pairs of synonyms only, while Option A pairs 'reformatory' (aiming to reform rather than penalise) with 'permissive'. Therefore, B is the exact contextual pair tested in banking exams.`
+      },
+      {
+        id: 2,
+        source: `Editorial Class 6th Nov &bull; Vocabulary Synonym Matching`,
+        text: `Select the most appropriate SYNONYM of the given editorial word:\n\nSLACKENING`,
+        options: [
+          `Intensifying`,
+          `Diminishing`,
+          `Accelerating`,
+          `Strengthening`,
+          `None of the above`
+        ],
+        correct: 1,
+        explanation: `Correct Answer: B (Diminishing).\n\nPedagogical Analysis: 'Slackening' describes something becoming slower, looser, or less intense (waning, diminishing, subsiding). Options A, C, and D are antonyms denoting increase in vigour or acceleration.`
+      },
+      {
+        id: 3,
+        source: `Editorial Class 6th Nov &bull; Vocabulary Synonym Matching`,
+        text: `Select the most appropriate SYNONYM of the given editorial word:\n\nWRANGLING`,
+        options: [
+          `Reconciling`,
+          `Collaborating`,
+          `Bickering`,
+          `Agreeing`,
+          `None of the above`
+        ],
+        correct: 2,
+        explanation: `Correct Answer: C (Bickering).\n\nPedagogical Analysis: 'Wrangling' means engaging in a protracted, noisy argument or dispute (squabbling, bickering, altercation). Reconciling, collaborating, and agreeing are all direct antonyms.`
+      },
+      {
+        id: 4,
+        source: `Editorial Reading Comprehension &bull; Error Detection`,
+        text: `Read the sentence below to identify if any grammatical segment contains an error:\n\n(1) Each of the boys / (2) have done / (3) their homework / (4) without any help.`,
+        options: [
+          `Segment 1 only`,
+          `Segment 2 only`,
+          `Both segments 2 and 3`,
+          `Segment 4 only`,
+          `No error`
+        ],
+        correct: 2,
+        explanation: `Correct Answer: C (Both segments 2 and 3).\n\nGrammatical Rule: The distributive pronoun 'Each' is singular and must take a singular verb ('has done', not 'have done') and a singular possessive pronoun ('his homework', not 'their homework'). In standard banking examination format, segment 2 ('have done') is the primary error, often combined with segment 3 in advanced combined correction sets. The corrected sentence reads: 'Each of the boys has done his homework without any help.'`
+      },
+      {
+        id: 5,
+        source: `Editorial Reading Comprehension &bull; Error Detection`,
+        text: `Identify the segment containing a grammatical error:\n\n(1) After the / (2) training, he / (3) is now very / (4) taller than I.`,
+        options: [
+          `Segment 1`,
+          `Segment 2`,
+          `Segment 3`,
+          `Segment 4`,
+          `No error`
+        ],
+        correct: 2,
+        explanation: `Correct Answer: C (Segment 3).\n\nGrammatical Rule: 'Very' is used with positive degree adjectives (e.g., 'very tall', 'very good'). With comparative degree adjectives, we use 'much', 'far', or 'way' (e.g., 'much taller than I', not 'very taller'). Therefore, segment 3 must be corrected to 'is now much'. Also note that 'than I' (nominative form) is grammatically correct as it compares 'he is... taller than I [am]'.`
+      },
+      {
+        id: 6,
+        source: `Daily Editorial Idioms &bull; Idiom Meaning`,
+        text: `Select the correct meaning of the given idiom:\n\nAT SIXES AND SEVENS`,
+        options: [
+          `In a state of total confusion or disorder`,
+          `Living in extraordinary luxury and opulence`,
+          `Divided into equal mathematical ratios`,
+          `Engaged in friendly and casual conversation`,
+          `None of these`
+        ],
+        correct: 0,
+        explanation: `Correct Answer: A (In a state of total confusion or disorder).\n\nPedagogical Analysis: The historic English idiom 'at sixes and sevens' describes utter disarray, bewilderment, or lack of organisation, such as an unprepared desk or a chaotic project rollout.`
+      },
+      {
+        id: 7,
+        source: `Daily Editorial Idioms &bull; Idiom Meaning`,
+        text: `Select the correct meaning of the given idiom:\n\nRUN IN THE SAME GROOVE`,
+        options: [
+          `Advance in harmonious coordination`,
+          `Repeat a familiar, unchanging routine`,
+          `Compete aggressively for market leadership`,
+          `Follow another person's example blindly`,
+          `None of these`
+        ],
+        correct: 1,
+        explanation: `Correct Answer: B (Repeat a familiar, unchanging routine).\n\nPedagogical Analysis: Like a needle stuck in the groove of a phonograph record, to 'run in the same groove' means to carry on in an established, repetitive, and habitual rut without innovation.`
+      },
+      {
+        id: 8,
+        source: `Daily Editorial Idioms &bull; Idiom Meaning`,
+        text: `Select the correct meaning of the given idiom:\n\nPOTLUCK DINNER`,
+        options: [
+          `A dinner where each guest brings a dish to share`,
+          `A dinner where guests draw lots for their seats`,
+          `A feast held in honour of an unexpected guest`,
+          `A formal banquet served after an awards ceremony`,
+          `None of these`
+        ],
+        correct: 0,
+        explanation: `Correct Answer: A (A dinner where each guest brings a dish to share).\n\nPedagogical Analysis: A 'potluck' is a communal gathering where participants each prepare and contribute food to be shared among everyone.`
+      },
+      {
+        id: 9,
+        source: `Editorial Master Class &bull; One Word Substitution`,
+        text: `Select the one-word substitution for:\n\n“A person who is indifferent, hostile, or smugly opposed to art, literature, and intellectual culture.”`,
+        options: [
+          `Suffrage`,
+          `Philistine`,
+          `Sororicide`,
+          `Ophidiophobia`,
+          `None of the above`
+        ],
+        correct: 1,
+        explanation: `Correct Answer: B (Philistine).\n\nPedagogical Analysis: 'Philistine' refers to an uncultured individual hostile to aesthetic refinements. 'Suffrage' means voting rights; 'Sororicide' means the murder of one's sister; 'Ophidiophobia' is an abnormal fear of snakes.`
+      },
+      {
+        id: 10,
+        source: `Editorial Reading Comprehension &bull; Analytical Inference (CAQM Stubble Burning)`,
+        text: `Based on the editorial passage regarding stubble burning in Punjab, why does the author contend that punitive measures alone will fail to eliminate farm fires?`,
+        options: [
+          `Because satellite monitoring has broken down and can no longer capture burning incidents.`,
+          `Because farmers face genuine economic, machinery, and market hurdles that make straw collection financially unviable.`,
+          `Because the judicial courts have granted farmers statutory immunity from municipal air pollution fines.`,
+          `Because industrial demand for paddy straw has already exceeded the available agricultural supply.`,
+          `None of the above`
+        ],
+        correct: 1,
+        explanation: `Correct Answer: B (Because farmers face genuine economic, machinery, and market hurdles that make straw collection financially unviable).\n\nEditorial Text Inference: As highlighted in the CAQM analysis, farmers operate under tight planting deadlines and lack affordable machinery or lucrative biomass markets. Hence, punitive fines without financial incentives or ending free irrigation power cannot yield long-term behavioural change.`
+      }
+    ];
+
+    /* ------------------------------------------------------------------------
+       4. Persistent Application State
+       ------------------------------------------------------------------------ */
+    let appState = {
+      activeTab: 'cards',
+      categoryFilter: 'all',
+      searchQuery: '',
+      masteredWordIds: [],
+      revisionWordIds: [],
+      flashcardIndex: 0,
+      quizCurrentIndex: 0,
+      quizUserAnswers: {},
+      quizSubmitted: false,
+      quizTimerSeconds: 900,
+      quizTimerRunning: true,
+      theme: 'light'
+    };
+
+    let timerInterval = null;
+
+    /* ------------------------------------------------------------------------
+       5. Web Audio API Synthetic Chime
+       ------------------------------------------------------------------------ */
+    let audioCtx = null;
+
+    function playSyntheticChime(isCorrect) {
+      try {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        if (!audioCtx) audioCtx = new AudioContext();
+        if (audioCtx.state === 'suspended') audioCtx.resume();
+
+        const now = audioCtx.currentTime;
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+
+        osc.type = 'sine';
+
+        if (isCorrect === true) {
+          // Pleasant high affirmation double tone
+          osc.frequency.setValueAtTime(523.25, now); // C5
+          osc.frequency.exponentialRampToValueAtTime(659.25, now + 0.1); // E5
+          gain.gain.setValueAtTime(0.12, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.35);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.35);
+        } else if (isCorrect === false) {
+          // Low gentle warning tone
+          osc.frequency.setValueAtTime(261.63, now); // C4
+          osc.frequency.setValueAtTime(220.00, now + 0.12); // A3
+          gain.gain.setValueAtTime(0.15, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.3);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.3);
+        } else {
+          // Tactile pronunciation ping
+          osc.frequency.setValueAtTime(440, now); // A4
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + 0.2);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now);
+          osc.stop(now + 0.2);
+        }
+      } catch (err) {
+        // Fallback gracefully if Web Audio is restricted
+      }
+    }
+
+    /* ------------------------------------------------------------------------
+       6. SpeechSynthesis Audio Engine (Pronounce Button)
+       ------------------------------------------------------------------------ */
+    function pronounceWord(wordText, buttonEl) {
+      playSyntheticChime(null);
+
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(wordText);
+        utterance.rate = 0.82; // measured pace for learners
+        utterance.pitch = 1.0;
+
+        const voices = window.speechSynthesis.getVoices();
+        const britishVoice = voices.find(v => v.lang.includes('en-GB')) ||
+                             voices.find(v => v.lang.includes('en-US')) ||
+                             voices.find(v => v.lang.startsWith('en'));
+
+        if (britishVoice) {
+          utterance.voice = britishVoice;
+        }
+
+        if (buttonEl) {
+          buttonEl.classList.add('speaking');
+          utterance.onend = function() {
+            buttonEl.classList.remove('speaking');
+          };
+          utterance.onerror = function() {
+            buttonEl.classList.remove('speaking');
+          };
+        }
+
+        window.speechSynthesis.speak(utterance);
+      }
+    }
+
+    /* ------------------------------------------------------------------------
+       7. SVG Artwork Generators for Visual Memory Hooks
+       ------------------------------------------------------------------------ */
+    function generateArtworkSvg(wordId) {
+      switch (wordId) {
+        case 'bleakness':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="bleakSky" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#9e9893"/>
+                <stop offset="100%" stop-color="#d6cecb"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="220" fill="url(#bleakSky)"/>
+            <!-- Barren cold hill -->
+            <path d="M-20 180 Q140 130 260 160 T420 190 L420 230 L-20 230 Z" fill="#4a4441"/>
+            <path d="M-20 195 Q180 165 420 210 L420 240 L-20 240 Z" fill="#2d2826"/>
+            <!-- Stark barren tree -->
+            <path d="M120 170 Q118 120 110 90 Q105 70 95 50 M110 90 Q125 70 145 55 M105 75 Q85 65 70 60 M120 120 Q145 105 160 95 M145 105 Q155 85 170 80" stroke="#1a1817" stroke-width="4" stroke-linecap="round" fill="none"/>
+            <!-- Solitary raven -->
+            <ellipse cx="93" cy="46" rx="5" ry="3" fill="#1a1817"/>
+            <polygon points="90,46 84,47 90,49" fill="#1a1817"/>
+            <!-- Heavy winter mist lines -->
+            <line x1="40" y1="130" x2="160" y2="130" stroke="#f7f3eb" stroke-width="1.5" stroke-dasharray="20 10" opacity="0.6"/>
+            <line x1="200" y1="145" x2="360" y2="145" stroke="#f7f3eb" stroke-width="1.5" stroke-dasharray="30 15" opacity="0.6"/>
+          </svg>`;
+
+        case 'comely':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#f4ece1"/>
+            <!-- Delicate portrait frame oval -->
+            <ellipse cx="200" cy="110" rx="90" ry="85" fill="none" stroke="#990f3d" stroke-width="2"/>
+            <ellipse cx="200" cy="110" rx="96" ry="91" fill="none" stroke="#990f3d" stroke-dasharray="4 4" stroke-width="1"/>
+            <!-- Graceful silhouette of woman in profile with traditional hair adornment -->
+            <path d="M190 70 C195 60 215 62 220 75 C225 88 220 100 212 108 C215 118 214 125 210 135 C205 145 220 160 230 165 L170 165 C178 150 180 135 182 120 C175 105 176 85 190 70 Z" fill="#4d4845"/>
+            <!-- Traditional lotus floral motif in hair -->
+            <circle cx="180" cy="85" r="7" fill="#990f3d"/>
+            <circle cx="174" cy="80" r="5" fill="#f4dce2"/>
+            <circle cx="186" cy="80" r="5" fill="#f4dce2"/>
+            <!-- Graceful decorative garland arc -->
+            <path d="M120 190 Q200 160 280 190" stroke="#0d7680" stroke-width="2" fill="none"/>
+            <circle cx="200" cy="175" r="4" fill="#0d7680"/>
+          </svg>`;
+
+        case 'untrammelled':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#e8f1f2"/>
+            <!-- Sunlit vast boundless horizon -->
+            <path d="M0 160 Q200 130 400 160 L400 220 L0 220 Z" fill="#c7dadb"/>
+            <!-- Galloping wild stallion silhouette -->
+            <path d="M160 115 C170 95 195 80 215 85 C230 88 245 82 255 70 C258 82 250 95 240 100 C255 102 275 105 285 115 C270 120 260 128 265 145 L252 145 C248 132 235 125 220 130 C200 135 185 145 170 155 L160 155 C165 140 165 125 160 115 Z" fill="#990f3d"/>
+            <!-- Speed wind lines -->
+            <path d="M70 90 L140 90 M50 110 L130 110 M80 130 L150 130" stroke="#0d7680" stroke-width="2.5" stroke-linecap="round"/>
+            <!-- Shattered iron shackles broken on bedrock -->
+            <ellipse cx="110" cy="180" rx="14" ry="7" fill="none" stroke="#33302e" stroke-width="3"/>
+            <line x1="125" y1="180" x2="140" y2="175" stroke="#33302e" stroke-width="3"/>
+            <ellipse cx="155" cy="173" rx="14" ry="7" fill="none" stroke="#33302e" stroke-width="3" stroke-dasharray="12 6"/>
+            <!-- Sparks of liberation -->
+            <circle cx="148" cy="165" r="3" fill="#9a6312"/>
+            <circle cx="138" cy="168" r="2" fill="#9a6312"/>
+          </svg>`;
+
+        case 'manoeuvre':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#ede6d8"/>
+            <!-- Chessboard perspective squares -->
+            <polygon points="60,180 120,180 100,140 50,140" fill="#cdc3b2"/>
+            <polygon points="120,180 180,180 150,140 100,140" fill="#4d4845"/>
+            <polygon points="180,180 240,180 200,140 150,140" fill="#cdc3b2"/>
+            <polygon points="240,180 300,180 250,140 200,140" fill="#4d4845"/>
+            <!-- Knight piece executing tactical L-fork -->
+            <path d="M190 140 C185 125 175 110 185 95 C190 88 198 85 200 75 C192 75 185 80 180 88 C175 80 178 70 190 65 C205 60 225 70 230 85 C235 98 225 112 225 140 Z" fill="#990f3d"/>
+            <circle cx="195" cy="80" r="3" fill="#ffffff"/>
+            <!-- Tactical calculated dashed arrow trajectory -->
+            <path d="M120 150 Q160 70 200 95" fill="none" stroke="#0d7680" stroke-width="3" stroke-dasharray="6 4"/>
+            <polygon points="205,95 195,90 198,102" fill="#0d7680"/>
+          </svg>`;
+
+        case 'diaphanous':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#fdfbf7"/>
+            <!-- Sunlight stream beams through window -->
+            <polygon points="80,0 160,0 340,220 220,220" fill="#fff5d9" opacity="0.6"/>
+            <!-- Translucent floating gossamer fabric ripples -->
+            <path d="M40 90 Q120 40 200 100 T360 80 L340 150 Q220 180 150 120 T30 140 Z" fill="#990f3d" fill-opacity="0.18" stroke="#990f3d" stroke-width="1.5"/>
+            <path d="M60 110 Q150 70 230 120 T370 100 L350 165 Q230 200 170 135 T50 155 Z" fill="#0d7680" fill-opacity="0.12" stroke="#0d7680" stroke-width="1.2"/>
+            <!-- Gentle sun sparkles -->
+            <circle cx="210" cy="80" r="3" fill="#9a6312" opacity="0.8"/>
+            <circle cx="280" cy="110" r="2" fill="#9a6312" opacity="0.7"/>
+          </svg>`;
+
+        case 'mercurial':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#ece6dc"/>
+            <!-- Left storm clouds & lightning / Right bright sun -->
+            <path d="M50 70 Q70 50 90 60 Q110 45 130 65 Q140 85 120 95 L60 95 Z" fill="#69625f"/>
+            <polygon points="85,95 75,120 90,118 80,145" fill="#9a6312"/>
+            <circle cx="330" cy="70" r="22" fill="#9a6312"/>
+            <!-- Central mercury thermometer tube -->
+            <rect x="188" y="30" width="24" height="130" rx="12" fill="#f7f3eb" stroke="#33302e" stroke-width="3"/>
+            <circle cx="200" cy="170" r="24" fill="#f7f3eb" stroke="#33302e" stroke-width="3"/>
+            <!-- Liquid mercury fluctuating column with volatile zigzag -->
+            <rect x="194" y="80" width="12" height="85" fill="#990f3d"/>
+            <circle cx="200" cy="170" r="18" fill="#990f3d"/>
+            <!-- Volatile movement wave arrows -->
+            <path d="M225 60 L240 70 L225 80 M225 100 L240 110 L225 120" stroke="#990f3d" stroke-width="2.5" fill="none"/>
+          </svg>`;
+
+        case 'lambent':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#2b2523"/>
+            <!-- Soft concentric amber radiant halos -->
+            <circle cx="200" cy="100" r="85" fill="#ffba28" fill-opacity="0.08"/>
+            <circle cx="200" cy="100" r="60" fill="#ffba28" fill-opacity="0.15"/>
+            <circle cx="200" cy="100" r="38" fill="#ffba28" fill-opacity="0.25"/>
+            <!-- Traditional brass oil diya lamp -->
+            <ellipse cx="200" cy="155" rx="55" ry="18" fill="#c98a2c" stroke="#8c5810" stroke-width="2"/>
+            <path d="M145 155 Q200 185 255 155 Z" fill="#a66e1d"/>
+            <!-- Gentle flicking flame tip -->
+            <path d="M200 95 C192 110 190 125 195 138 C198 143 202 143 205 138 C210 125 208 110 200 95 Z" fill="#ffe299"/>
+            <circle cx="200" cy="120" r="4" fill="#ffffff"/>
+            <!-- Antique manuscript corner catching the soft glow -->
+            <polygon points="70,195 180,185 190,215 80,220" fill="#efe8da" opacity="0.8"/>
+          </svg>`;
+
+        case 'persnickety':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#f7f3eb"/>
+            <!-- Ruled ledger paper lines with red alignment marks -->
+            <line x1="40" y1="50" x2="360" y2="50" stroke="#cdc3b2" stroke-width="1.5"/>
+            <line x1="40" y1="90" x2="360" y2="90" stroke="#cdc3b2" stroke-width="1.5"/>
+            <line x1="40" y1="130" x2="360" y2="130" stroke="#cdc3b2" stroke-width="1.5"/>
+            <line x1="40" y1="170" x2="360" y2="170" stroke="#cdc3b2" stroke-width="1.5"/>
+            <!-- Big magnifying glass focusing on tiny punctuation -->
+            <circle cx="180" cy="100" r="50" fill="#ffffff" stroke="#33302e" stroke-width="5"/>
+            <line x1="218" y1="135" x2="270" y2="185" stroke="#33302e" stroke-width="9" stroke-linecap="round"/>
+            <!-- Microscopic red comma and caliper precision mark -->            <text x="172" y="112" font-family="serif" font-size="34" font-weight="bold" fill="#990f3d">;</text>
+            <path d="M150 80 L150 120 M210 80 L210 120 M150 100 L210 100" stroke="#0d7680" stroke-width="1.5" stroke-dasharray="3 2"/>
+            <text x="160" y="75" font-family="sans-serif" font-size="11" fill="#0d7680" font-weight="bold">0.05mm</text>
+          </svg>`;
+
+        case 'delectable':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#f6efe4"/>
+            <!-- Elegant domed banquet platter dish -->
+            <ellipse cx="200" cy="170" rx="120" ry="25" fill="#ddd2be" stroke="#33302e" stroke-width="2"/>
+            <ellipse cx="200" cy="165" rx="90" ry="18" fill="#c98a2c"/>
+            <!-- Golden spiced layered paratha with butter glaze -->
+            <ellipse cx="200" cy="160" rx="75" ry="14" fill="#e8a838"/>
+            <circle cx="190" cy="158" r="4" fill="#754308"/>
+            <circle cx="215" cy="160" r="3" fill="#754308"/>
+            <!-- Gentle curling aromatic steam vapours -->
+            <path d="M170 145 Q160 115 175 90 T165 50" stroke="#990f3d" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+            <path d="M200 140 Q215 105 195 80 T210 40" stroke="#990f3d" stroke-width="3" fill="none" stroke-linecap="round" opacity="0.8"/>
+            <path d="M230 145 Q240 115 225 90 T235 50" stroke="#990f3d" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.7"/>
+          </svg>`;
+
+        case 'hubris':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#1d1a18"/>
+            <!-- Blazing golden sun overhead -->
+            <circle cx="320" cy="40" r="45" fill="#f5c065"/>
+            <circle cx="320" cy="40" r="65" fill="#f5c065" opacity="0.2"/>
+            <!-- Icarus soaring upward blindly while wax wings melt -->
+            <path d="M160 130 C150 110 165 95 180 100 C195 105 200 120 190 135 L175 140 Z" fill="#f2e8de"/>
+            <!-- Feather wings dissolving into falling droplets -->
+            <path d="M180 100 Q130 60 90 90 Q120 105 170 115 Z" fill="#990f3d"/>
+            <path d="M190 105 Q220 70 260 85 Q230 110 195 120 Z" fill="#990f3d"/>
+            <!-- Melting wax drops & falling feathers -->
+            <circle cx="110" cy="120" r="3" fill="#f5c065"/>
+            <circle cx="130" cy="140" r="2.5" fill="#f5c065"/>
+            <path d="M100 150 Q105 160 102 170" stroke="#c2b8ae" stroke-width="1.5" fill="none"/>
+            <path d="M240 130 Q245 145 240 155" stroke="#c2b8ae" stroke-width="1.5" fill="none"/>
+          </svg>`;
+
+        case 'punitive':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#ede5d8"/>
+            <!-- Heavy judicial dark-oak gavel striking anvil base -->
+            <ellipse cx="230" cy="175" rx="70" ry="16" fill="#695c52" stroke="#33302e" stroke-width="2"/>
+            <ellipse cx="230" cy="168" rx="60" ry="12" fill="#8c7a6d"/>
+            <!-- Gavel head in motion -->
+            <rect x="180" y="70" width="75" height="40" rx="4" fill="#990f3d" transform="rotate(-15 180 70)" stroke="#33302e" stroke-width="2"/>
+            <rect x="200" y="90" width="16" height="70" fill="#521021" transform="rotate(-15 200 90)" stroke="#33302e" stroke-width="2"/>
+            <!-- Impact shock waves -->
+            <path d="M160 155 Q180 145 200 155 M240 155 Q260 145 280 155" stroke="#990f3d" stroke-width="3" fill="none"/>
+            <!-- Legal summons parchment with penalty seal -->
+            <polygon points="60,120 130,110 140,180 70,190" fill="#f7f3eb" stroke="#33302e" stroke-width="1.5"/>
+            <circle cx="100" cy="150" r="12" fill="#b3261e"/>
+            <text x="94" y="154" fill="#ffffff" font-family="sans-serif" font-weight="bold" font-size="10">FINE</text>
+          </svg>`;
+
+        case 'slackening':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#e6edf0"/>
+            <!-- Harbour dock pier wood planks -->
+            <line x1="0" y1="180" x2="400" y2="180" stroke="#33302e" stroke-width="3"/>
+            <!-- Heavy iron mooring bollard -->
+            <rect x="90" y="110" width="45" height="70" fill="#4d4845" stroke="#1a1817" stroke-width="2"/>
+            <ellipse cx="112" cy="110" rx="30" ry="10" fill="#33302e"/>
+            <!-- Heavy rope loosening and sagging as tension eases -->
+            <path d="M125 130 Q220 185 380 120" stroke="#9a6312" stroke-width="12" fill="none" stroke-linecap="round"/>
+            <path d="M125 145 Q210 200 370 135" stroke="#754308" stroke-width="4" stroke-dasharray="10 6" fill="none"/>
+            <!-- Slackening indicator arrows pointing downward -->
+            <path d="M240 120 L240 150 M235 142 L240 152 L245 142" stroke="#0d7680" stroke-width="3" fill="none"/>
+          </svg>`;
+
+        case 'wrangling':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#f0e9dd"/>
+            <!-- Split negotiating conference table with jagged fracture -->
+            <polygon points="40,160 360,160 380,200 20,200" fill="#8c7a6d"/>
+            <line x1="200" y1="160" x2="195" y2="200" stroke="#1a1817" stroke-width="3" stroke-dasharray="8 4"/>
+            <!-- Left disputant silhouette -->
+            <circle cx="100" cy="90" r="18" fill="#990f3d"/>
+            <path d="M80 150 C80 120 120 120 120 150 Z" fill="#990f3d"/>
+            <line x1="120" y1="125" x2="155" y2="115" stroke="#990f3d" stroke-width="4" stroke-linecap="round"/>
+            <!-- Right opposing disputant silhouette -->
+            <circle cx="300" cy="90" r="18" fill="#0f5499"/>
+            <path d="M280 150 C280 120 320 120 320 150 Z" fill="#0f5499"/>
+            <line x1="280" y1="125" x2="245" y2="115" stroke="#0f5499" stroke-width="4" stroke-linecap="round"/>
+            <!-- Clashing speech debate waves -->
+            <polygon points="170,105 185,115 170,125" fill="#990f3d"/>
+            <polygon points="230,105 215,115 230,125" fill="#0f5499"/>
+          </svg>`;
+
+        case 'despondency':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#2d2826"/>
+            <!-- Unlit stone fireplace hearth -->
+            <rect x="70" y="80" width="110" height="110" fill="#1a1817" stroke="#4d4845" stroke-width="3"/>
+            <!-- Student sitting with head rested on desk in deep dejection -->
+            <circle cx="260" cy="115" r="16" fill="#c2b8ae"/>
+            <path d="M240 180 C240 145 280 145 280 180 Z" fill="#4d4845"/>
+            <!-- Subtle single ray of dawn peeking through high window slit -->
+            <polygon points="340,20 370,20 280,180 250,180" fill="#ffd9e2" opacity="0.15"/>
+          </svg>`;
+
+        case 'exuberance':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#14213d"/>
+            <!-- Ascending celebration fireworks burst -->
+            <circle cx="200" cy="90" r="6" fill="#ffffff"/>
+            <!-- Radiating celebratory sparks in vibrant claret, gold and cyan -->
+            <path d="M200 90 L150 40 M200 90 L250 40 M200 90 L130 90 M200 90 L270 90 M200 90 L160 140 M200 90 L240 140 M200 90 L200 20 M200 90 L200 160" stroke="#f5c065" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="150" cy="40" r="4" fill="#990f3d"/>
+            <circle cx="250" cy="40" r="4" fill="#990f3d"/>
+            <circle cx="130" cy="90" r="4" fill="#5cbcc4"/>
+            <circle cx="270" cy="90" r="4" fill="#5cbcc4"/>
+            <!-- Golden starburst accents -->
+            <polygon points="200,5 204,15 215,19 204,23 200,33 196,23 185,19 196,15" fill="#f5c065"/>
+          </svg>`;
+
+        case 'circumscribed':
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg">
+            <rect width="400" height="220" fill="#f7f3eb"/>
+            <!-- Rigid enclosing compass boundary circle -->
+            <circle cx="190" cy="120" r="65" fill="none" stroke="#990f3d" stroke-width="3" stroke-dasharray="6 4"/>
+            <!-- Brass drafting compass needle arm -->
+            <polygon points="190,20 185,120 195,120" fill="#33302e"/>
+            <polygon points="190,20 250,110 255,105" fill="#9a6312"/>
+            <circle cx="190" cy="20" r="8" fill="#33302e"/>
+            <!-- Confined central text box -->
+            <rect x="155" y="100" width="70" height="40" fill="#f4dce2" stroke="#990f3d" stroke-width="1.5"/>
+            <text x="162" y="125" font-family="sans-serif" font-size="11" font-weight="bold" fill="#6b0a2a">LIMITS</text>
+          </svg>`;
+
+        default:
+          return `<svg viewBox="0 0 400 220" xmlns="http://www.w3.org/2000/svg"><rect width="400" height="220" fill="#eee"/></svg>`;
+      }
+    }
+
+    /* ------------------------------------------------------------------------
+       8. Mode 1: Render Vocabulary Cards
+       ------------------------------------------------------------------------ */
+    function renderVocabCards() {
+      const container = document.getElementById('vocabGrid');
+      if (!container) return;
+
+      const q = appState.searchQuery.toLowerCase().trim();
+      const cat = appState.categoryFilter;
+
+      const filtered = VOCAB_DATA.filter(item => {
+        // Category filter check
+        if (cat === 'mastered_only') {
+          if (!appState.masteredWordIds.includes(item.id)) return false;
+        } else if (cat !== 'all' && item.category !== cat) {
+          return false;
+        }
+
+        // Search text check
+        if (!q) return true;
+        const inWord = item.word.toLowerCase().includes(q);
+        const inMeaning = item.meaning.toLowerCase().includes(q);
+        const inTelugu = item.telugu.toLowerCase().includes(q) || item.teluguTrans.toLowerCase().includes(q);
+        const inSyn = item.synonyms.some(s => s.toLowerCase().includes(q));
+        const inAnt = item.antonyms.some(a => a.toLowerCase().includes(q));
+        return inWord || inMeaning || inTelugu || inSyn || inAnt;
+      });
+
+      if (filtered.length === 0) {
+        container.innerHTML = `
+          <div style="grid-column: 1 / -1; padding: var(--space-xl); text-align:center; border: var(--rule-column); background: var(--surface-container-low);">
+            <h3>No vocabulary entries match your search criteria.</h3>
+            <p style="color:var(--on-surface-variant); margin-top:var(--space-2xs);">Try clearing filters or search queries.</p>
+            <button class="btn-primary" style="margin-top:var(--space-sm);" onclick="resetVocabFilters()">Reset All Filters</button>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = filtered.map(item => {
+        const isMastered = appState.masteredWordIds.includes(item.id);
+        const synPills = item.synonyms.slice(0, 4).map(s => `<span class="lex-pill">${s}</span>`).join('');
+        const antPills = item.antonyms.slice(0, 3).map(a => `<span class="lex-pill">${a}</span>`).join('');
+
+        return `
+          <article class="vocab-card ${isMastered ? 'mastered' : ''}" id="card_${item.id}">
+            <div class="card-top-meta">
+              <span class="tag-bare">${item.category}</span>
+              <span class="claret-label">SBI PO / IBPS PO &bull; ${item.relevance.banking}</span>
+            </div>
+
+            <div class="word-header">
+              <div>
+                <h3 class="word-title">${item.word}</h3>
+                <span class="phonetic-badge">/ ${item.phonetic} / &bull; ${item.pos}</span>
+              </div>
+              <button class="btn-pronounce" onclick="pronounceWord('${item.word}', this)" title="Listen to pronunciation">
+                <i data-lucide="volume-2"></i> Pronounce
+              </button>
+            </div>
+
+            <div class="telugu-block">
+              <div class="telugu-script">${item.telugu}</div>
+              <div class="telugu-trans">${item.teluguTrans}</div>
+            </div>
+
+            <div>
+              <p style="font-weight: 600; font-size: 0.95rem; margin-bottom: var(--space-2xs);">${item.meaning}</p>
+              <div class="beginner-callout">
+                <strong><i data-lucide="lightbulb" style="display:inline; width:12px; height:12px;"></i> Pedagogical Intuition:</strong>
+                ${item.beginner}
+              </div>
+            </div>
+
+            <div class="lexical-tags">
+              <div class="lex-col">
+                <strong>Synonyms:</strong>
+                <div class="lex-pills">${synPills}</div>
+              </div>
+              <div class="lex-col">
+                <strong>Antonyms:</strong>
+                <div class="lex-pills">${antPills}</div>
+              </div>
+            </div>
+
+            <div class="example-sentence">
+              "${item.example}"
+            </div>
+
+            <div class="exam-relevance-strip">
+              <label class="mastery-check-label">
+                <input type="checkbox" ${isMastered ? 'checked' : ''} onchange="toggleMastered('${item.id}', this.checked)">
+                <span>${isMastered ? 'Mastered for Exam' : 'Mark as Mastered'}</span>
+              </label>
+              <span style="color:var(--on-surface-variant); font-size:0.75rem;">
+                Editorial: <strong>${item.relevance.editorial}</strong>
+              </span>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    function filterVocabCards() {
+      const input = document.getElementById('vocabSearchInput');
+      if (input) {
+        appState.searchQuery = input.value;
+        renderVocabCards();
+      }
+    }
+
+    function setCategoryFilter(cat, btnEl) {
+      appState.categoryFilter = cat;
+      const chips = document.querySelectorAll('#categoryFilterContainer .chip-btn');
+      chips.forEach(c => c.classList.remove('active'));
+      if (btnEl) btnEl.classList.add('active');
+      renderVocabCards();
+    }
+
+    function resetVocabFilters() {
+      appState.categoryFilter = 'all';
+      appState.searchQuery = '';
+      const input = document.getElementById('vocabSearchInput');
+      if (input) input.value = '';
+      const firstChip = document.querySelector('#categoryFilterContainer .chip-btn');
+      if (firstChip) setCategoryFilter('all', firstChip);
+      renderVocabCards();
+    }
+
+    function toggleMastered(wordId, checked) {
+      if (checked) {
+        if (!appState.masteredWordIds.includes(wordId)) {
+          appState.masteredWordIds.push(wordId);
+        }
+      } else {
+        appState.masteredWordIds = appState.masteredWordIds.filter(id => id !== wordId);
+      }
+      updateStats();
+      saveState();
+      renderVocabCards();
+    }
+
+    /* ------------------------------------------------------------------------
+       9. Mode 2: Visual Memory Hooks Gallery & Recall Drill
+       ------------------------------------------------------------------------ */
+    function renderVisualGallery() {
+      const container = document.getElementById('visualGridContainer');
+      if (!container) return;
+
+      container.innerHTML = VOCAB_DATA.map(item => {
+        const svgArtwork = generateArtworkSvg(item.id);
+
+        return `
+          <div class="visual-card">
+            <div class="card-top-meta">
+              <span class="claret-label">${item.word}</span>
+              <span class="tag-bare">/ ${item.phonetic} /</span>
+            </div>
+
+            <div class="svg-artwork-container">
+              ${svgArtwork}
+            </div>
+
+            <div class="telugu-block">
+              <div class="telugu-script">${item.telugu}</div>
+              <div class="telugu-trans">${item.teluguTrans}</div>
+            </div>
+
+            <div class="visual-mnemonic-box">
+              <strong>Nimisha Ma'am's Mnemonic Story:</strong>
+              ${item.mnemonic}
+            </div>
+
+            <p style="font-size: 0.92rem; color: var(--on-surface);">
+              <strong>Visual Hook Scene:</strong> ${item.visualConcept}
+            </p>
+
+            <div style="margin-top:auto; display:flex; justify-content:space-between; align-items:center;">
+              <button class="btn-pronounce" onclick="pronounceWord('${item.word}', this)">
+                <i data-lucide="volume-2"></i> Pronounce
+              </button>
+              <button class="btn-secondary" style="font-size:0.75rem;" onclick="jumpToFlashcardWord('${item.id}')">
+                Open in Flashcard &rarr;
+              </button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      lucide.createIcons();
+    }
+
+    /* Visual Recall Mini Drill */
+    let drillCurrentStep = 0;
+    const drillQuestions = [
+      { id: 'untrammelled', hint: `A wild stallion bursting forward through an open plain with shattered iron chains falling to earth.` },
+      { id: 'manoeuvre', hint: `A chess knight executing a calculated tactical fork across pawns on a chessboard.` },
+      { id: 'bleakness', hint: `A barren, solitary winter tree against heavy overcast grey skies with cold mist rolling over frostbitten soil.` },
+      { id: 'lambent', hint: `A traditional brass diya oil lamp radiating soft concentric rings of gentle amber light.` },
+      { id: 'persnickety', hint: `A detective's magnifying glass inspecting microscopic punctuation alignment with a vernier caliper.` }
+    ];
+
+    function startVisualDrill() {
+      const panel = document.getElementById('visualDrillPanel');
+      if (!panel) return;
+      panel.style.display = 'block';
+      drillCurrentStep = 0;
+      loadDrillStep();
+      panel.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function closeVisualDrill() {
+      const panel = document.getElementById('visualDrillPanel');
+      if (panel) panel.style.display = 'none';
+    }
+
+    function loadDrillStep() {
+      const q = drillQuestions[drillCurrentStep];
+      const stepNumEl = document.getElementById('drillStepNum');
+      const svgContainer = document.getElementById('drillSvgContainer');
+      const hintEl = document.getElementById('drillPromptHint');
+      const optsContainer = document.getElementById('drillOptionsContainer');
+      const feedbackEl = document.getElementById('drillFeedback');
+      const nextBtn = document.getElementById('drillNextBtn');
+
+      if (!q || !stepNumEl || !svgContainer || !hintEl || !optsContainer) return;
+
+      stepNumEl.textContent = `${drillCurrentStep + 1}`;
+      svgContainer.innerHTML = generateArtworkSvg(q.id);
+      hintEl.textContent = `Visual Memory Clue: "${q.hint}"`;
+
+      if (feedbackEl) feedbackEl.style.display = 'none';
+      if (nextBtn) nextBtn.style.display = 'none';
+
+      // Pick 3 distractors
+      const distractors = VOCAB_DATA.filter(w => w.id !== q.id)
+                                    .sort(() => 0.5 - Math.random())
+                                    .slice(0, 3)
+                                    .map(w => w.id);
+      const choices = [q.id, ...distractors].sort(() => 0.5 - Math.random());
+
+      optsContainer.innerHTML = choices.map(optId => {
+        const wordObj = VOCAB_DATA.find(w => w.id === optId);
+        return `
+          <button class="drill-opt-btn" onclick="checkDrillAnswer('${optId}', '${q.id}', this)">
+            <span>${wordObj ? wordObj.word : optId}</span>
+            <span style="font-size:0.8rem; font-family:var(--font-label); font-weight:normal; color:var(--on-surface-variant);">
+              ${wordObj ? wordObj.teluguTrans : ''}
+            </span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function checkDrillAnswer(chosenId, correctId, btnEl) {
+      const allBtns = document.querySelectorAll('.drill-opt-btn');
+      allBtns.forEach(b => b.disabled = true);
+
+      const feedbackEl = document.getElementById('drillFeedback');
+      const nextBtn = document.getElementById('drillNextBtn');
+
+      if (chosenId === correctId) {
+        btnEl.classList.add('correct');
+        playSyntheticChime(true);
+        if (feedbackEl) {
+          feedbackEl.style.display = 'block';
+          feedbackEl.style.color = 'var(--positive)';
+          feedbackEl.textContent = `Outstanding! You accurately connected the visual memory hook to '${chosenId.toUpperCase()}'.`;
+        }
+      } else {
+        btnEl.classList.add('wrong');
+        playSyntheticChime(false);
+        allBtns.forEach(b => {
+          if (b.textContent.includes(VOCAB_DATA.find(w => w.id === correctId).word)) {
+            b.classList.add('correct');
+          }
+        });
+        if (feedbackEl) {
+          feedbackEl.style.display = 'block';
+          feedbackEl.style.color = 'var(--error)';
+          feedbackEl.textContent = `The correct editorial word is '${correctId.toUpperCase()}'.`;
+        }
+      }
+
+      if (nextBtn) {
+        nextBtn.style.display = 'inline-flex';
+        if (drillCurrentStep >= drillQuestions.length - 1) {
+          nextBtn.textContent = 'Complete Visual Drill';
+        } else {
+          nextBtn.textContent = 'Next Visual Challenge \u2192';
+        }
+      }
+    }
+
+    function nextDrillStep() {
+      if (drillCurrentStep < drillQuestions.length - 1) {
+        drillCurrentStep++;
+        loadDrillStep();
+      } else {
+        alert('Well done! You have completed the Visual Memory Recall Challenge.');
+        closeVisualDrill();
+      }
+    }
+
+    /* ------------------------------------------------------------------------
+       10. Mode 3: Interactive Flashcards View
+       ------------------------------------------------------------------------ */
+    let flashcardDeck = [...VOCAB_DATA];
+
+    function renderCurrentFlashcard() {
+      const idx = appState.flashcardIndex;
+      const item = flashcardDeck[idx];
+      if (!item) return;
+
+      const deckCountEl = document.getElementById('flashcardDeckCount');
+      const progressBar = document.getElementById('flashcardProgressBar');
+      const fcInner = document.getElementById('flashcardInner');
+
+      // Reset flip state on change
+      if (fcInner) fcInner.classList.remove('is-flipped');
+
+      if (deckCountEl) deckCountEl.textContent = `Card ${idx + 1} of ${flashcardDeck.length}`;
+      if (progressBar) progressBar.style.width = `${((idx + 1) / flashcardDeck.length) * 100}%`;
+
+      // Populate Front
+      document.getElementById('fcCategoryTag').textContent = item.category;
+      document.getElementById('fcExamTag').textContent = `SBI PO / IBPS PO: ${item.relevance.banking}`;
+      document.getElementById('fcWord').textContent = item.word;
+      document.getElementById('fcPhonetic').textContent = `/ ${item.phonetic} /`;
+      document.getElementById('fcPos').textContent = `${item.pos} \u2022 Click card to inspect Telugu meaning & analysis`;
+
+      // Populate Back
+      document.getElementById('fcBackWord').textContent = item.word;
+      document.getElementById('fcTelugu').textContent = item.telugu;
+      document.getElementById('fcTeluguTrans').textContent = item.teluguTrans;
+      document.getElementById('fcMeaning').textContent = item.meaning;
+      document.getElementById('fcBeginner').textContent = item.beginner;
+      document.getElementById('fcExample').textContent = `"${item.example}"`;
+
+      const synContainer = document.getElementById('fcSynonyms');
+      if (synContainer) {
+        synContainer.innerHTML = item.synonyms.map(s => `<span class="lex-pill">${s}</span>`).join('');
+      }
+
+      const antContainer = document.getElementById('fcAntonyms');
+      if (antContainer) {
+        antContainer.innerHTML = item.antonyms.map(a => `<span class="lex-pill">${a}</span>`).join('');
+      }
+
+      lucide.createIcons();
+    }
+
+    function toggleCardFlip() {
+      const fcInner = document.getElementById('flashcardInner');
+      if (fcInner) {
+        fcInner.classList.toggle('is-flipped');
+        playSyntheticChime(null);
+      }
+    }
+
+    function nextFlashcard() {
+      if (appState.flashcardIndex < flashcardDeck.length - 1) {
+        appState.flashcardIndex++;
+      } else {
+        appState.flashcardIndex = 0; // cycle back
+      }
+      renderCurrentFlashcard();
+      saveState();
+    }
+
+    function prevFlashcard() {
+      if (appState.flashcardIndex > 0) {
+        appState.flashcardIndex--;
+      } else {
+        appState.flashcardIndex = flashcardDeck.length - 1;
+      }
+      renderCurrentFlashcard();
+      saveState();
+    }
+
+    function shuffleFlashcards() {
+      flashcardDeck.sort(() => 0.5 - Math.random());
+      appState.flashcardIndex = 0;
+      renderCurrentFlashcard();
+    }
+
+    function resetFlashcardProgress() {
+      flashcardDeck = [...VOCAB_DATA];
+      appState.flashcardIndex = 0;
+      renderCurrentFlashcard();
+    }
+
+    function markCardMastered() {
+      const item = flashcardDeck[appState.flashcardIndex];
+      if (item && !appState.masteredWordIds.includes(item.id)) {
+        appState.masteredWordIds.push(item.id);
+        updateStats();
+        saveState();
+      }
+      playSyntheticChime(true);
+      nextFlashcard();
+    }
+
+    function markCardRevision() {
+      const item = flashcardDeck[appState.flashcardIndex];
+      if (item && !appState.revisionWordIds.includes(item.id)) {
+        appState.revisionWordIds.push(item.id);
+        saveState();
+      }
+      playSyntheticChime(false);
+      nextFlashcard();
+    }
+
+    function playCurrentFlashcardAudio() {
+      const item = flashcardDeck[appState.flashcardIndex];
+      const btn = document.getElementById('fcPronounceBtn');
+      if (item) {
+        pronounceWord(item.word, btn);
+      }
+    }
+
+    function jumpToFlashcardWord(wordId) {
+      const idx = flashcardDeck.findIndex(w => w.id === wordId);
+      if (idx !== -1) {
+        appState.flashcardIndex = idx;
+      }
+      switchTab('flashcards');
+    }
+
+    // Keyboard navigation for Flashcards
+    window.addEventListener('keydown', function(e) {
+      if (appState.activeTab !== 'flashcards') return;
+      if (e.code === 'Space') {
+        e.preventDefault();
+        toggleCardFlip();
+      } else if (e.code === 'ArrowRight') {
+        nextFlashcard();
+      } else if (e.code === 'ArrowLeft') {
+        prevFlashcard();
+      }
+    });
+
+    /* ------------------------------------------------------------------------
+       11. Mode 4: Banking Exam Quiz Engine
+       ------------------------------------------------------------------------ */
+    function renderQuizQuestion() {
+      const idx = appState.quizCurrentIndex;
+      const q = QUIZ_QUESTIONS[idx];
+      if (!q) return;
+
+      const qCounter = document.getElementById('quizQuestionCounter');
+      const qProgress = document.getElementById('quizProgressFill');
+      const qSource = document.getElementById('qSourceTag');
+      const qText = document.getElementById('qText');
+      const optContainer = document.getElementById('qOptionsContainer');
+      const explBox = document.getElementById('qExplanationBox');
+      const explText = document.getElementById('qExplanationText');
+      const btnPrev = document.getElementById('btnPrevQuizQ');
+      const btnNext = document.getElementById('btnNextQuizQ');
+
+      if (qCounter) qCounter.textContent = `Question ${idx + 1} of ${QUIZ_QUESTIONS.length}`;
+      if (qProgress) qProgress.style.width = `${((idx + 1) / QUIZ_QUESTIONS.length) * 100}%`;
+      if (qSource) qSource.innerHTML = q.source;
+      if (qText) qText.textContent = q.text;
+
+      if (btnPrev) btnPrev.disabled = (idx === 0);
+      if (btnNext) {
+        if (idx === QUIZ_QUESTIONS.length - 1) {
+          btnNext.innerHTML = 'Finish &amp; View Scorecard <i data-lucide="award"></i>';
+        } else {
+          btnNext.innerHTML = 'Next Question <i data-lucide="arrow-right"></i>';
+        }
+      }
+
+      const userAnswer = appState.quizUserAnswers[q.id];
+      const hasAnswered = (userAnswer !== undefined);
+
+      if (optContainer) {
+        const letters = ['A', 'B', 'C', 'D', 'E'];
+        optContainer.innerHTML = q.options.map((opt, oIdx) => {
+          let optClass = 'quiz-option';
+          if (hasAnswered) {
+            if (oIdx === q.correct) {
+              optClass += ' correct-answer';
+            } else if (oIdx === userAnswer) {
+              optClass += ' wrong-answer';
+            }
+          }
+
+          return `
+            <button class="${optClass}" onclick="selectQuizOption(${q.id}, ${oIdx})" ${hasAnswered ? 'disabled' : ''}>
+              <span class="opt-letter">${letters[oIdx]}</span>
+              <span>${opt}</span>
+            </button>
+          `;
+        }).join('');
+      }
+
+      if (explBox && explText) {
+        if (hasAnswered) {
+          explBox.classList.add('active');
+          explText.innerHTML = q.explanation.replace(/\n/g, '<br>');
+        } else {
+          explBox.classList.remove('active');
+        }
+      }
+
+      lucide.createIcons();
+    }
+
+    function selectQuizOption(qId, selectedOptionIdx) {
+      if (appState.quizUserAnswers[qId] !== undefined) return; // already answered
+
+      appState.quizUserAnswers[qId] = selectedOptionIdx;
+      const q = QUIZ_QUESTIONS.find(item => item.id === qId);
+
+      if (q) {
+        if (selectedOptionIdx === q.correct) {
+          playSyntheticChime(true);
+        } else {
+          playSyntheticChime(false);
+        }
+      }
+
+      renderQuizQuestion();
+      updateStats();
+      saveState();
+    }
+
+    function nextQuizQuestion() {
+      if (appState.quizCurrentIndex < QUIZ_QUESTIONS.length - 1) {
+        appState.quizCurrentIndex++;
+        renderQuizQuestion();
+      } else {
+        submitQuiz();
+      }
+    }
+
+    function prevQuizQuestion() {
+      if (appState.quizCurrentIndex > 0) {
+        appState.quizCurrentIndex--;
+        renderQuizQuestion();
+      }
+    }
+
+    function submitQuiz() {
+      appState.quizSubmitted = true;
+      clearInterval(timerInterval);
+
+      let correctCount = 0;
+      QUIZ_QUESTIONS.forEach(q => {
+        if (appState.quizUserAnswers[q.id] === q.correct) {
+          correctCount++;
+        }
+      });
+
+      const total = QUIZ_QUESTIONS.length;
+      const pct = Math.round((correctCount / total) * 100);
+
+      const activeBlock = document.getElementById('quizActiveBlock');
+      const scoreBlock = document.getElementById('quizScorecardBlock');
+      if (activeBlock) activeBlock.style.display = 'none';
+      if (scoreBlock) scoreBlock.style.display = 'block';
+
+      document.getElementById('scorePercent').textContent = `${pct}%`;
+      document.getElementById('statTotalQ').textContent = total;
+      document.getElementById('statCorrectQ').textContent = correctCount;
+      document.getElementById('statIncorrectQ').textContent = total - correctCount;
+
+      const spentSecs = 900 - appState.quizTimerSeconds;
+      const mins = Math.floor(spentSecs / 60);
+      const secs = spentSecs % 60;
+      document.getElementById('statTimeSpent').textContent = `${mins}m ${secs}s`;
+
+      const lede = document.getElementById('scoreGradeLede');
+      if (pct >= 80) {
+        lede.innerHTML = `<span style="color:var(--positive);">Distinction &bull; SBI PO &amp; RBI Grade B Merit Ready!</span><br>Outstanding command over editorial vocabulary, grammatical error detection, and idiom nuances.`;
+      } else if (pct >= 60) {
+        lede.innerHTML = `<span style="color:var(--warning);">Proficient &bull; Solid Foundation for IBPS PO Mains!</span><br>Good performance. Review incorrect grammar rules and confusing vocabulary pairs.`;
+      } else {
+        lede.innerHTML = `<span style="color:var(--primary);">Needs Revision &bull; Practice Daily Editorial Sets</span><br>Focus on subject-verb agreement and daily vocabulary flashcards to boost accuracy.`;
+      }
+
+      updateStats();
+      saveState();
+    }
+
+    function restartQuizFromScorecard() {
+      resetQuiz();
+      const activeBlock = document.getElementById('quizActiveBlock');
+      const scoreBlock = document.getElementById('quizScorecardBlock');
+      if (activeBlock) activeBlock.style.display = 'block';
+      if (scoreBlock) scoreBlock.style.display = 'none';
+    }
+
+    function reviewQuizAnswers() {
+      const activeBlock = document.getElementById('quizActiveBlock');
+      const scoreBlock = document.getElementById('quizScorecardBlock');
+      if (activeBlock) activeBlock.style.display = 'block';
+      if (scoreBlock) scoreBlock.style.display = 'none';
+      appState.quizCurrentIndex = 0;
+      renderQuizQuestion();
+    }
+
+    function resetQuiz() {
+      appState.quizCurrentIndex = 0;
+      appState.quizUserAnswers = {};
+      appState.quizSubmitted = false;
+      appState.quizTimerSeconds = 900;
+      renderQuizQuestion();
+      startQuizTimer();
+    }
+
+    function startQuizTimer() {
+      clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (!appState.quizTimerRunning || appState.quizSubmitted) return;
+        if (appState.quizTimerSeconds > 0) {
+          appState.quizTimerSeconds--;
+          const m = Math.floor(appState.quizTimerSeconds / 60);
+          const s = appState.quizTimerSeconds % 60;
+          const displayEl = document.getElementById('timerVal');
+          if (displayEl) {
+            displayEl.textContent = `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+          }
+        } else {
+          clearInterval(timerInterval);
+          alert('Time is up for this mock session! Submitting your answers.');
+          submitQuiz();
+        }
+      }, 1000);
+    }
+
+    function toggleQuizTimer() {
+      appState.quizTimerRunning = !appState.quizTimerRunning;
+      const displayEl = document.getElementById('quizTimerDisplay');
+      if (displayEl) {
+        displayEl.style.opacity = appState.quizTimerRunning ? '1' : '0.4';
+      }
+    }
+
+    /* ------------------------------------------------------------------------
+       12. Modals & Ancillary Tools (Revision Sheet & Confusing Pairs)
+       ------------------------------------------------------------------------ */
+    function openRevisionSheet() {
+      const modal = document.getElementById('revisionModal');
+      const tbody = document.getElementById('revisionTableBody');
+      if (!modal || !tbody) return;
+
+      tbody.innerHTML = VOCAB_DATA.map(item => `
+        <tr>
+          <td>
+            <strong>${item.word}</strong><br>
+            <span style="font-size:0.75rem; color:var(--on-surface-variant);">/${item.phonetic}/</span>
+          </td>
+          <td><span class="tag-bare">${item.pos}</span></td>
+          <td style="color:var(--primary); font-weight:600;">${item.telugu}</td>
+          <td>${item.meaning}</td>
+          <td>${item.synonyms.slice(0, 3).join(', ')}</td>
+          <td>${item.antonyms.slice(0, 2).join(', ')}</td>
+          <td><span class="claret-label">${item.relevance.banking}</span></td>
+        </tr>      `).join('');
+
+      modal.classList.add('active');
+    }
+
+    function closeRevisionSheet() {
+      const modal = document.getElementById('revisionModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function closeRevisionSheetOnBackdrop(e) {
+      if (e.target.id === 'revisionModal') closeRevisionSheet();
+    }
+
+    function openConfusingWords() {
+      const modal = document.getElementById('confusingModal');
+      const container = document.getElementById('confusingPairsContainer');
+      if (!modal || !container) return;
+
+      container.innerHTML = CONFUSING_PAIRS.map(pair => `
+        <div class="confusing-pair-card">
+          <div class="confusing-col">
+            <h3 style="color:var(--primary);">${pair.word1} (${pair.pos1})</h3>
+            <p style="font-size:0.95rem; margin-top:var(--space-2xs);">${pair.meaning1}</p>
+          </div>
+          <div class="confusing-col">
+            <h3 style="color:var(--secondary);">${pair.word2} (${pair.pos2})</h3>
+            <p style="font-size:0.95rem; margin-top:var(--space-2xs);">${pair.meaning2}</p>
+          </div>
+          <div style="grid-column: 1 / -1; background:var(--surface-container-low); padding:var(--space-xs); border-left:3px solid var(--warning); font-size:0.88rem;">
+            <strong>Banking Examination Trap:</strong> ${pair.examTrap}
+          </div>
+        </div>
+      `).join('');
+
+      modal.classList.add('active');
+    }
+
+    function closeConfusingWords() {
+      const modal = document.getElementById('confusingModal');
+      if (modal) modal.classList.remove('active');
+    }
+
+    function closeConfusingWordsOnBackdrop(e) {
+      if (e.target.id === 'confusingModal') closeConfusingWords();
+    }
+
+    /* ------------------------------------------------------------------------
+       13. Export Notes (CSV Download via NotebookAppApi)
+       ------------------------------------------------------------------------ */
+    function exportStudyNotes() {
+      let csv = `Word,Phonetic,Part of Speech,Category,Telugu Meaning,English Meaning,Synonyms,Antonyms,Exam Sentence\n`;
+      VOCAB_DATA.forEach(w => {
+        const syns = `"${w.synonyms.join('; ')}"`;
+        const ants = `"${w.antonyms.join('; ')}"`;
+        const ex = `"${w.example.replace(/"/g, '""')}"`;
+        const def = `"${w.meaning.replace(/"/g, '""')}"`;
+        const tel = `"${w.telugu} (${w.teluguTrans})"`;
+        csv += `${w.word},${w.phonetic},${w.pos},${w.category},${tel},${def},${syns},${ants},${ex}\n`;
+      });
+
+      if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === 'function') {
+        window.notebookAppApi.triggerFileDownload({
+          content: csv,
+          contentType: 'text/csv',
+          encoding: 'UTF-8',
+          filename: 'Editorial_Vocabulary_Master_Nimisha_Maam.csv'
+        });
+      } else {
+        // Fallback for standalone browser testing
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'Editorial_Vocabulary_Master_Nimisha_Maam.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    /* ------------------------------------------------------------------------
+       14. Theme Toggle (Broadsheet Day / Night Edition)
+       ------------------------------------------------------------------------ */
+    function toggleTheme() {
+      const current = document.documentElement.getAttribute('data-theme');
+      const next = (current === 'dark') ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      appState.theme = next;
+
+      const btn = document.getElementById('themeToggleBtn');
+      if (btn) {
+        btn.innerHTML = (next === 'dark')
+          ? '<i data-lucide="sun"></i> Day Edition'
+          : '<i data-lucide="moon"></i> Night Edition';
+        lucide.createIcons();
+      }
+      saveState();
+    }
+
+    /* ------------------------------------------------------------------------
+       15. Tab Switching & Progress Tracking
+       ------------------------------------------------------------------------ */
+    function switchTab(tabId) {
+      appState.activeTab = tabId;
+
+      // Update Tab Buttons
+      const tabBtns = document.querySelectorAll('.tab-btn');
+      tabBtns.forEach(btn => {
+        btn.classList.remove('active');
+        btn.setAttribute('aria-selected', 'false');
+      });
+
+      // Update Views
+      const views = document.querySelectorAll('.mode-view');
+      views.forEach(v => v.classList.remove('active'));
+
+      if (tabId === 'cards') {
+        document.getElementById('tabBtnCards').classList.add('active');
+        document.getElementById('tabBtnCards').setAttribute('aria-selected', 'true');
+        document.getElementById('viewCards').classList.add('active');
+        renderVocabCards();
+      } else if (tabId === 'visual') {
+        document.getElementById('tabBtnVisual').classList.add('active');
+        document.getElementById('tabBtnVisual').setAttribute('aria-selected', 'true');
+        document.getElementById('viewVisual').classList.add('active');
+        renderVisualGallery();
+      } else if (tabId === 'flashcards') {
+        document.getElementById('tabBtnFlashcards').classList.add('active');
+        document.getElementById('tabBtnFlashcards').setAttribute('aria-selected', 'true');
+        document.getElementById('viewFlashcards').classList.add('active');
+        renderCurrentFlashcard();
+      } else if (tabId === 'quiz') {
+        document.getElementById('tabBtnQuiz').classList.add('active');
+        document.getElementById('tabBtnQuiz').setAttribute('aria-selected', 'true');
+        document.getElementById('viewQuiz').classList.add('active');
+        if (!appState.quizSubmitted) {
+          renderQuizQuestion();
+          startQuizTimer();
+        }
+      }
+
+      saveState();
+    }
+
+    function updateStats() {
+      const masteredEl = document.getElementById('masteredStat');
+      const accuracyEl = document.getElementById('accuracyStat');
+
+      if (masteredEl) {
+        masteredEl.textContent = `${appState.masteredWordIds.length}`;
+      }
+
+      if (accuracyEl) {
+        const answers = Object.keys(appState.quizUserAnswers);
+        if (answers.length === 0) {
+          accuracyEl.textContent = '--';
+        } else {
+          let correct = 0;
+          answers.forEach(qId => {
+            const q = QUIZ_QUESTIONS.find(item => item.id == qId);
+            if (q && appState.quizUserAnswers[qId] === q.correct) correct++;
+          });
+          const accPct = Math.round((correct / answers.length) * 100);
+          accuracyEl.textContent = `${accPct}%`;
+        }
+      }
+    }
+
+    /* ------------------------------------------------------------------------
+       16. State Persistence via notebookAppApi
+       ------------------------------------------------------------------------ */
+    async function saveState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+        try {
+          await window.notebookAppApi.setAppState({
+            activeTab: appState.activeTab,
+            masteredWordIds: appState.masteredWordIds,
+            revisionWordIds: appState.revisionWordIds,
+            flashcardIndex: appState.flashcardIndex,
+            quizUserAnswers: appState.quizUserAnswers,
+            quizSubmitted: appState.quizSubmitted,
+            theme: appState.theme
+          });
+        } catch (err) {
+          console.warn('Could not persist state', err);
+        }
+      }
+    }
+
+    async function loadSavedState() {
+      if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+        try {
+          const saved = await window.notebookAppApi.getAppState();
+          if (saved) {
+            if (saved.activeTab) appState.activeTab = saved.activeTab;
+            if (Array.isArray(saved.masteredWordIds)) appState.masteredWordIds = saved.masteredWordIds;
+            if (Array.isArray(saved.revisionWordIds)) appState.revisionWordIds = saved.revisionWordIds;
+            if (typeof saved.flashcardIndex === 'number') appState.flashcardIndex = saved.flashcardIndex;
+            if (saved.quizUserAnswers) appState.quizUserAnswers = saved.quizUserAnswers;
+            if (typeof saved.quizSubmitted === 'boolean') appState.quizSubmitted = saved.quizSubmitted;
+            if (saved.theme) {
+              appState.theme = saved.theme;
+              document.documentElement.setAttribute('data-theme', saved.theme);
+            }
+          }
+        } catch (err) {
+          console.warn('Could not restore state', err);
+        }
+      }
+    }
+
+    /* ------------------------------------------------------------------------
+       17. Application Initialisation
+       ------------------------------------------------------------------------ */
+    window.addEventListener('DOMContentLoaded', async function() {
+      // 1. Load state
+      await loadSavedState();
+
+      // 2. Initialise Lucide icons
+      lucide.createIcons();
+
+      // 3. Render initial views
+      renderVocabCards();
+      renderVisualGallery();
+      renderCurrentFlashcard();
+      renderQuizQuestion();
+      updateStats();
+
+      // 4. Restore active tab
+      switchTab(appState.activeTab || 'cards');
+
+      // 5. Notify host application that artifact is ready
+      if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+        window.notebookAppApi.notifyAppReady();
+      }
+    });
+  </script>
+</body>
+</html>
