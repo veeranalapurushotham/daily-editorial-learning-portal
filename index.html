@@ -1,0 +1,4408 @@
+<!DOCTYPE html>
+<html lang="en-GB" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="artifact-type" content="dashboard">
+  <meta name="design-style" content="briefing">
+  <title>The Editorial Dossier | Permanent Daily English Learning Portal</title>
+
+  <!-- Google Fonts: Source Serif 4 (Editorial Serif), Plus Jakarta Sans (Body), Geist Mono (Labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Geist+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons (Exact Pinned CDN) -->
+  <script src="https://unpkg.com/lucide@1.43.0/dist/umd/lucide.min.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light;
+
+      /* Page and surfaces: warm stone-white paper */
+      --background: #faf9f5;
+      --surface-container-low: #ffffff;
+      --surface-container: #f1efe8;
+      --surface-container-high: #e6e2d6;
+
+      /* Ink */
+      --on-surface: #17181a;
+      --on-surface-variant: #56585c;
+
+      /* Rules */
+      --outline: #17181a;
+      --outline-variant: #dedad0;
+
+      /* Accents */
+      --primary: #17181a;
+      --on-primary: #faf9f5;
+      --primary-container: #f2b705;
+      --on-primary-container: #17181a;
+      --secondary: #1f4e5f;
+      --tertiary: #785008;
+      --error: #b42318;
+      --on-error: #ffffff;
+
+      /* Data series and semantics */
+      --data-1: #1f4e5f;
+      --data-2: #d99000;
+      --data-3: #2b6e52;
+      --data-4: #b84a39;
+      --data-context: #c4bfb2;
+
+      --positive: #2b6e52;
+      --warning: #d99000;
+      --focus: #1f4e5f;
+
+      /* Typography */
+      --font-headline: 'Source Serif 4', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --font-label: 'Geist Mono', monospace;
+
+      /* Shape */
+      --rounded: 0.25rem;
+      --rounded-lg: 0.375rem;
+      --rounded-full: 9999px;
+
+      /* Style effects */
+      --section-rule: 1.5px solid var(--outline);
+      --card-border: 1px solid var(--outline-variant);
+      --badge-radius: 2px;
+      --heading-tracking: -0.02em;
+      --label-tracking: 0.08em;
+
+      /* Type scale for dashboard/tool */
+      --display-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.25rem);
+      --headline-size: clamp(1.25rem, 1.1rem + 0.5vw, 1.5rem);
+      --subhead-size: clamp(1.0625rem, 1rem + 0.25vw, 1.1875rem);
+      --body-size: clamp(0.9375rem, 0.9rem + 0.15vw, 1rem);
+      --label-size: 0.75rem;
+
+      /* Spacing scale */
+      --space-xs: 0.25rem;
+      --space-sm: 0.5rem;
+      --space-md: 1rem;
+      --space-lg: 1.5rem;
+      --space-xl: 2.5rem;
+      --space-2xl: 4rem;
+      --space-3xl: 6rem;
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+      --dur-micro: 120ms;
+      --dur-short: 220ms;
+      --dur-long: 420ms;
+    }
+
+    html[data-theme="dark"] {
+      color-scheme: dark;
+      --background: #121417;
+      --surface-container-low: #181b1f;
+      --surface-container: #20242a;
+      --surface-container-high: #2c313a;
+
+      --on-surface: #f2f0ea;
+      --on-surface-variant: #9ea4ad;
+
+      --outline: #f2f0ea;
+      --outline-variant: #2c313a;
+
+      --primary: #f2f0ea;
+      --on-primary: #121417;
+      --primary-container: #f2b705;
+      --on-primary-container: #121417;
+      --secondary: #7cc4e8;
+      --tertiary: #f2b705;
+      --error: #f04438;
+      --on-error: #ffffff;
+
+      --positive: #34d399;
+      --warning: #fbbf24;
+      --focus: #7cc4e8;
+      --data-1: #7cc4e8;
+      --data-2: #fbbf24;
+      --data-3: #34d399;
+      --data-4: #f87171;
+      --data-context: #4b5563;
+    }
+
+    /* Base Reset */
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      overflow-x: clip;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background);
+      color: var(--on-surface);
+      font-family: var(--font-body);
+      font-size: var(--body-size);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    header { position: static !important; }
+
+    /* Accessibility focus rings */
+    :focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Top Masthead & App Container */
+    .app-layout {
+      display: flex;
+      min-height: 100vh;
+      width: 100%;
+    }
+
+    /* Sidebar Navigation */
+    .sidebar {
+      width: 280px;
+      flex-shrink: 0;
+      background-color: var(--surface-container);
+      border-right: var(--card-border);
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      z-index: 50;
+    }
+
+    .sidebar-brand {
+      padding: var(--space-lg);
+      border-bottom: var(--section-rule);
+    }
+
+    .brand-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+      margin-bottom: var(--space-xs);
+    }
+
+    .brand-title {
+      font-family: var(--font-headline);
+      font-size: 1.35rem;
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: var(--heading-tracking);
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    .brand-sub {
+      font-size: 0.78rem;
+      color: var(--secondary);
+      font-weight: 600;
+      margin-top: var(--space-xs);
+    }
+
+    .nav-list {
+      list-style: none;
+      padding: var(--space-md);
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+      flex: 1;
+    }
+
+    .nav-item-btn {
+      width: 100%;
+      text-align: left;
+      background: transparent;
+      border: 1px solid transparent;
+      border-radius: var(--rounded);
+      padding: 0.65rem 0.85rem;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      cursor: pointer;
+      transition: background-color var(--dur-short) var(--ease-out), color var(--dur-short) var(--ease-out);
+    }
+
+    .nav-item-btn:hover {
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+
+    .nav-item-btn.active {
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      border-color: var(--outline-variant);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    }
+
+    .nav-item-btn.active .nav-icon {
+      color: var(--secondary);
+    }
+
+    .nav-badge {
+      margin-left: auto;
+      font-family: var(--font-label);
+      font-size: 0.7rem;
+      padding: 0.1rem 0.4rem;
+      border-radius: var(--badge-radius);
+      background-color: var(--surface-container-high);
+      color: var(--on-surface-variant);
+    }
+
+    .sidebar-footer {
+      padding: var(--space-md) var(--space-lg);
+      border-top: var(--card-border);
+      background-color: var(--surface-container-low);
+    }
+
+    .user-streak-widget {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: var(--space-sm);
+    }
+
+    .streak-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background-color: var(--primary-container);
+      color: var(--on-primary-container);
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--badge-radius);
+    }
+
+    /* Main Content Area */
+    .main-viewport {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-width: 0;
+      overflow-y: auto;
+    }
+
+    /* Top Utility Bar */
+    .top-bar {
+      background-color: var(--surface-container-low);
+      border-bottom: var(--card-border);
+      padding: var(--space-sm) var(--space-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      position: sticky;
+      top: 0;
+      z-index: 40;
+    }
+
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      flex: 1;
+      min-width: 0;
+    }
+
+    .mobile-menu-toggle {
+      display: none;
+      background: transparent;
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: 0.4rem;
+      color: var(--on-surface);
+      cursor: pointer;
+    }
+
+    .date-selector-wrap {
+      display: flex;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .date-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+      letter-spacing: var(--label-tracking);
+    }
+
+    .date-select {
+      background-color: var(--surface-container);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: 0.35rem 0.75rem;
+      font-family: var(--font-label);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--on-surface);
+      cursor: pointer;
+    }
+
+    .top-bar-right {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+
+    .btn-icon-subtle {
+      background: transparent;
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: 0.4rem 0.6rem;
+      color: var(--on-surface);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .btn-icon-subtle:hover {
+      background-color: var(--surface-container-high);
+    }
+
+    /* Page Container */
+    .content-container {
+      max-width: 1140px;
+      width: 100%;
+      margin: 0 auto;
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xl);
+    }
+
+    /* Defining Treatment 1: Dossier section bar with signal-gold pill */
+    .dossier-bar {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      border-bottom: var(--section-rule);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-md);
+    }
+
+    .dossier-pill {
+      background: var(--primary-container);
+      color: var(--on-primary-container);
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.6875rem;
+      letter-spacing: var(--label-tracking);
+      text-transform: uppercase;
+      padding: 0.1875rem 0.5rem;
+      border-radius: var(--badge-radius);
+    }
+
+    .dossier-meta {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--on-surface-variant);
+      text-transform: uppercase;
+    }
+
+    .dossier-meta-end {
+      margin-left: auto;
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      color: var(--secondary);
+      font-weight: 600;
+    }
+
+    /* Defining Treatment 2: Editorial serif headline with petrol-slate standfirst */
+    .editorial-title {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      letter-spacing: var(--heading-tracking);
+      line-height: 1.12;
+      color: var(--on-surface);
+      font-size: var(--display-size);
+      margin: 0 0 var(--space-xs) 0;
+    }
+
+    .editorial-standfirst {
+      font-family: var(--font-body);
+      font-weight: 600;
+      color: var(--secondary);
+      font-size: var(--subhead-size);
+      line-height: 1.45;
+      margin: 0 0 var(--space-md) 0;
+    }
+
+    /* Defining Treatment 3: Crisp white bordered figure cards on warm stone */
+    .figure-card {
+      background: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .figure-card .value {
+      font-family: var(--font-headline);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums lining-nums;
+      color: var(--on-surface);
+    }
+
+    /* Defining Treatment 4: Numbered index badges (01, 02, 03) */
+    .index-num {
+      font-family: var(--font-label);
+      font-weight: 600;
+      font-size: var(--label-size);
+      color: var(--secondary);
+      background-color: var(--surface-container);
+      padding: 0.15rem 0.35rem;
+      border-radius: var(--badge-radius);
+      display: inline-block;
+    }
+
+    /* Defining Treatment 5: Warm stone sidebar / aside callout */
+    .aside-box {
+      background: var(--surface-container);
+      border-top: var(--section-rule);
+      border-radius: 0 0 var(--rounded-lg) var(--rounded-lg);
+      padding: var(--space-md);
+    }
+
+    /* Dashboard Layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .stat-card {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .stat-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--on-surface-variant);
+      font-size: 0.78rem;
+      font-family: var(--font-label);
+      text-transform: uppercase;
+      letter-spacing: var(--label-tracking);
+    }
+
+    .stat-card-value {
+      font-family: var(--font-headline);
+      font-size: 1.85rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      margin: var(--space-xs) 0 0 0;
+    }
+
+    .stat-card-footer {
+      font-size: 0.75rem;
+      color: var(--on-surface-variant);
+      display: flex;
+      align-items: center;
+      gap: 0.25rem;
+      margin-top: var(--space-xs);
+    }
+
+    .stat-card-footer.positive { color: var(--positive); font-weight: 600; }
+    .stat-card-footer.accent { color: var(--secondary); font-weight: 600; }
+
+    /* Hero Quick Continue Box */
+    .hero-continue-card {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+
+    .action-btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background-color: var(--primary);
+      color: var(--on-primary);
+      border: 1px solid var(--outline);
+      border-radius: var(--rounded);
+      padding: 0.65rem 1.25rem;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: opacity var(--dur-micro) var(--ease-out);
+    }
+
+    .action-btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .action-btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      background-color: var(--surface-container-low);
+      color: var(--on-surface);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: 0.65rem 1.15rem;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .action-btn-secondary:hover {
+      background-color: var(--surface-container-high);
+    }
+
+    /* Tab Panels */
+    .tab-view {
+      display: none;
+    }
+
+    .tab-view.active {
+      display: block;
+      animation: fadeIn var(--dur-short) var(--ease-out);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Paragraph breakdown & interactive words */
+    .editorial-content-flow {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: var(--space-xl);
+    }
+
+    .editorial-reading-pane {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+    }
+
+    .editorial-paragraph {
+      margin-bottom: var(--space-lg);
+      line-height: 1.75;
+      position: relative;
+    }
+
+    .paragraph-marker {
+      font-family: var(--font-label);
+      font-size: 0.72rem;
+      color: var(--secondary);
+      font-weight: 600;
+      margin-right: 0.35rem;
+    }
+
+    .interactive-vocab-term {
+      color: var(--secondary);
+      font-weight: 600;
+      border-bottom: 1.5px dashed var(--secondary);
+      cursor: pointer;
+      padding: 0 0.15rem;
+      border-radius: 2px;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .interactive-vocab-term:hover {
+      background-color: rgba(31, 78, 95, 0.1);
+    }
+
+    .editorial-analysis-pane {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+
+    .analysis-card {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .analysis-card-title {
+      font-family: var(--font-headline);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 0 0 var(--space-sm) 0;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--on-surface);
+    }
+
+    .telugu-box {
+      background-color: var(--surface-container);
+      border-left: 3px solid var(--secondary);
+      padding: var(--space-md);
+      border-radius: 0 var(--rounded) var(--rounded) 0;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .telugu-header {
+      font-family: var(--font-body);
+      font-weight: 700;
+      font-size: 0.8rem;
+      color: var(--secondary);
+      text-transform: uppercase;
+      letter-spacing: var(--label-tracking);
+      margin-bottom: 0.35rem;
+    }
+
+    /* Vocabulary Bank */
+    .vocab-controls {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-md);
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md);
+    }
+
+    .search-input-wrap {
+      flex: 1;
+      min-width: 240px;
+      position: relative;
+    }
+
+    .search-input {
+      width: 100%;
+      background-color: var(--surface-container);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: 0.55rem 0.75rem 0.55rem 2.2rem;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--on-surface);
+    }
+
+    .search-icon-pos {
+      position: absolute;
+      left: 0.75rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--on-surface-variant);
+      pointer-events: none;
+    }
+
+    .vocab-filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+
+    .filter-chip {
+      background-color: var(--surface-container);
+      border: 1px solid transparent;
+      border-radius: var(--rounded);
+      padding: 0.35rem 0.65rem;
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .filter-chip:hover {
+      background-color: var(--surface-container-high);
+      color: var(--on-surface);
+    }
+
+    .filter-chip.active {
+      background-color: var(--primary);
+      color: var(--on-primary);
+    }
+
+    .vocab-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-md);
+    }
+
+    .vocab-card {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+      transition: border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .vocab-card:hover {
+      border-color: var(--outline);
+    }
+
+    .vocab-header-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: var(--space-sm);
+    }
+
+    .vocab-word-title {
+      font-family: var(--font-headline);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    .vocab-phonetic {
+      font-family: var(--font-label);
+      font-size: 0.8rem;
+      color: var(--on-surface-variant);
+      margin-left: 0.5rem;
+    }
+
+    .vocab-pos-badge {
+      font-family: var(--font-label);      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      padding: 0.15rem 0.45rem;
+      border-radius: var(--badge-radius);
+      background-color: var(--surface-container);
+      color: var(--secondary);
+    }
+
+    .vocab-priority-badge {
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: var(--badge-radius);
+      font-weight: 700;
+      text-transform: uppercase;
+    }
+
+    .priority-high {
+      background-color: #fee4e2;
+      color: #b42318;
+    }
+
+    .priority-medium {
+      background-color: #fef0c7;
+      color: #b54708;
+    }
+
+    .vocab-def {
+      font-size: 0.92rem;
+      color: var(--on-surface);
+      margin: 0;
+    }
+
+    .vocab-telugu {
+      font-size: 0.88rem;
+      color: var(--tertiary);
+      font-weight: 500;
+      background-color: var(--surface-container);
+      padding: 0.35rem 0.65rem;
+      border-radius: var(--rounded);
+      border-left: 2.5px solid var(--primary-container);
+    }
+
+    .vocab-memory-illustration {
+      background-color: var(--surface-container);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: 0.6rem 0.85rem;
+      font-size: 0.8rem;
+      color: var(--on-surface-variant);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .vocab-memory-icon {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: var(--rounded);
+      background-color: var(--surface-container-low);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--secondary);
+    }
+
+    .vocab-sentences-block {
+      border-top: 1px dashed var(--outline-variant);
+      padding-top: var(--space-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.82rem;
+    }
+
+    .sentence-item {
+      color: var(--on-surface-variant);
+    }
+
+    .sentence-tag {
+      font-family: var(--font-label);
+      font-size: 0.68rem;
+      font-weight: 600;
+      color: var(--secondary);
+      text-transform: uppercase;
+      margin-right: 0.35rem;
+    }
+
+    .vocab-syn-ant-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      font-size: 0.78rem;
+      padding-top: var(--space-xs);
+    }
+
+    .vocab-action-bar {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: var(--card-border);
+      padding-top: var(--space-sm);
+    }
+
+    .btn-audio-speak {
+      background: transparent;
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: 0.3rem 0.65rem;
+      font-family: var(--font-label);
+      font-size: 0.75rem;
+      color: var(--secondary);
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      cursor: pointer;
+    }
+
+    .btn-audio-speak:hover {
+      background-color: var(--surface-container-high);
+    }
+
+    .btn-master-toggle {
+      background: transparent;
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: 0.3rem 0.65rem;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    .btn-master-toggle.mastered {
+      background-color: var(--positive);
+      color: #ffffff;
+      border-color: var(--positive);
+    }
+
+    /* Flashcard View */
+    .flashcard-stage {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-lg);
+      max-width: 680px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .flashcard-box {
+      width: 100%;
+      min-height: 380px;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+
+    .flashcard-inner {
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+      position: relative;
+      transition: transform 0.5s var(--ease-out);
+      transform-style: preserve-3d;
+      border-radius: var(--rounded-lg);
+    }
+
+    .flashcard-box.flipped .flashcard-inner {
+      transform: rotateY(180deg);
+    }
+
+    .flashcard-face {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      min-height: 380px;
+      backface-visibility: hidden;
+      border-radius: var(--rounded-lg);
+      border: var(--card-border);
+      background-color: var(--surface-container-low);
+      padding: var(--space-xl);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.03);
+    }
+
+    .flashcard-back {
+      transform: rotateY(180deg);
+      background-color: var(--surface-container);
+    }
+
+    .flashcard-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      gap: var(--space-md);
+    }
+
+    /* Pronunciation Lab View */
+    .lab-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-lg);
+    }
+
+    .lab-card {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+    }
+
+    .syllable-chips-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin: var(--space-md) 0;
+    }
+
+    .syllable-chip {
+      background-color: var(--surface-container);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: 0.6rem 1rem;
+      font-family: var(--font-label);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--on-surface);
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out);
+    }
+
+    .syllable-chip:hover {
+      background-color: var(--surface-container-high);
+    }
+
+    .syllable-chip.stressed {
+      border-color: var(--secondary);
+      background-color: rgba(31, 78, 95, 0.12);
+      color: var(--secondary);
+      position: relative;
+    }
+
+    .syllable-chip.stressed::after {
+      content: 'STRESS';
+      position: absolute;
+      top: -0.45rem;
+      right: 0.3rem;
+      font-size: 0.55rem;
+      background-color: var(--secondary);
+      color: #ffffff;
+      padding: 0 0.25rem;
+      border-radius: 2px;
+    }
+
+    /* Quiz Module View */
+    .quiz-container {
+      max-width: 820px;
+      margin: 0 auto;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-lg);
+    }
+
+    .quiz-header-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .quiz-card {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+    }
+
+    .question-prompt {
+      font-family: var(--font-headline);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--on-surface);
+      margin: 0 0 var(--space-lg) 0;
+      line-height: 1.45;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-sm);
+    }
+
+    .quiz-option-btn {
+      width: 100%;
+      text-align: left;
+      background-color: var(--surface-container);
+      border: 1px solid var(--outline-variant);
+      border-radius: var(--rounded);
+      padding: var(--space-md);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--on-surface);
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      cursor: pointer;
+      transition: background-color var(--dur-micro) var(--ease-out), border-color var(--dur-micro) var(--ease-out);
+    }
+
+    .quiz-option-btn:hover:not(:disabled) {
+      background-color: var(--surface-container-high);
+      border-color: var(--outline);
+    }
+
+    .quiz-option-btn.correct {
+      background-color: rgba(43, 110, 82, 0.12);
+      border-color: var(--positive);
+      color: var(--positive);
+      font-weight: 600;
+    }
+
+    .quiz-option-btn.incorrect {
+      background-color: rgba(180, 35, 24, 0.12);
+      border-color: var(--error);
+      color: var(--error);
+      font-weight: 600;
+    }
+
+    .quiz-explanation-box {
+      margin-top: var(--space-lg);
+      padding: var(--space-md);
+      background-color: var(--surface-container);
+      border-left: 3px solid var(--secondary);
+      border-radius: 0 var(--rounded) var(--rounded) 0;
+      font-size: 0.88rem;
+    }
+
+    /* Admin CMS / Update Lesson Tool Modal & View */
+    .cms-container {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      padding: var(--space-xl);
+    }
+
+    .form-group {
+      margin-bottom: var(--space-md);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+
+    .form-label {
+      font-family: var(--font-label);
+      font-size: var(--label-size);
+      font-weight: 600;
+      color: var(--on-surface);
+      text-transform: uppercase;
+      letter-spacing: var(--label-tracking);
+    }
+
+    .form-input, .form-textarea, .form-select {
+      background-color: var(--surface-container);
+      border: var(--card-border);
+      border-radius: var(--rounded);
+      padding: 0.65rem 0.85rem;
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--on-surface);
+    }
+
+    .form-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* Modal Sheet for Vocab Definition */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(23, 24, 26, 0.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: var(--space-md);
+    }
+
+    .modal-overlay.active {
+      display: flex;
+    }
+
+    .modal-sheet {
+      background-color: var(--surface-container-low);
+      border: var(--card-border);
+      border-radius: var(--rounded-lg);
+      width: 100%;
+      max-width: 540px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: var(--space-xl);
+      position: relative;
+      animation: modalSlide var(--dur-short) var(--ease-out);
+    }
+
+    @keyframes modalSlide {
+      from { transform: translateY(16px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: transparent;
+      border: none;
+      color: var(--on-surface-variant);
+      cursor: pointer;
+    }
+
+    /* Responsive Queries */
+    @media (max-width: 1024px) {
+      .dashboard-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .editorial-content-flow { grid-template-columns: 1fr; }
+      .vocab-grid { grid-template-columns: 1fr; }
+      .lab-container { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        position: fixed;
+        left: -290px;
+        transition: left var(--dur-short) var(--ease-out);
+        box-shadow: 2px 0 12px rgba(0,0,0,0.15);
+      }
+      .sidebar.open {
+        left: 0;
+      }
+      .mobile-menu-toggle {
+        display: inline-flex;
+      }
+      .hero-continue-card {
+        grid-template-columns: 1fr;
+        gap: var(--space-md);
+      }
+      .dashboard-grid { grid-template-columns: 1fr; }
+      .content-container { padding: var(--space-md); }
+    }
+
+    /* Print styles */
+    @media print {
+      .sidebar, .top-bar, .action-btn-primary, .action-btn-secondary { display: none !important; }
+      .main-viewport { overflow: visible !important; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-layout">
+  <!-- Desktop & Mobile Sidebar Navigation -->
+  <aside class="sidebar" id="sidebarNav">
+    <div class="sidebar-brand">
+      <div class="brand-meta">
+        <i data-lucide="book-open-check" style="width: 14px; height: 14px; color: var(--secondary);"></i>
+        <span>Bank Exam Dossier</span>
+      </div>
+      <h1 class="brand-title">Daily English</h1>
+      <div class="brand-sub">SBI PO • IBPS PO • RBI Grade B • SSC</div>
+    </div>
+
+    <ul class="nav-list">
+      <li>
+        <button type="button" class="nav-item-btn active" onclick="switchTab('dashboard')">
+          <i data-lucide="layout-dashboard" class="nav-icon" style="width: 18px; height: 18px;"></i>
+          <span>Dashboard</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-item-btn" onclick="switchTab('editorials')">
+          <i data-lucide="newspaper" class="nav-icon" style="width: 18px; height: 18px;"></i>
+          <span>Daily Editorials</span>
+          <span class="nav-badge" id="navEditorialCount">2</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-item-btn" onclick="switchTab('vocab')">
+          <i data-lucide="book-a" class="nav-icon" style="width: 18px; height: 18px;"></i>
+          <span>Vocabulary Bank</span>
+          <span class="nav-badge" id="navVocabCount">70+</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-item-btn" onclick="switchTab('flashcards')">
+          <i data-lucide="layers" class="nav-icon" style="width: 18px; height: 18px;"></i>
+          <span>Flashcard Trainer</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-item-btn" onclick="switchTab('pronunciation')">
+          <i data-lucide="volume-2" class="nav-icon" style="width: 18px; height: 18px;"></i>
+          <span>Pronunciation Lab</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-item-btn" onclick="switchTab('quiz')">
+          <i data-lucide="award" class="nav-icon" style="width: 18px; height: 18px;"></i>
+          <span>Exam Quizzes</span>
+        </button>
+      </li>
+      <li>
+        <button type="button" class="nav-item-btn" onclick="switchTab('cms')">
+          <i data-lucide="plus-circle" class="nav-icon" style="width: 18px; height: 18px;"></i>
+          <span>Add Daily Lesson (CMS)</span>
+        </button>
+      </li>
+    </ul>
+
+    <div class="sidebar-footer">
+      <div class="user-streak-widget">
+        <span style="font-size: 0.78rem; font-weight: 600; color: var(--on-surface-variant);">Learning Streak</span>
+        <span class="streak-pill" id="sidebarStreakBadge">
+          <i data-lucide="flame" style="width: 12px; height: 12px;"></i>
+          <span id="sidebarStreakCount">14</span> Days
+        </span>
+      </div>
+      <div style="font-size: 0.72rem; color: var(--on-surface-variant); font-family: var(--font-label);">
+        Permanent URL • Daily Auto-Save
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Viewport -->
+  <main class="main-viewport">
+    <div style="margin:12px auto;padding:12px 18px;max-width:1100px;background:#f4efe6;border:1px solid #d9cdbb;border-radius:10px;color:#30291f;font:600 14px/1.5 system-ui;">New annotated lesson (6 November 2026): <a href="lessons/2026-11-06-annotated.html" style="color:#6d4b2c;text-decoration:underline;">Open vocabulary, Telugu meanings, flashcards and quizzes</a></div>
+    <!-- Top Utility Bar -->
+    <header class="top-bar">
+      <div class="top-bar-left">
+        <button type="button" class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Toggle navigation menu">
+          <i data-lucide="menu" style="width: 20px; height: 20px;"></i>
+        </button>
+        <div class="date-selector-wrap">
+          <label for="globalDateSelect" class="date-label">Archive Date:</label>
+          <select id="globalDateSelect" class="date-select" onchange="handleDateSelectChange(this.value)">
+            <option value="2026-11-10">10th November 2026 (Today)</option>
+            <option value="2026-11-06">6th November 2026 (COP Analysis)</option>
+            <option value="all">View All Lessons</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="top-bar-right">
+        <!-- Accent toggle: British UK / US -->
+        <button type="button" class="btn-icon-subtle" onclick="toggleAccentMode()" title="Toggle Pronunciation Accent" id="btnAccentMode">
+          <i data-lucide="languages" style="width: 14px; height: 14px;"></i>
+          <span id="accentLabel">UK Accent (en-GB)</span>
+        </button>
+
+        <!-- Speed toggle -->
+        <button type="button" class="btn-icon-subtle" onclick="toggleAudioSpeed()" title="Audio Speed Toggle" id="btnSpeedMode">
+          <i data-lucide="gauge" style="width: 14px; height: 14px;"></i>
+          <span id="speedLabel">1.0x</span>
+        </button>
+
+        <!-- Theme Toggle -->
+        <button type="button" class="btn-icon-subtle" onclick="toggleTheme()" title="Toggle Dark / Light Mode" aria-label="Toggle theme">
+          <i data-lucide="moon" id="themeIcon" style="width: 16px; height: 16px;"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Content Sections Container -->
+    <div class="content-container">
+
+      <!-- ================= 1. DASHBOARD VIEW ================= -->
+      <section id="viewDashboard" class="tab-view active">
+        <!-- Dossier Header -->
+        <div class="dossier-bar">
+          <span class="dossier-pill">Executive Briefing</span>
+          <span class="dossier-meta">Daily Competitive English Dossier</span>
+          <span class="dossier-meta-end" id="dashboardCurrentDate">10th November, 2026</span>
+        </div>
+
+        <h2 class="editorial-title">Aspirant's Daily Command Centre</h2>
+        <p class="editorial-standfirst">Curated editorial breakdowns, high-frequency banking vocabulary, idioms, and exam-mode testing for SBI PO, IBPS PO, RBI Grade B, and SSC CGL.</p>
+
+        <!-- Quick Resume Card -->
+        <div class="hero-continue-card">
+          <div>
+            <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--secondary); text-transform: uppercase; font-weight: 600; margin-bottom: 0.35rem;">
+              Today's Featured Editorial
+            </div>
+            <h3 style="font-family: var(--font-headline); font-size: 1.45rem; font-weight: 600; margin: 0 0 0.5rem 0;" id="heroEditorialTitle">
+              The Cracker Conundrum: Supreme Court Order & North Indian Air Quality
+            </h3>
+            <p style="color: var(--on-surface-variant); font-size: 0.9rem; margin: 0 0 1rem 0;">
+              Examine the critical tension between judicial demands for quantitative causative evidence and the severe public health realities of winter atmospheric inversions.
+            </p>
+            <div style="display: flex; gap: var(--space-sm); flex-wrap: wrap;">
+              <button type="button" class="action-btn-primary" onclick="switchTab('editorials')">
+                <i data-lucide="book-open" style="width: 16px; height: 16px;"></i>
+                <span>Read Full Editorial & Telugu Notes</span>
+              </button>
+              <button type="button" class="action-btn-secondary" onclick="switchTab('quiz')">
+                <i data-lucide="check-circle-2" style="width: 16px; height: 16px;"></i>
+                <span>Take Daily Quiz (10 Questions)</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="aside-box" style="margin: 0;">
+            <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--on-surface-variant); text-transform: uppercase; margin-bottom: 0.5rem;">
+              Exam Relevance Breakdown
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 0.85rem;">
+              <div style="display: flex; justify-content: space-between;">
+                <span>Cloze Test & Vocab:</span>
+                <strong style="color: var(--positive);">Very High</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span>Reading Comprehension:</span>
+                <strong style="color: var(--secondary);">Mains Level</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span>Descriptive Essay Hook:</span>
+                <strong style="color: var(--tertiary);">Environmental Policy</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Metric Stat Cards -->
+        <div class="dashboard-grid">
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span>Total Vocab Bank</span>
+              <i data-lucide="book-text" style="width: 16px; height: 16px; color: var(--secondary);"></i>
+            </div>
+            <div class="stat-card-value" id="statTotalVocab">72</div>
+            <div class="stat-card-footer accent">
+              <span>Includes synonyms & idioms</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span>Words Mastered</span>
+              <i data-lucide="check-check" style="width: 16px; height: 16px; color: var(--positive);"></i>
+            </div>
+            <div class="stat-card-value" id="statMasteredVocab" style="color: var(--positive);">18</div>
+            <div class="stat-card-footer positive">
+              <span id="statMasteredPct">25%</span> of repository retained
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span>Pending Review</span>
+              <i data-lucide="clock" style="width: 16px; height: 16px; color: var(--warning);"></i>
+            </div>
+            <div class="stat-card-value" id="statPendingVocab" style="color: var(--warning);">54</div>
+            <div class="stat-card-footer">
+              <span>Spaced repetition active</span>
+            </div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-card-header">
+              <span>Quiz Accuracy</span>
+              <i data-lucide="target" style="width: 16px; height: 16px; color: var(--secondary);"></i>
+            </div>
+            <div class="stat-card-value" id="statQuizAccuracy">84%</div>
+            <div class="stat-card-footer accent">
+              <span>Based on last 25 attempts</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Weekly Routine & Lesson Quick List -->
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: var(--space-lg);">
+          <div class="figure-card">
+            <div class="dossier-bar" style="margin-bottom: var(--space-sm);">
+              <span class="index-num">01</span>
+              <span class="dossier-meta">Recent Daily Dossiers</span>
+            </div>
+            <div style="display: flex; flex-direction: column; gap: var(--space-sm);" id="dashboardLessonList">
+              <!-- Rendered via JS -->
+            </div>
+          </div>
+
+          <div class="figure-card">
+            <div class="dossier-bar" style="margin-bottom: var(--space-sm);">
+              <span class="index-num">02</span>
+              <span class="dossier-meta">7-Day Study Cadence</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; text-align: center; margin-top: var(--space-md);">
+              <div>
+                <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--on-surface-variant);">WED</div>
+                <div style="width: 28px; height: 28px; border-radius: var(--rounded); background-color: var(--positive); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0.3rem auto; font-size: 0.75rem;">✓</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--on-surface-variant);">THU</div>
+                <div style="width: 28px; height: 28px; border-radius: var(--rounded); background-color: var(--positive); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0.3rem auto; font-size: 0.75rem;">✓</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--on-surface-variant);">FRI</div>
+                <div style="width: 28px; height: 28px; border-radius: var(--rounded); background-color: var(--positive); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0.3rem auto; font-size: 0.75rem;">✓</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--on-surface-variant);">SAT</div>
+                <div style="width: 28px; height: 28px; border-radius: var(--rounded); background-color: var(--positive); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0.3rem auto; font-size: 0.75rem;">✓</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--on-surface-variant);">SUN</div>
+                <div style="width: 28px; height: 28px; border-radius: var(--rounded); background-color: var(--positive); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0.3rem auto; font-size: 0.75rem;">✓</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--on-surface-variant);">MON</div>
+                <div style="width: 28px; height: 28px; border-radius: var(--rounded); background-color: var(--positive); color: #fff; display: flex; align-items: center; justify-content: center; margin: 0.3rem auto; font-size: 0.75rem;">✓</div>
+              </div>
+              <div>
+                <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--secondary); font-weight: 700;">TODAY</div>
+                <div style="width: 28px; height: 28px; border-radius: var(--rounded); background-color: var(--primary-container); color: var(--on-primary-container); font-weight: 700; display: flex; align-items: center; justify-content: center; margin: 0.3rem auto; font-size: 0.75rem;">10</div>
+              </div>
+            </div>
+            <div style="font-size: 0.78rem; color: var(--on-surface-variant); margin-top: var(--space-md); text-align: center;">
+              Keep your streak alive by mastering at least 5 words and taking today's quiz!
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 2. DAILY EDITORIALS VIEW ================= -->
+      <section id="viewEditorials" class="tab-view">
+        <div class="dossier-bar">
+          <span class="dossier-pill">Reading Comprehension</span>
+          <span class="dossier-meta">Paragraph-by-Paragraph Analysis & Telugu Conceptual Breakdown</span>
+          <span class="dossier-meta-end">Click any dotted term for instant definition</span>
+        </div>
+
+        <!-- Editorial Selector Buttons -->
+        <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-md); flex-wrap: wrap;" id="editorialSwitcherTabs">
+          <!-- Rendered via JS -->
+        </div>
+
+        <!-- Active Editorial Container -->
+        <div id="editorialContentDisplay">
+          <!-- Injected dynamically by renderActiveEditorial() -->
+        </div>
+      </section>
+
+      <!-- ================= 3. ADVANCED VOCABULARY BANK VIEW ================= -->
+      <section id="viewVocab" class="tab-view">
+        <div class="dossier-bar">
+          <span class="dossier-pill">Lexicon Archive</span>
+          <span class="dossier-meta">High-Frequency Competitive Exam Repository</span>
+          <span class="dossier-meta-end" id="vocabActiveCountDisplay">Showing 70 Words</span>
+        </div>
+
+        <h2 class="editorial-title">Master Vocabulary & Idioms</h2>
+        <p class="editorial-standfirst">Complete with IPA phonetics, Telugu conceptual meaning, realistic visual memory anchors, and 3-tier contextual examples (Everyday, Editorial, Banking Cloze Test).</p>
+
+        <!-- Controls & Filters -->
+        <div class="vocab-controls">
+          <div class="search-input-wrap">
+            <i data-lucide="search" class="search-icon-pos" style="width: 16px; height: 16px;"></i>
+            <input type="text" id="vocabSearchInput" class="search-input" placeholder="Search by word, synonym, or Telugu meaning..." oninput="handleVocabFilterChange()">
+          </div>
+
+          <div class="vocab-filter-group">
+            <button type="button" class="filter-chip active" onclick="setVocabCategoryFilter('all', this)">All</button>
+            <button type="button" class="filter-chip" onclick="setVocabCategoryFilter('Praise', this)">Praise &amp; Honours</button>
+            <button type="button" class="filter-chip" onclick="setVocabCategoryFilter('Criticism', this)">Criticism</button>
+            <button type="button" class="filter-chip" onclick="setVocabCategoryFilter('Habits', this)">Habits &amp; Quirks</button>
+            <button type="button" class="filter-chip" onclick="setVocabCategoryFilter('Difference', this)">Difference &amp; Equality</button>
+            <button type="button" class="filter-chip" onclick="setVocabCategoryFilter('Conduct', this)">Moral Conduct</button>
+            <button type="button" class="filter-chip" onclick="setVocabCategoryFilter('Idiom', this)">Idioms &amp; Phrases</button>
+            <button type="button" class="filter-chip" onclick="setVocabStatusFilter('pending', this)">Needs Practice</button>
+            <button type="button" class="filter-chip" onclick="setVocabStatusFilter('mastered', this)">Mastered</button>
+          </div>
+        </div>
+
+        <!-- Vocab Grid -->
+        <div class="vocab-grid" id="vocabCardGrid">
+          <!-- Injected dynamically via JS -->        </div>
+      </section>
+
+      <!-- ================= 4. FLASHCARD TRAINER VIEW ================= -->
+      <section id="viewFlashcards" class="tab-view">
+        <div class="dossier-bar">
+          <span class="dossier-pill">Active Recall</span>
+          <span class="dossier-meta">Spaced Repetition & Visual Association</span>
+          <span class="dossier-meta-end" id="flashcardCounter">Card 1 of 40</span>
+        </div>
+
+        <div class="flashcard-stage">
+          <div style="display: flex; gap: var(--space-sm); width: 100%; justify-content: space-between; align-items: center;">
+            <div style="font-family: var(--font-label); font-size: 0.8rem; color: var(--on-surface-variant);">
+              Filter Deck:
+              <select id="flashcardFilterSelect" class="date-select" onchange="initFlashcards(this.value)">
+                <option value="all">All Words (Full Deck)</option>
+                <option value="pending">Only Words Needing Practice</option>
+                <option value="high">High Exam Priority Only</option>
+                <option value="idioms">Idioms &amp; Phrases Only</option>
+              </select>
+            </div>
+            <button type="button" class="btn-icon-subtle" onclick="shuffleFlashcards()">
+              <i data-lucide="shuffle" style="width: 14px; height: 14px;"></i>
+              <span>Shuffle Deck</span>
+            </button>
+          </div>
+
+          <!-- Flip Card Container -->
+          <div class="flashcard-box" id="flashcardBox" onclick="toggleFlashcardFlip()">
+            <div class="flashcard-inner">
+              <!-- FRONT FACE -->
+              <div class="flashcard-face flashcard-front">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span class="vocab-pos-badge" id="fcFrontPos">NOUN</span>
+                  <span class="vocab-priority-badge priority-high" id="fcFrontPriority">HIGH EXAM PRIORITY</span>
+                </div>
+
+                <div style="text-align: center; margin: auto 0;">
+                  <h2 style="font-family: var(--font-headline); font-size: 2.2rem; margin: 0 0 0.5rem 0;" id="fcFrontWord">
+                    Accolades
+                  </h2>
+                  <div style="font-family: var(--font-label); color: var(--on-surface-variant); font-size: 1rem; margin-bottom: 1.5rem;" id="fcFrontPhonetic">
+                    /ˈæk.ə.leɪdz/ • (AK-uh-laydz)
+                  </div>
+
+                  <div class="vocab-memory-illustration" style="max-width: 420px; margin: 0 auto; text-align: left;">
+                    <div class="vocab-memory-icon">
+                      <i data-lucide="sparkles" style="width: 16px; height: 16px;"></i>
+                    </div>
+                    <div id="fcFrontMemoryHook">
+                      Visual Hook: A distinguished scholar on a velvet stage receiving gold laurels amidst thunderous applause.
+                    </div>
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px dashed var(--outline-variant); padding-top: var(--space-md);">
+                  <button type="button" class="btn-audio-speak" onclick="event.stopPropagation(); speakFlashcardWord()">
+                    <i data-lucide="volume-2" style="width: 16px; height: 16px;"></i>
+                    <span>Listen Pronunciation</span>
+                  </button>
+                  <span style="font-family: var(--font-label); font-size: 0.75rem; color: var(--on-surface-variant);">
+                    Tap card to reveal definition &amp; Telugu meaning ↺
+                  </span>
+                </div>
+              </div>
+
+              <!-- BACK FACE -->
+              <div class="flashcard-face flashcard-back">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                  <span class="dossier-pill">Answer Key</span>
+                  <span id="fcBackWordTitle" style="font-family: var(--font-headline); font-weight: 700; font-size: 1.1rem;">Accolades</span>
+                </div>
+
+                <div style="display: flex; flex-direction: column; gap: var(--space-md); margin: auto 0;">
+                  <div>
+                    <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--on-surface-variant); text-transform: uppercase;">
+                      English Definition
+                    </div>
+                    <div style="font-size: 1.05rem; font-weight: 600; color: var(--on-surface);" id="fcBackDef">
+                      Awards, honours, or expressions of praise given to someone for their achievements.
+                    </div>
+                  </div>
+
+                  <div class="telugu-box" style="margin: 0;">
+                    <div class="telugu-header">తెలుగు తాత్పర్యం (Telugu Meaning)</div>
+                    <div style="font-weight: 600; color: var(--secondary);" id="fcBackTelugu">
+                      ప్రశంస, గౌరవం, పురస్కారం (Prashamsa, Gauravam)
+                    </div>
+                  </div>
+
+                  <div style="font-size: 0.85rem; color: var(--on-surface-variant);">
+                    <strong>Synonyms:</strong> <span id="fcBackSynonyms">Eulogies, Plaudits, Commendations</span><br>
+                    <strong>Antonyms:</strong> <span id="fcBackAntonyms">Condemnations, Censures, Reprimands</span>
+                  </div>
+
+                  <div style="font-size: 0.82rem; background-color: var(--surface-container-low); padding: 0.5rem; border-radius: var(--rounded); border-left: 2px solid var(--secondary);">
+                    <strong>Exam Context:</strong> <span id="fcBackExample">The economist received numerous accolades for her seminal contribution to financial stabilization.</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; border-top: var(--card-border); padding-top: var(--space-sm);">
+                  <button type="button" class="btn-master-toggle" id="fcBtnNeedsPractice" onclick="event.stopPropagation(); setFlashcardStatus(false)">
+                    <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
+                    <span>Needs Practice</span>
+                  </button>
+                  <button type="button" class="btn-master-toggle mastered" id="fcBtnMastered" onclick="event.stopPropagation(); setFlashcardStatus(true)">
+                    <i data-lucide="check" style="width: 14px; height: 14px;"></i>
+                    <span>Mark as Mastered</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Stage Navigation Buttons -->
+          <div class="flashcard-controls">
+            <button type="button" class="action-btn-secondary" onclick="prevFlashcard()">
+              <i data-lucide="chevron-left" style="width: 16px; height: 16px;"></i>
+              <span>Previous</span>
+            </button>
+
+            <div style="display: flex; gap: 0.35rem; align-items: center;" id="fcProgressDots">
+              <!-- Dots rendered via JS -->
+            </div>
+
+            <button type="button" class="action-btn-primary" onclick="nextFlashcard()">
+              <span>Next Card</span>
+              <i data-lucide="chevron-right" style="width: 16px; height: 16px;"></i>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 5. PRONUNCIATION LAB VIEW ================= -->
+      <section id="viewPronunciation" class="tab-view">
+        <div class="dossier-bar">
+          <span class="dossier-pill">Phonetics &amp; Prosody</span>
+          <span class="dossier-meta">Interactive Syllable Cadence &amp; British / American Stress Lab</span>
+          <span class="dossier-meta-end">Web Speech Synthesis API</span>
+        </div>
+
+        <h2 class="editorial-title">Oral Fluency &amp; Pronunciation Lab</h2>
+        <p class="editorial-standfirst">Break down polysyllabic vocabulary into precise syllables, identify primary stress peaks, and master interview-ready English for Banking GD/PI.</p>
+
+        <div class="lab-container">
+          <div class="lab-card">
+            <div class="form-group">
+              <label for="labWordSelect" class="form-label">Select Word from 10th / 6th Nov Archive:</label>
+              <select id="labWordSelect" class="form-select" onchange="loadLabWord(this.value)">
+                <!-- Populated via JS -->
+              </select>
+            </div>
+
+            <div style="margin: var(--space-lg) 0;">
+              <span class="index-num">PHONETIC BREAKDOWN</span>
+              <div style="display: flex; align-items: baseline; gap: var(--space-md); margin-top: 0.5rem;">
+                <h3 style="font-family: var(--font-headline); font-size: 1.85rem; margin: 0;" id="labWordTitle">Idiosyncrasy</h3>
+                <span style="font-family: var(--font-label); color: var(--secondary); font-size: 1.05rem;" id="labWordIpa">/ˌɪd.i.əˈsɪŋ.krə.si/</span>
+              </div>
+              <div style="color: var(--on-surface-variant); font-size: 0.85rem; margin-top: 0.25rem;" id="labWordRespelling">
+                Easy Respelling: id-ee-oh-SING-kruh-see
+              </div>
+            </div>
+
+            <div>
+              <div class="form-label">Interactive Syllables (Click individual syllable to hear cadence):</div>
+              <div class="syllable-chips-row" id="labSyllablesContainer">
+                <!-- Injected via JS -->
+              </div>
+            </div>
+
+            <div style="display: flex; gap: var(--space-md); margin-top: var(--space-lg); flex-wrap: wrap;">
+              <button type="button" class="action-btn-primary" onclick="speakCurrentLabWord(1.0)">
+                <i data-lucide="volume-2" style="width: 16px; height: 16px;"></i>
+                <span>Normal Pace (1.0x)</span>
+              </button>
+              <button type="button" class="action-btn-secondary" onclick="speakCurrentLabWord(0.7)">
+                <i data-lucide="turtle" style="width: 16px; height: 16px;"></i>
+                <span>Slow Motion Breakdown (0.7x)</span>
+              </button>
+              <button type="button" class="action-btn-secondary" onclick="repeatLabWordThreeTimes()">
+                <i data-lucide="repeat" style="width: 16px; height: 16px;"></i>
+                <span>Echo 3x Drill</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="lab-card">
+            <div class="dossier-bar" style="margin-bottom: var(--space-sm);">
+              <span class="index-num">02</span>
+              <span class="dossier-meta">Aspirant's Speaking Guidance</span>
+            </div>
+
+            <div class="analysis-card" style="margin-bottom: var(--space-md); background-color: var(--surface-container);">
+              <h4 style="font-family: var(--font-headline); margin: 0 0 0.4rem 0; font-size: 1rem;">Primary Stress Rule</h4>
+              <p style="font-size: 0.85rem; color: var(--on-surface-variant); margin: 0;" id="labStressRuleText">
+                In words ending in -cy, -ty, -phy, or -gy, the primary stress naturally falls on the antepenultimate (third from last) syllable: id-ee-oh-<strong>SING</strong>-kruh-see.
+              </p>
+            </div>
+
+            <div class="telugu-box" style="margin-bottom: var(--space-md);">
+              <div class="telugu-header">ఉచ్చారణ మార్గదర్శకం (Telugu Pronunciation Tip)</div>
+              <div style="font-size: 0.88rem; color: var(--on-surface);" id="labTeluguTip">
+                ఈ పదాన్ని పలికేటప్పుడు 'SING' అనే అక్షరంపై ఎక్కువ బరువు పెట్టి స్పష్టంగా పలకాలి. ఇది ఇంటర్వ్యూలలో మాట్లాడేటప్పుడు మీ ఇంగ్లీష్ పరిజ్ఞానాన్ని ఉన్నతంగా ప్రతిబింబిస్తుంది.
+              </div>
+            </div>
+
+            <div class="aside-box" style="margin: 0;">
+              <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--secondary); text-transform: uppercase; font-weight: 600; margin-bottom: 0.25rem;">
+                SBI PO Group Discussion Drill
+              </div>
+              <div style="font-size: 0.82rem; color: var(--on-surface-variant);" id="labDrillSentence">
+                "Each candidate possessed an unmistakable idiosyncrasy, yet their collective intellect produced seamless analytical harmony."
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 6. EXAM QUIZ MODULE VIEW ================= -->
+      <section id="viewQuiz" class="tab-view">
+        <div class="dossier-bar">
+          <span class="dossier-pill">Banking Exam Simulator</span>
+          <span class="dossier-meta">SBI PO • IBPS PO • RBI Grade B • SSC Pattern</span>
+          <span class="dossier-meta-end" id="quizProgressStatus">Question 1 of 10</span>
+        </div>
+
+        <div class="quiz-container">
+          <div class="quiz-header-bar">
+            <div>
+              <span class="index-num" id="quizTypeBadge">VOCABULARY MCQ</span>
+              <span style="font-family: var(--font-label); font-size: 0.75rem; color: var(--on-surface-variant); margin-left: 0.5rem;" id="quizDifficultyBadge">
+                Difficulty: SBI PO Mains
+              </span>
+            </div>
+            <div style="font-family: var(--font-label); font-size: 0.88rem; font-weight: 700; color: var(--secondary);">
+              Score: <span id="quizScoreCounter">0</span> / <span id="quizTotalQuestionsCounter">10</span>
+            </div>
+          </div>
+
+          <div class="quiz-card" id="quizCardBody">
+            <h3 class="question-prompt" id="quizQuestionPrompt">
+              Loading exam questions...
+            </h3>
+
+            <div class="options-grid" id="quizOptionsContainer">
+              <!-- Rendered via JS -->
+            </div>
+
+            <!-- Detailed Rationale Box -->
+            <div class="quiz-explanation-box" id="quizExplanationBox" style="display: none;">
+              <div style="font-family: var(--font-label); font-size: 0.72rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; margin-bottom: 0.25rem;">
+                Official Rationale &amp; Distractor Analysis:
+              </div>
+              <div id="quizExplanationText" style="line-height: 1.6;"></div>
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--space-xl); border-top: var(--card-border); padding-top: var(--space-md);">
+              <button type="button" class="btn-icon-subtle" onclick="resetActiveQuiz()">
+                <i data-lucide="refresh-cw" style="width: 14px; height: 14px;"></i>
+                <span>Restart Quiz</span>
+              </button>
+              <button type="button" class="action-btn-primary" id="btnNextQuizQuestion" onclick="advanceQuizQuestion()" style="display: none;">
+                <span>Next Question</span>
+                <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ================= 7. ADD DAILY LESSON (CMS) VIEW ================= -->
+      <section id="viewCms" class="tab-view">
+        <div class="dossier-bar">
+          <span class="dossier-pill">Content Management</span>
+          <span class="dossier-meta">Permanent Dynamic Update Engine</span>
+          <span class="dossier-meta-end">Single Permanent URL Architecture</span>
+        </div>
+
+        <h2 class="editorial-title">Add / Import Daily English Lesson</h2>
+        <p class="editorial-standfirst">Paste or create a new daily editorial lesson without rebuilding the application. The system automatically preserves all prior days, links new vocabulary to flashcards and quizzes, and updates local state.</p>
+
+        <div class="cms-container">
+          <div style="display: flex; gap: var(--space-md); margin-bottom: var(--space-lg); border-bottom: var(--card-border); padding-bottom: var(--space-sm);">
+            <button type="button" class="filter-chip active" id="btnCmsModeVisual" onclick="setCmsMode('visual')">Interactive Form</button>
+            <button type="button" class="filter-chip" id="btnCmsModeJson" onclick="setCmsMode('json')">JSON Bulk Import / Export</button>
+            <button type="button" class="btn-icon-subtle" style="margin-left: auto;" onclick="loadSampleLessonIntoCms()">
+              <i data-lucide="wand-2" style="width: 14px; height: 14px;"></i>
+              <span>Load 11th Nov Preview Preset</span>
+            </button>
+          </div>
+
+          <!-- Visual Form Mode -->
+          <form id="cmsVisualForm" onsubmit="handleCmsVisualSubmit(event)">
+            <div style="display: grid; grid-template-columns: 1fr 2fr; gap: var(--space-md);">
+              <div class="form-group">
+                <label for="cmsInputDate" class="form-label">Lesson Date (YYYY-MM-DD)*</label>
+                <input type="date" id="cmsInputDate" class="form-input" required value="2026-11-11">
+              </div>
+              <div class="form-group">
+                <label for="cmsInputTitle" class="form-label">Editorial Title*</label>
+                <input type="text" id="cmsInputTitle" class="form-input" placeholder="e.g. Monetary Policy Stance: Navigating Inflationary Pressures" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cmsInputStandfirst" class="form-label">Standfirst / Subhead</label>
+              <input type="text" id="cmsInputStandfirst" class="form-input" placeholder="Brief summary line highlighting the core economic debate...">
+            </div>
+
+            <div class="form-group">
+              <label for="cmsInputText" class="form-label">Full Editorial Text (Split paragraphs with double newlines)*</label>
+              <textarea id="cmsInputText" class="form-textarea" placeholder="Paste full editorial text here..." required style="min-height: 160px;"></textarea>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-md);">
+              <div class="form-group">
+                <label for="cmsInputTeluguSummary" class="form-label">Telugu Conceptual Summary (తాత్పర్యం)</label>
+                <textarea id="cmsInputTeluguSummary" class="form-textarea" placeholder="తెలుగు సారాంశం మరియు ముఖ్యాంశాలు..."></textarea>
+              </div>
+              <div class="form-group">
+                <label for="cmsInputTone" class="form-label">Author's Tone &amp; Central Argument</label>
+                <textarea id="cmsInputTone" class="form-textarea" placeholder="Tone: Analytical, Pragmatic. Central Argument: ..."></textarea>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="cmsInputVocabRaw" class="form-label">Vocabulary List (Format: Word | POS | English Meaning | Telugu | Synonyms)</label>
+              <textarea id="cmsInputVocabRaw" class="form-textarea" placeholder="Example:
+Rebuke | Verb | To express sharp disapproval | గద్దించు, మందలించు | Reprimand, Admonish
+Prodigal | Adjective | Wastefully extravagant | విచ్చలవిడిగా ఖర్చుచేసే | Profligate, Spendthrift"></textarea>
+            </div>
+
+            <div style="display: flex; gap: var(--space-md); margin-top: var(--space-lg);">
+              <button type="submit" class="action-btn-primary">
+                <i data-lucide="save" style="width: 16px; height: 16px;"></i>
+                <span>Publish Lesson to Portal</span>
+              </button>
+              <button type="button" class="action-btn-secondary" onclick="exportDataBackup()">
+                <i data-lucide="download" style="width: 16px; height: 16px;"></i>
+                <span>Export Current Database (JSON)</span>
+              </button>
+            </div>
+          </form>
+
+          <!-- JSON Bulk Mode -->
+          <div id="cmsJsonMode" style="display: none;">
+            <div class="form-group">
+              <label for="cmsJsonTextarea" class="form-label">Structured Daily Lesson JSON Payload</label>
+              <textarea id="cmsJsonTextarea" class="form-textarea" style="min-height: 320px; font-family: var(--font-label); font-size: 0.8rem;"></textarea>
+            </div>
+            <div style="display: flex; gap: var(--space-md);">
+              <button type="button" class="action-btn-primary" onclick="handleCmsJsonSubmit()">
+                <i data-lucide="upload" style="width: 16px; height: 16px;"></i>
+                <span>Import &amp; Validate JSON</span>
+              </button>
+              <button type="button" class="action-btn-secondary" onclick="loadSampleJsonTemplate()">
+                <i data-lucide="file-code" style="width: 16px; height: 16px;"></i>
+                <span>Reset to Clean JSON Schema</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- ================= MODAL SHEET FOR CLICKABLE WORDS ================= -->
+<div class="modal-overlay" id="vocabModalOverlay" onclick="closeVocabModal()">
+  <div class="modal-sheet" onclick="event.stopPropagation()">
+    <button type="button" class="modal-close-btn" onclick="closeVocabModal()" aria-label="Close modal">
+      <i data-lucide="x" style="width: 20px; height: 20px;"></i>
+    </button>
+    <div id="modalSheetContent">
+      <!-- Populated on word click -->
+    </div>
+  </div>
+</div>
+
+<!-- Required Notebook Shim API tag -->
+<api-shim></api-shim>
+
+<script>
+/**
+ * THE EDITORIAL DOSSIER — PERMANENT DAILY ENGLISH LEARNING APP
+ * SBI PO • IBPS PO • RBI GRADE B • SSC CGL
+ */
+
+// Global Application State
+let appData = {
+  activeDate: '2026-11-10',
+  activeTab: 'dashboard',
+  accent: 'en-GB', // 'en-GB' or 'en-US'
+  audioRate: 1.0,
+  theme: 'light',
+  userMasteredIds: [],
+  userPracticeIds: [],
+  userStreak: 14,
+  quizAttempts: [],
+  customLessons: []
+};
+
+// Seed Data for 10th Nov, 2026 & 6th Nov, 2026
+const DEFAULT_LESSONS = [
+  {
+    id: 'lesson-2026-11-10-1',
+    date: '2026-11-10',
+    title: 'The Cracker Conundrum: Supreme Court Order & Post-Deepavali Air Quality',
+    standfirst: 'North Indian cities confront severe particulate emergencies following judicial relaxations, exposing the flaw of demanding single-source causation during winter atmospheric inversions.',
+    source: 'The Hindu & Editorial Analysis',
+    readingTime: '5 min read',
+    tone: 'Analytical, Critical & Cautionary',
+    difficulty: 'SBI PO Mains / RBI Grade B Level',
+    paragraphs: [
+      `The two Deepavali nights following the Supreme Court's (SC) temporary relaxation of the firecracker ban played out predictably across the Indo-Gangetic plains. The Air Quality Index (AQI) in several north Indian cities — already categorised as 'poor' and 'very poor' in the opening week of November — deteriorated precipitously into the hazardous 'severe' band on Deepavali night. Ground monitoring stations and atmospheric sensors reported particulate matter PM2.5 in Delhi and its peripheral suburbs exceeding an alarming 1,000 micrograms per cubic metre, obliterating safe statutory limits.`,
+      `In this grim context, the Supreme Court's order last week regarding crackers bears urgent revisiting. While explicitly acknowledging that it was aware of the deleterious emissions originating from crackers, the Court has continually insisted upon quantitative, empirical evidence measuring the explicit, isolated health and environmental consequences of Deepavali celebrations. In ambient atmospheric science, however, furnishing direct, isolated causative evidence is virtually impossible due to multivariate interactions.`,
+      `The meteorological dynamics of November decisively exacerbate this dilemma. Slackening wind speeds and post-monsoon atmospheric dryness combine to produce a stubborn temperature inversion layer. This atmospheric ceiling traps latent particulate matter arising from vehicular traffic, industrial complexes, construction dust, and transboundary stubble burning. When millions of firecrackers are simultaneously ignited in an uncongenial, stagnant atmosphere, the cumulative public health catastrophe is immediate. Demanding pinpoint judicial culpability while ignoring cumulative air-basin physics renders millions vulnerable to pulmonary distress.`
+    ],
+    paragraphBreakdown: [
+      {
+        paraNum: '01',
+        title: 'Immediate Empirical Fallout',
+        points: [
+          'Direct outcome of relaxation: AQI plunged from poor into the severe hazardous category.',
+          'PM2.5 breached 1,000 µg/m³ in Delhi NCR, multiplying statutory health ceilings by twenty-fold.'
+        ]
+      },
+      {
+        paraNum: '02',
+        title: 'The Judicial Dilemma vs. Atmospheric Science',
+        points: [
+          'The Supreme Court sought isolated, single-factor causative proof before imposing strict prohibitions.',
+          'Science proves that ambient air pollution is synergistic: isolating one source in an open sky is scientifically unfeasible.'
+        ]
+      },
+      {
+        paraNum: '03',
+        title: 'Meteorological Trapping & Public Health Imperative',
+        points: [
+          'Post-monsoon low winds and thermal inversion form a lid over North India.',
+          'Crackers compound vehicular, industrial, and agricultural stubble emissions, triggering immediate emergencies.'
+        ]
+      }
+    ],
+    centralArgument: 'Demanding isolated, single-source causative proof for firecracker emissions ignores the synergistic physical reality of winter atmospheric inversions and delays urgent public health interventions.',
+    authorTone: 'Critical of legal formalism in ambient environmental matters; strongly objective and evidence-grounded regarding air-basin physics.',
+    beginnerSummary: 'Following Deepavali, air pollution in North India hit dangerous levels. The Supreme Court had relaxed firecracker bans, asking for separate proof that crackers alone caused the smog. However, environmental science shows that smoke from crackers combines with vehicle fumes, crop burning, and still winter air to make the entire atmosphere toxic.',
+    teluguSummary: `దీపావళి బాణాసంచాపై సుప్రీంకోర్టు ఇచ్చిన తాత్కాలిక సడలింపుల తర్వాత ఉత్తర భారత నగరాల్లో వాయు కాలుష్యం (AQI) తీవ్ర ప్రమాదకర స్థాయికి చేరుకుంది. ఢిల్లీ పరిసర ప్రాంతాల్లో PM2.5 కాలుష్య కారకాలు 1,000 మార్కును దాటాయి. బాణాసంచా వల్ల మాత్రమే ఇంత నష్టం జరిగిందని విడిగా నిరూపించే శాస్త్రీయ ఆధారాలు కావాలని కోర్టు కోరడం ఆచరణ సాధ్యం కాదు. శీతాకాలంలో గాలి వేగం తగ్గడం, పంట వ్యర్థాల దహనం, వాహనాల పొగ అన్నీ కలిసి గాలిని స్తంభింపజేస్తాయి. ఈ సంక్లిష్ట వాతావరణంలో బాణాసంచా పొగ కలవడం వల్ల ప్రజారోగ్యం తీవ్రంగా దెబ్బతింటోంది.`,
+    rcQuestions: [
+      {
+        id: 'rc-1',
+        question: 'Which of the following best reflects the central thesis of the editorial regarding the Supreme Court’s requirement?',
+        options: [
+          'The Court was justified because no ban should ever occur without quantitative chemical verification.',
+          'The Court’s insistence on isolated causative evidence disregards the synergistic nature of ambient air pollution.',
+          'Firecrackers are solely responsible for Delhi’s post-monsoon pollution spikes.',
+          'Meteorological conditions improve dramatically when firecracker restrictions are relaxed.'
+        ],
+        correctIndex: 1,
+        explanation: 'Option B accurately highlights that atmospheric pollution functions via cumulative synergy; demanding single-source isolation creates judicial paralysis during real public health emergencies.'
+      },
+      {
+        id: 'rc-2',
+        question: 'Why is "direct, causative evidence" described as nearly impossible to furnish in this context?',
+        options: [
+          'Air quality monitoring sensors in India are technologically incapable of recording PM2.5 above 500.',
+          'The Supreme Court refuses to accept digital air monitoring datasets.',
+          'Multiple pollutant streams (vehicles, stubble, dust) interact simultaneously beneath a thermal inversion layer.',
+          'Wind speeds in November are too high to capture stationary pollution plumes.'
+        ],
+        correctIndex: 2,
+        explanation: 'Option C is supported by paragraph 3: slackening winds, stubble smoke, vehicles, and dryness trap pollutants together under a thermal ceiling, making single-variable isolation unfeasible.'
+      }
+    ]
+  },
+  {
+    id: 'lesson-2026-11-10-2',
+    date: '2026-11-10',
+    title: 'Short Story: The Last Twenty Minutes (Aspirant Resilience & Mastery)',
+    standfirst: 'An inspiring examination prep narrative illustrating how mental clarity, steady pacing, and vocabulary mastery unlock peak performance under intense pressure.',
+    source: 'Daily Class Vocab Short Story',
+    readingTime: '4 min read',
+    tone: 'Inspirational, Reflective & Pedagogical',
+    difficulty: 'SBI PO / IBPS Descriptive Standard',
+    paragraphs: [
+      `At 8:40 one evening, Niharika sat in the staff room of the palatial hotel where she worked nights. Beyond the door, the grand lobby was teeming with wedding guests. She had precisely twenty minutes before her arduous shift began and a bank mock test open on her phone. For weeks, she had spent late evenings fretting over her quantitative scores. Whenever she lost marks on a time-and-work problem, she had written the same glib explanation in her notebook: "Calculation mistake."`,
+      `That night, she scrolled past her raw score and opened a question she had skipped four consecutive times. Two taps filled a reservoir at disparate rates. She had been blindly averaging the time each tap took, and now she paused to ask herself a fundamental question without relying on memorised formulae: If both taps were running simultaneously, how could the tank take longer to fill than it would with the faster tap alone? She drew a tank in the margin, gave the taps zany faces, and inscribed the fraction filled per minute. This time, the mathematics made total sense. At nine, she discreetly slipped the notebook into her pocket and began her shift with quiet composure.`,
+      `Across town, Meenal prepared for her mains examination. One morning, an elderly gentleman brought an old letter written about what it meant to live through a devastating flood and then live with the permanent loss of a home. "We kept the key for years," he read softly. Meenal had struggled to make her descriptive essays pack a punch; that one plain, unadorned sentence taught her more about evocative writing than any manual. When his scraping chair edged her nerves and he explained a soporific had left him drowsy, she resisted the urge to rule the quiet room with an iron fist. Instead, she acknowledged that the heat is on, settled her composure, and discovered that flowering under pressure is quiet and resolute.`
+    ],
+    paragraphBreakdown: [
+      {
+        paraNum: '01',
+        title: 'Overcoming Glib Rationalisations',
+        points: [
+          'Niharika stopped making superficial excuses ("glib explanations") for conceptual hurdles.',
+          'Focus amidst chaos: preparing during the last twenty minutes before an arduous hotel shift.'
+        ]
+      },
+      {
+        paraNum: '02',
+        title: 'Intuitive Conceptual Mastery',
+        points: [
+          'Shifting from blind formula memorisation to first-principles thinking in time-and-work problems.',
+          'Visualizing problems concretely restores confidence.'
+        ]
+      },
+      {
+        paraNum: '03',
+        title: 'Descriptive Power & Flowering Under Pressure',
+        points: [
+          'Exam essays must "pack a punch" through genuine emotional economy rather than verbose clutter.',
+          'Managing emotional composure ("no iron fist") when "the heat is on".'
+        ]
+      }
+    ],
+    centralArgument: 'True competitive exam mastery requires replacing glib self-deceptions with first-principles understanding, emotional composure, and the discipline of flowering under pressure.',
+    authorTone: 'Empathetic, motivating, and rich in practical exam psychology.',
+    beginnerSummary: 'Niharika and Meenal show how banking exam aspirants overcome anxiety. Instead of making glib excuses for quant mistakes, Niharika drew visual diagrams to truly understand work problems. Meenal learned that powerful descriptive writing comes from simple, heartfelt sentences rather than heavy jargon, finding calm focus under stress.',
+    teluguSummary: `ఈ కథనం పోటీ పరీక్షలకు సిద్ధమయ్యే అభ్యర్థుల మనోస్థైర్యాన్ని, ఆత్మవిశ్వాసాన్ని తెలియజేస్తుంది. నిహారిక హోటల్ డ్యూటీకి వెళ్లే ముందు మిగిలిన 20 నిమిషాల్లో కష్టమైన మ్యాథ్స్ లెక్కను బట్టీ పట్టకుండా సరళమైన బొమ్మల ద్వారా అర్థం చేసుకుంది. మీనల్ డిస్క్రిప్టివ్ రైటింగ్‌లో అనవసర పదాలు కాకుండా భావం సూటిగా నాటుకునేలా రాయడం నేర్చుకుంది. ఒత్తిడిలో కోపగించుకోకుండా ప్రశాంతంగా ఆలోచించి విజయం సాధించడమే ("flowering under pressure") దీని సారాంశం.`,
+    rcQuestions: [
+      {
+        id: 'rc-3',
+        question: 'What does Niharika’s rejection of her previous "glib explanation" signify?',
+        options: [
+          'She realized the mock test software had a technical calculation glitch.',
+          'She stopped offering superficial excuses and engaged in genuine conceptual problem-solving.',
+          'She decided to abandon quantitative aptitude in favour of reasoning puzzles.',
+          'She decided to resign from her evening shift job.'
+        ],
+        correctIndex: 1,
+        explanation: 'Option B is correct. "Glib" means speaking easily in an insincere or shallow manner; replacing it with first-principles reasoning represents genuine conceptual engagement.'
+      }
+    ]
+  },
+  {
+    id: 'lesson-2026-11-06-1',
+    date: '2026-11-06',
+    title: 'Implementation COP: Turning Global Climate Pledges into Concrete Action',
+    standfirst: 'Multilateral climate negotiations must pivot from rhetorical declarations to verifiable climate finance and accountable Loss and Damage funding.',
+    source: 'International Climate Briefing',
+    readingTime: '5 min read',
+    tone: 'Pragmatic, Direct & Solution-Oriented',
+    difficulty: 'RBI Grade B / UPSC Standard',
+    paragraphs: [
+      `As delegates convene for the annual climate summit, the international community stands at a familiar crossroads. For decades, global climate discourse has been teeming with lofty declarations, yet the disparity between non-binding commitments and tangible implementation remains striking. This summit has thus been styled as the 'Implementation COP' — a gathering whose sole credibility hinges on operationalising the New Collective Quantified Goal (NCQG) on climate finance.`,
+      `Developing nations, grappling with disproportionate climate vulnerabilities despite their negligible historical emissions, have categorically repudiated the facile promises of private capital substitution. They correctly point out that loans masquerading as climate aid only deepen sovereign debt. Instead, transparent grant-based mechanisms must be devised to ensure vulnerable populations are not left desolate in the wake of intensifying extreme weather events.`,
+      `Equally crucial is establishing rigorous monitoring metrics. Global civil society cannot allow recalcitrant polluters to pull the wool over public eyes with creative carbon-accounting maneuvers. True multilateralism requires an egalitarian ethos where responsibility matches capability, ensuring global climate governance does not remain a mere bone of contention between North and South.`
+    ],
+    paragraphBreakdown: [
+      {
+        paraNum: '01',
+        title: 'The Implementation Imperative',
+        points: [
+          'Transition from empty declarations to verifiable operational targets.',
+          'Focus on the New Collective Quantified Goal (NCQG) for climate finance.'
+        ]
+      },
+      {
+        paraNum: '02',
+        title: 'Equitable Finance vs. Debt Traps',
+        points: [
+          'Developing nations repudiate loan-heavy climate funding schemes.',
+          'Demand for grant-based, predictable capital for Loss and Damage.'
+        ]
+      },
+      {
+        paraNum: '03',
+        title: 'Transparency and Governance',
+        points: [
+          'Eliminating deceitful carbon-accounting and greenwashing.',
+          'Instituting an egalitarian climate framework.'
+        ]
+      }
+    ],
+    centralArgument: 'Climate multilateralism can only regain legitimacy if developing nations receive transparent, grant-based financing rather than debt-inducing loans and deceptive accounting schemes.',
+    authorTone: 'Pragmatic, uncompromising on climate justice, and urgent.',
+    beginnerSummary: 'The climate summit is called an "Implementation COP" because leaders must stop making empty promises and start providing real financial help. Poor countries need direct grants rather than loans that increase their national debt. Rich nations must provide transparent funds without using tricky accounting to hide inaction.',
+    teluguSummary: `ఈ అంతర్జాతీయ వాతావరణ సదస్సు కేవలం తీర్మానాలకే పరిమితం కాకుండా ఆచరణాత్మక కార్యాచరణ వైపు మారాలి. వర్ధమాన దేశాలకు అప్పుల రూపంలో కాకుండా నేరుగా గ్రాంట్ల రూపంలో వాతావరణ నిధులు (NCQG) అందించాలి. ధనిక దేశాలు మోసపూరిత కార్బన్ లెక్కలతో ప్రజలను మభ్యపెట్టకుండా న్యాయమైన, సమానత్వ భావనతో కూడిన ఆర్థిక సహాయాన్ని విడుదల చేయడమే దీని ప్రధాన లక్ష్యం.`,
+    rcQuestions: [
+      {
+        id: 'rc-4',
+        question: 'Why do developing nations repudiate private capital substitution in climate finance?',
+        options: [
+          'Because private enterprises are legally prohibited from attending international summits.',
+          'Because commercial debt structures aggravate existing sovereign debt without guaranteeing climate resilience.',
+          'Because grant-based funding causes domestic hyperinflation.',
+          'Because they prefer bilateral barter trade agreements.'
+        ],
+        correctIndex: 1,
+        explanation: 'Option B reflects paragraph 2, which underscores that loans disguised as climate aid worsen sovereign fiscal distress rather than delivering sustainable reparations.'
+      }
+    ]
+  }
+];
+
+// Comprehensive Vocabulary & Idioms Database (From 10th Nov & 6th Nov sources)
+const VOCAB_DATABASE = [
+  // 1. Praise, Recognition & Achievement
+  {
+    id: 'v-1',
+    word: 'Accolades',
+    phonetic: '/ˈæk.ə.leɪdz/',
+    respelling: 'AK-uh-laydz',
+    syllables: ['Ac', 'co', 'lades'],
+    stressIndex: 0,
+    pos: 'Noun (Plural)',
+    category: 'Praise',
+    priority: 'high',
+    meaning: 'Awards, honours, or formal expressions of praise given to someone for an achievement.',
+    telugu: 'పురస్కారాలు, ప్రశంసలు, సన్మానాలు (Puraskaralu, Prashamsalu)',
+    memoryHook: 'A Nobel laureate bowing on stage as golden medals and floral garlands rain from the balcony.',
+    sentences: {
+      everyday: 'The young chef received accolades from his entire family for the splendid feast.',
+      editorial: 'The prominent economist received numerous accolades for her seminal contribution to stabilizing monetary policy.',
+      cloze: 'Despite winning widespread _______ from international monitors, the administrative commission remained humble in its self-evaluation.'
+    },
+    synonyms: ['Eulogies', 'Plaudits', 'Commendations', 'Compliments'],
+    antonyms: ['Condemnations', 'Censures', 'Reprimands']
+  },
+  {
+    id: 'v-2',
+    word: 'Eulogies',
+    phonetic: '/ˈjuː.lə.dʒiz/',
+    respelling: 'YOO-luh-jeez',
+    syllables: ['Eu', 'lo', 'gies'],
+    stressIndex: 0,
+    pos: 'Noun (Plural)',
+    category: 'Praise',
+    priority: 'high',
+    meaning: 'Speeches or pieces of writing that praise someone highly, especially posthumously.',
+    telugu: 'గుణగానం, సంస్మరణ ప్రశంసలు (Gunagaanam, Prashamsa Bhashanallu)',
+    memoryHook: 'A solemn podium draped in velvet where colleagues recount the courageous deeds of a fallen leader.',
+    sentences: {
+      everyday: 'Colleagues gathered to deliver sincere eulogies celebrating his four decades of dedicated service.',
+      editorial: 'The former president was remembered in glowing eulogies that emphasized his unwavering commitment to national unity.',
+      cloze: 'Rather than indulging in premature _______, the committee focused on measuring verifiable post-crisis deliverables.'
+    },
+    synonyms: ['Panegyrics', 'Plaudits', 'Encomiums', 'Tributes'],
+    antonyms: ['Invectives', 'Diatribes', 'Denunciations']
+  },
+  {
+    id: 'v-3',
+    word: 'Plaudits',
+    phonetic: '/ˈplɔː.dɪts/',
+    respelling: 'PLAW-dits',
+    syllables: ['Plau', 'dits'],
+    stressIndex: 0,
+    pos: 'Noun (Plural)',
+    category: 'Praise',
+    priority: 'medium',
+    meaning: 'Enthusiastic expressions of approval or applause from an audience or critics.',
+    telugu: 'ప్రశంసలు, కరతాళ ధ్వనులు (Prashamsalu, Abhinandanalu)',
+    memoryHook: 'A packed concert hall erupting into a standing ovation as the pianist strikes the final chord.',
+    sentences: {
+      everyday: 'Her breakthrough documentary won immediate plaudits from audiences across the globe.',
+      editorial: 'The central bank’s prompt liquidity infusion earned plaudits from domestic and international bond markets.',
+      cloze: 'The tech conglomerate reaped immense commercial _______ following the launch of its energy-efficient microchip.'
+    },
+    synonyms: ['Acclaim', 'Approbation', 'Kudos', 'Cheers'],
+    antonyms: ['Disapproval', 'Booing', 'Reproof']
+  },
+  {
+    id: 'v-4',
+    word: 'Commendations',
+    phonetic: '/ˌkɒm.ənˈdeɪ.ʃənz/',
+    respelling: 'kom-en-DAY-shuhnz',
+    syllables: ['Com', 'men', 'da', 'tions'],
+    stressIndex: 2,
+    pos: 'Noun (Plural)',
+    category: 'Praise',
+    priority: 'high',
+    meaning: 'Formal or official expressions of praise and approval for exemplary duty.',
+    telugu: 'అధికారిక ప్రశంసా పత్రాలు, మెప్పు (Adhikarika Prashamsalu)',
+    memoryHook: 'A military general pinning a gold ribbon on the chest of a valiant rescue officer.',
+    sentences: {
+      everyday: 'Two police officers received commendations for bravery during the city flood rescue operation.',
+      editorial: 'The vigilance department issued formal commendations to the audit team for exposing the illicit financial cartel.',
+      cloze: 'Special regulatory _______ were conferred upon public sector banks demonstrating superior non-performing asset recovery.'
+    },
+    synonyms: ['Citations', 'Endorsements', 'Testimonials'],
+    antonyms: ['Reprimands', 'Admonitions', 'Sanctions']
+  },
+
+  // 2. Criticism & Disapproval
+  {
+    id: 'v-5',
+    word: 'Censures',
+    phonetic: '/ˈsɛn.ʃərz/',
+    respelling: 'SEN-sherz',
+    syllables: ['Cen', 'sures'],
+    stressIndex: 0,
+    pos: 'Noun / Verb',
+    category: 'Criticism',
+    priority: 'high',
+    meaning: 'Formal and vehement expressions of severe disapproval or official reprimand.',
+    telugu: 'తీవ్ర నిందలు, అధికారిక అభిశంసనలు (Teevra Nindalu, Abhishamsana)',
+    memoryHook: 'A parliamentary gavel slamming down as an ethics motion of reprimand is read into the record.',
+    sentences: {
+      everyday: 'The reckless motorist faced stern censures from the local magistrate.',
+      editorial: 'The corporate board voted to issue severe censures against executives who bypassed audit protocols.',
+      cloze: 'Failure to comply with statutory liquidity ratios attracts immediate regulatory _______ from the Reserve Bank of India.'
+    },
+    synonyms: ['Condemnations', 'Reprimands', 'Strictures', 'Rebukes'],
+    antonyms: ['Accolades', 'Commendations', 'Endorsements']
+  },
+  {
+    id: 'v-6',
+    word: 'Reprimands',
+    phonetic: '/ˈrɛp.rɪ.mɑːndz/',
+    respelling: 'REP-ri-mahndz',
+    syllables: ['Rep', 'ri', 'mands'],
+    stressIndex: 0,
+    pos: 'Noun / Verb',
+    category: 'Criticism',
+    priority: 'medium',
+    meaning: 'Direct, often official or institutional, expressions of sharp criticism for wrongdoing.',
+    telugu: 'మందలింపులు, మందలించుట (Mandalimpulu, Gaddinpu)',
+    memoryHook: 'A branch manager pointing sternly at a ledger error while explaining protocol to a junior associate.',
+    sentences: {
+      everyday: 'The apprentice received a gentle reprimand for arriving late to the workshop.',
+      editorial: 'Regulatory bodies must issue binding reprimands rather than toothless advisories to polluting factories.',
+      cloze: 'Despite repeated administrative _______, the contractor failed to rectify structural defects on the elevated corridor.'
+    },
+    synonyms: ['Admonitions', 'Castigations', 'Chidings'],
+    antonyms: ['Plaudits', 'Compliments', 'Praise']
+  },
+
+  // 3. Habits, Individuality & Convention
+  {
+    id: 'v-7',
+    word: 'Idiosyncrasy',
+    phonetic: '/ˌɪd.i.əˈsɪŋ.krə.si/',
+    respelling: 'id-ee-oh-SING-kruh-see',
+    syllables: ['Id', 'i', 'o', 'syn', 'cra', 'sy'],
+    stressIndex: 3,
+    pos: 'Noun',
+    category: 'Habits',
+    priority: 'high',
+    meaning: 'A distinctive, peculiar habit or characteristic temperament unique to an individual.',
+    telugu: 'విలక్షణమైన వ్యక్తిగత అలవాటు, ప్రత్యేక పోకడ (Vilakshanamaina Alavaatu)',
+    memoryHook: 'An eccentric professor who insists on arranging his fountain pens strictly in order of ink viscosity.',
+    sentences: {
+      everyday: 'His habit of pacing the hallway while thinking deeply is a harmless idiosyncrasy.',
+      editorial: 'Market analysts must separate macroeconomic fundamental trends from the fleeting idiosyncrasy of retail day-traders.',
+      cloze: 'Every branch manager brings a subtle leadership _______ to office workflows without violating compliance standards.'
+    },
+    synonyms: ['Quirk', 'Peculiarity', 'Eccentricity', 'Mannerism'],
+    antonyms: ['Normality', 'Conventionality', 'Uniformity']
+  },
+  {
+    id: 'v-8',
+    word: 'Quirk',
+    phonetic: '/kwɜːk/',
+    respelling: 'KWURK',
+    syllables: ['Quirk'],
+    stressIndex: 0,
+    pos: 'Noun',
+    category: 'Habits',
+    priority: 'medium',
+    meaning: 'A strange or unexpected aspect of a person’s character or behaviour.',
+    telugu: 'విచిత్రమైన అలవాటు, వింత తీరు (Vichitramaina Teeru)',
+    memoryHook: 'A grandfather clock that inexplicably chimes thirteen times whenever rain approaches.',
+    sentences: {
+      everyday: 'Drinking warm tea with a pinch of black salt was her signature morning quirk.',
+      editorial: 'A peculiar quirk in the double-taxation treaty allowed multinational holding entities to route profits untaxed.',
+      cloze: 'Statistical anomalies in seasonal agricultural yields were initially dismissed as an agronomic _______.'
+    },
+    synonyms: ['Foible', 'Idiosyncrasy', 'Oddity', 'Kink'],
+    antonyms: ['Conformity', 'Standard', 'Regularity']
+  },
+
+  // 4. Difference, Similarity & Equality
+  {
+    id: 'v-9',
+    word: 'Dissimilitude',
+    phonetic: '/dɪs.sɪˈmɪl.ɪ.tjuːd/',
+    respelling: 'dih-sim-IL-ih-tood',
+    syllables: ['Dis', 'si', 'mil', 'i', 'tude'],
+    stressIndex: 2,
+    pos: 'Noun',
+    category: 'Difference',
+    priority: 'high',
+    meaning: 'A lack of resemblance or similarity; marked diversity or difference between things.',
+    telugu: 'వ్యత్యాసం, అసమాన రూపం, భిన్నత్వం (Vyathyaasam, Bhinnatvam)',
+    memoryHook: 'Holding a hand-hewn rustic earthenware bowl directly beside a polished titanium space probe casing.',
+    sentences: {
+      everyday: 'The dissimilitude between the identical twins’ artistic temperaments surprised their classmates.',
+      editorial: 'The research monograph underscored the stark dissimilitude between tier-1 urban hospital infrastructure and rural primary health centres.',
+      cloze: 'A profound _______ in credit penetration between metropolitan and agrarian districts persists despite digital banking expansion.'
+    },
+    synonyms: ['Unlikeness', 'Disparity', 'Incongruity', 'Divergence'],
+    antonyms: ['Similarity', 'Resemblance', 'Congruity', 'Parity']
+  },
+  {
+    id: 'v-10',
+    word: 'Disparity',
+    phonetic: '/dɪˈspær.ə.ti/',    respelling: 'dih-SPAR-uh-tee',
+    syllables: ['Dis', 'par', 'i', 'ty'],
+    stressIndex: 1,
+    pos: 'Noun',
+    category: 'Difference',
+    priority: 'high',
+    meaning: 'A noticeable and usually unfair difference, especially in amount, level, or opportunity.',
+    telugu: 'అసమానత, వ్యత్యాసం, అసమతుల్యత (Asamanatha, Teeda)',
+    memoryHook: 'A see-saw with a glittering skyscraper weighed on one side and a dry earthen pot on the other.',
+    sentences: {
+      everyday: 'There remains a pronounced disparity between the prices charged in tourist markets and local bazaars.',
+      editorial: 'Targeted fiscal transfers are essential to mitigate the growing income disparity exacerbated by post-pandemic inflation.',
+      cloze: 'The committee highlighted the widening wage _______ between contract workers and permanent officers within the sector.'
+    },
+    synonyms: ['Inequality', 'Imbalance', 'Disproportion', 'Gap'],
+    antonyms: ['Parity', 'Equality', 'Equivalence']
+  },
+  {
+    id: 'v-11',
+    word: 'Egalitarian',
+    phonetic: '/ɪˌɡæl.ɪˈteə.ri.ən/',
+    respelling: 'ih-gal-ih-TAIR-ee-uhn',
+    syllables: ['E', 'gal', 'i', 'tar', 'i', 'an'],
+    stressIndex: 3,
+    pos: 'Adjective / Noun',
+    category: 'Difference',
+    priority: 'high',
+    meaning: 'Believing in or based on the principle that all people are equal and deserve equal rights.',
+    telugu: 'సమతావాద, అందరికీ సమాన హక్కులు కల్పించే (Samathavada)',
+    memoryHook: 'A round wooden council table where every chair is the exact same height and wood grain.',
+    sentences: {
+      everyday: 'The community garden operates on an egalitarian system where every resident has an equal harvest share.',
+      editorial: 'A truly egalitarian multilateral order cannot grant disproportionate veto leverage to carbon-intensive superpowers.',
+      cloze: 'The cooperative credit society was founded upon strictly _______ bylaws, granting each member a single vote.'
+    },
+    synonyms: ['Democratic', 'Equalitarian', 'Fair-minded', 'Classless'],
+    antonyms: ['Elitist', 'Hierarchical', 'Aristocratic']
+  },
+
+  // 5. Speech, Thought & Sincerity
+  {
+    id: 'v-12',
+    word: 'Glib',
+    phonetic: '/ɡlɪb/',
+    respelling: 'GLIB',
+    syllables: ['Glib'],
+    stressIndex: 0,
+    pos: 'Adjective',
+    category: 'Speech',
+    priority: 'high',
+    meaning: 'Fluent and smooth in speech, but often shallow, facile, or insincere.',
+    telugu: 'పైపై మాటలు మాట్లాడే, మోసపు మాటకారి (Paipai Matalu, Chalaki)',
+    memoryHook: 'A slick street salesman with an oiled smile brushing off serious customer questions with rapid jokes.',
+    sentences: {
+      everyday: 'He offered a glib apology for missing the appointment, but his careless expression revealed his indifference.',
+      editorial: 'The spokesperson gave a glib response to probing inquiries regarding regional water supply contamination.',
+      cloze: 'Aspirants who rely on _______ memorised templates without internalising fundamental grammar struggle in descriptive evaluations.'
+    },
+    synonyms: ['Slick', 'Facile', 'Smooth-talking', 'Superficial'],
+    antonyms: ['Sincere', 'Thoughtful', 'Earnest', 'Profound']
+  },
+  {
+    id: 'v-13',
+    word: 'Facile',
+    phonetic: '/ˈfæs.aɪl/',
+    respelling: 'FAS-eyel',
+    syllables: ['Fac', 'ile'],
+    stressIndex: 0,
+    pos: 'Adjective',
+    category: 'Speech',
+    priority: 'medium',
+    meaning: 'Ignoring the true complexities of an issue; simplistic and shallow.',
+    telugu: 'సులభతరమైన కానీ లోతులేని, తేలికపాటి (Lothuleni, Saralamaina)',
+    memoryHook: 'A cartoon blueprint attempting to solve a multi-lane city traffic jam with a single magic wand.',
+    sentences: {
+      everyday: 'Dismissing the conflict as a simple misunderstanding is a facile conclusion.',
+      editorial: 'Policymakers must eschew facile remedies that overlook structural imbalances in agricultural supply chains.',
+      cloze: 'The research paper was rejected because of its _______ methodology and unsubstantiated macroeconomic claims.'
+    },
+    synonyms: ['Simplistic', 'Superficial', 'Shallow', 'Oversimplified'],
+    antonyms: ['Thorough', 'Profound', 'Complex', 'Meticulous']
+  },
+
+  // 6. Abundance, Growth & Scarcity
+  {
+    id: 'v-14',
+    word: 'Teeming',
+    phonetic: '/ˈtiː.mɪŋ/',
+    respelling: 'TEE-ming',
+    syllables: ['Teem', 'ing'],
+    stressIndex: 0,
+    pos: 'Adjective',
+    category: 'Abundance',
+    priority: 'high',
+    meaning: 'Abounding or filled to overflowing with living things, people, or activities.',
+    telugu: 'కిటకిటలాడే, సమృద్ధిగా ఉన్న, గుంపులు గుంపులుగా ఉన్న (Katakatalade, Samruddhi)',
+    memoryHook: 'A vibrant coral reef illuminated by sunlight, packed with hundreds of shimmering darting fish.',
+    sentences: {
+      everyday: 'The bustling railway station was teeming with holiday commuters carrying luggage.',
+      editorial: 'The coastal marine sanctuary is teeming with endemic biodiversity that faces severe bleaching risks.',
+      cloze: 'By late afternoon, the city’s wholesale credit bazaar was _______ with merchants negotiating commodity futures.'
+    },
+    synonyms: ['Brimming', 'Swarming', 'Abounding', 'Overrun'],
+    antonyms: ['Sparse', 'Desolate', 'Depleted', 'Deserted']
+  },
+  {
+    id: 'v-15',
+    word: 'Burgeoning',
+    phonetic: '/ˈbɜː.dʒən.ɪŋ/',
+    respelling: 'BUR-juh-ning',
+    syllables: ['Bur', 'geon', 'ing'],
+    stressIndex: 0,
+    pos: 'Adjective',
+    category: 'Abundance',
+    priority: 'high',
+    meaning: 'Beginning to grow or increase rapidly; flourishing exponentially.',
+    telugu: 'వేగంగా అభివృద్ధి చెందుతున్న, వికసిస్తున్న (Vekanga Peruguthunna)',
+    memoryHook: 'A green bamboo shoot piercing through stone and growing taller by the hour.',
+    sentences: {
+      everyday: 'Her burgeoning career as a documentary photographer required extensive travel.',
+      editorial: 'India’s burgeoning fintech ecosystem has accelerated financial inclusion across tier-3 towns.',
+      cloze: 'The state’s _______ manufacturing sector demands substantial upgrades to heavy electrical transmission grids.'
+    },
+    synonyms: ['Flourishing', 'Thriving', 'Expanding', 'Sprouting'],
+    antonyms: ['Declining', 'Withering', 'Shrinking', 'Stagnating']
+  },
+  {
+    id: 'v-16',
+    word: 'Desolate',
+    phonetic: '/ˈdɛs.ə.lət/',
+    respelling: 'DES-uh-luht',
+    syllables: ['Des', 'o', 'late'],
+    stressIndex: 0,
+    pos: 'Adjective',
+    category: 'Abundance',
+    priority: 'medium',
+    meaning: 'Bleak, empty, and devoid of inhabitants, warmth, or comfort.',
+    telugu: 'నిర్జనమైన, పాడుబడిన, ఒంటరిగా ఉన్న (Nirjanamaina, Paadubadina)',
+    memoryHook: 'A wind-swept salt flat under an overcast winter sky with not a single footprint in sight.',
+    sentences: {
+      everyday: 'After the gold rush subsided, the once noisy mining camp became a desolate ghost town.',
+      editorial: 'Drought-prone agrarian belts risk becoming desolate unless systematic rainwater catchment is constructed.',
+      cloze: 'Following the relocation of the heavy textile mills, the waterfront warehouse district lay _______ for a decade.'
+    },
+    synonyms: ['Barren', 'Bleak', 'Forsaken', 'Deserted'],
+    antonyms: ['Teeming', 'Populous', 'Lush', 'Inhabited']
+  },
+
+  // 7. Searching, Finding & Recognising
+  {
+    id: 'v-17',
+    word: 'Grope',
+    phonetic: '/ɡrəʊp/',
+    respelling: 'GROHP',
+    syllables: ['Grope'],
+    stressIndex: 0,
+    pos: 'Verb',
+    category: 'Searching',
+    priority: 'high',
+    meaning: 'To feel or search about blindly or clumsily with the hands, especially in darkness.',
+    telugu: 'తడవులాడు, చేతులతో వెతుకు (Tadavulaadu, Chethulatho Vetuku)',
+    memoryHook: 'A hand reaching into a pitch-black cellar groping along a cold brick wall for a flashlight switch.',
+    sentences: {
+      everyday: 'When the electricity suddenly cut out, she had to grope in the dark corridor for her bedside lantern.',
+      editorial: 'Developing nations cannot be left to grope for emergency funding during climate-induced humanitarian crises.',
+      cloze: 'Without comprehensive statistical baselines, policymakers were forced to _______ in the dark on interest rate decisions.'
+    },
+    synonyms: ['Fumble', 'Probe', 'Scrabble', 'Scramble'],
+    antonyms: ['Locate', 'Identify', 'Discover', 'Pinpoint']
+  },
+  {
+    id: 'v-18',
+    word: 'Probe',
+    phonetic: '/prəʊb/',
+    respelling: 'PROHB',
+    syllables: ['Probe'],
+    stressIndex: 0,
+    pos: 'Verb / Noun',
+    category: 'Searching',
+    priority: 'high',
+    meaning: 'To examine, investigate, or explore thoroughly with careful inquiry.',
+    telugu: 'క్షుణ్ణంగా పరిశీలించు, దర్యాప్తు చేయు (Kshunnanga Pariseelinchu)',
+    memoryHook: 'A magnifying glass and a surgical probe inspecting the fine mechanisms inside an antique watch.',
+    sentences: {
+      everyday: 'The journalist probed deeply into the origins of the anonymous financial report.',
+      editorial: 'The parliamentary committee decided to probe the systemic compliance lapses behind the non-performing loan surge.',
+      cloze: 'Forensic auditors were deployed to _______ discrepancies between reported tax assets and real warehouse reserves.'
+    },
+    synonyms: ['Investigate', 'Scrutinise', 'Examine', 'Interrogate'],
+    antonyms: ['Overlook', 'Ignore', 'Disregard']
+  },
+
+  // 8. Harmful Conduct & Moral Character
+  {
+    id: 'v-19',
+    word: 'Nefarious',
+    phonetic: '/nɪˈfeə.ri.əs/',
+    respelling: 'nih-FAIR-ee-us',
+    syllables: ['Ne', 'far', 'i', 'ous'],
+    stressIndex: 1,
+    pos: 'Adjective',
+    category: 'Conduct',
+    priority: 'high',
+    meaning: 'Extremely wicked, infamous, immoral, or criminal in nature.',
+    telugu: 'దుష్ట, దుర్మార్గమైన, హేయమైన (Dushta, Durmargamaina)',
+    memoryHook: 'A shadowy syndicate huddled behind glowing green server screens designing ransomware for hospitals.',
+    sentences: {
+      everyday: 'The detective unravelled the nefarious scheme before any innocent civilians could be harmed.',
+      editorial: 'Cybercriminals devised a nefarious scheme to intercept confidential banking transactions through spoofed authentication gateways.',
+      cloze: 'The regulatory agency uncovered a _______ conspiracy among rogue brokers to artificially inflate small-cap equities.'
+    },
+    synonyms: ['Heinous', 'Diabolical', 'Malevolent', 'Iniquitous'],
+    antonyms: ['Virtuous', 'Benevolent', 'Honourable', 'Righteous']
+  },
+  {
+    id: 'v-20',
+    word: 'Benevolent',
+    phonetic: '/bəˈnɛv.əl.ənt/',
+    respelling: 'buh-NEV-uh-luhnt',
+    syllables: ['Be', 'nev', 'o', 'lent'],
+    stressIndex: 1,
+    pos: 'Adjective',
+    category: 'Conduct',
+    priority: 'medium',
+    meaning: 'Characterised by or expressing goodwill, charitable kindness, and desire to help others.',
+    telugu: 'దయగల, పరోపకార బుద్ధి గల, మంచి మనసున్న (Dayagala, Paropakari)',
+    memoryHook: 'A warm elder pouring clean water and distributing warm woollen cloaks to weary travellers.',
+    sentences: {
+      everyday: 'The school was established through the endowment of a benevolent local philanthropist.',
+      editorial: 'Multilateral development banks must adopt a benevolent yet rigorous posture towards highly indebted island nations.',
+      cloze: 'True social welfare requires structural fiscal empowerment rather than reliance on the capricious whims of _______ donors.'
+    },
+    synonyms: ['Altruistic', 'Magnanimous', 'Kind-hearted', 'Charitable'],
+    antonyms: ['Malevolent', 'Sinister', 'Malicious', 'Spiteful']
+  },
+
+  // 9. Deception, Information & Warnings
+  {
+    id: 'v-21',
+    word: 'Dupe',
+    phonetic: '/djuːp/',
+    respelling: 'DYOOP',
+    syllables: ['Dupe'],
+    stressIndex: 0,
+    pos: 'Verb / Noun',
+    category: 'Conduct',
+    priority: 'high',
+    meaning: 'To deceive, trick, or mislead someone into believing an untruth or doing something foolish.',
+    telugu: 'మోసగించు, బోల్తా కొట్టించు (Mosaginchu, Vanchinchu)',
+    memoryHook: 'A wooden illusion box where a magician pretends a gold sovereign has vanished into thin air.',
+    sentences: {
+      everyday: 'He was duped by a fraudulent email promising an unearned foreign lottery jackpot.',
+      editorial: 'Predatory lending apps deliberately dupe uninformed borrowers by hiding exorbitant daily penalty compounding.',
+      cloze: 'The central bank conducted awareness campaigns to prevent senior citizens from being _______ into sharing one-time passwords.'
+    },
+    synonyms: ['Deceive', 'Hoodwink', 'Beguile', 'Swindle'],
+    antonyms: ['Enlighten', 'Inform', 'Alert', 'Disabuse']
+  },
+
+  // 10. Suitability, Friendliness & Hostility
+  {
+    id: 'v-22',
+    word: 'Uncongenial',
+    phonetic: '/ˌʌn.kənˈdʒiː.ni.əl/',
+    respelling: 'un-kun-JEEN-yuhl',
+    syllables: ['Un', 'con', 'ge', 'ni', 'al'],
+    stressIndex: 2,
+    pos: 'Adjective',
+    category: 'Habits',
+    priority: 'high',
+    meaning: 'Incompatible, unsuitable, or unpleasant to someone’s character, preferences, or wellbeing.',
+    telugu: 'అనుకూలం కాని, సరిపడని, అసమ్మతమైన (Anukoolam Kaani, Saripadani)',
+    memoryHook: 'A delicate tropical fern placed upon an icy, wind-blasted metal roof where it shrivels in the chill.',
+    sentences: {
+      everyday: 'She found the harsh fluorescent lighting and blaring sirens of the factory deeply uncongenial.',
+      editorial: 'The employees struggled to maintain high operational output in an uncongenial and toxic working environment.',
+      cloze: 'Stagnant post-monsoon meteorological conditions proved highly _______ to the dispersion of particulate pollutants.'
+    },
+    synonyms: ['Inhospitable', 'Unsuitable', 'Antipathetic', 'Disagreeable'],
+    antonyms: ['Pleasant', 'Agreeable', 'Amiable', 'Cordial']
+  },
+
+  // 11. Learning, Absorption & Rejection
+  {
+    id: 'v-23',
+    word: 'Imbibe',
+    phonetic: '/ɪmˈbaɪb/',
+    respelling: 'im-BIBE',
+    syllables: ['Im', 'bibe'],
+    stressIndex: 1,
+    pos: 'Verb',
+    category: 'Habits',
+    priority: 'high',
+    meaning: 'To absorb, assimilate, or take in knowledge, ideas, values, or liquids gradually.',
+    telugu: 'గ్రహించు, అంతర్గతం చేసుకొను, జీర్ణించుకొను (Grahinchu, Anthargatham)',
+    memoryHook: 'A dry sponge placed in clean water, swelling steadily as it draws every drop into its fibers.',
+    sentences: {
+      everyday: 'Young students naturally imbibe ethical values and social manners from observant parents.',
+      editorial: 'Judicial magistrates must imbibe the nuanced realities of ambient environmental science when interpreting public nuisance statutes.',
+      cloze: 'New probationary officers are urged to _______ the bank’s stringent ethical guidelines before managing high-value portfolios.'
+    },
+    synonyms: ['Assimilate', 'Internalise', 'Absorb', 'Ingest'],
+    antonyms: ['Discard', 'Repudiate', 'Eschew', 'Reject']
+  },
+  {
+    id: 'v-24',
+    word: 'Repudiate',
+    phonetic: '/rɪˈpjuː.di.eɪt/',
+    respelling: 'rih-PYOO-dee-ayt',
+    syllables: ['Re', 'pu', 'di', 'ate'],
+    stressIndex: 1,
+    pos: 'Verb',
+    category: 'Habits',
+    priority: 'high',
+    meaning: 'To refuse to accept, acknowledge, or associate with; to reject authoritatively.',
+    telugu: 'తిరస్కరించు, నిరాకరించు, ఖండించు (Thiraskarinchu, Nirakarinchu)',
+    memoryHook: 'A diplomat pushing an unsigned, unfair treaty across the mahogany table with an outstretched palm.',
+    sentences: {
+      everyday: 'The author stepped forward to repudiate the erroneous quotes attributed to him online.',
+      editorial: 'Developing states categorically repudiated climate frameworks that shift loss-and-damage responsibilities onto private lenders.',
+      cloze: 'The sovereign government moved swiftly to _______ allegations of unauthorized currency market interventions.'
+    },
+    synonyms: ['Reject', 'Disown', 'Renounce', 'Spurn'],
+    antonyms: ['Embrace', 'Adopt', 'Validate', 'Endorse']
+  },
+
+  // 12. Tools & Usage Clarifications
+  {
+    id: 'v-25',
+    word: 'Devise vs. Device',
+    phonetic: '/dɪˈvaɪz/ vs /dɪˈvaɪs/',
+    respelling: 'dih-VYZE (Verb) vs dih-VYCE (Noun)',
+    syllables: ['De', 'vise'],
+    stressIndex: 1,
+    pos: 'Verb vs Noun Pair',
+    category: 'Grammar',
+    priority: 'high',
+    meaning: 'Devise (Verb): To formulate, invent or plan. Device (Noun): An instrument, tool, or strategic scheme.',
+    telugu: 'Devise = పథకం రూపొందించు (క్రియ); Device = సాధనం, పరికరం (నామవాచకం)',
+    memoryHook: 'An engineer sitting with a pencil to DEVISE a blueprint that powers a handheld electronic DEVICE.',
+    sentences: {
+      everyday: 'We must devise an efficient rota for managing weekend household chores.',
+      editorial: 'The research laboratory designed a sensory device to detect airborne volatile chemicals in real time.',
+      cloze: 'The financial intelligence unit helped _______ an algorithmic _______ to flag suspicious money transfers.'
+    },
+    synonyms: ['Concoct, Contrive (Verb)', 'Apparatus, Gadget (Noun)'],
+    antonyms: ['Demolish, Disorder']
+  },
+  {
+    id: 'v-26',
+    word: 'Soporific',
+    phonetic: '/ˌsɒp.ərˈɪf.ɪk/',
+    respelling: 'sop-er-IF-ik',
+    syllables: ['So', 'po', 'rif', 'ic'],
+    stressIndex: 2,
+    pos: 'Adjective / Noun',
+    category: 'Habits',
+    priority: 'medium',
+    meaning: 'Tending to induce drowsiness or sleep; sleep-inducing.',
+    telugu: 'నిద్రపుచ్చే, మత్తు కలిగించే (Nidrapucche, Matthu Kaliginche)',
+    memoryHook: 'A warm mug of spiced chamomile tea under a crackling fire causing heavy eyelids to close.',
+    sentences: {
+      everyday: 'The rhythmic hum of the ceiling fan had a soporific effect on the warm afternoon room.',
+      editorial: 'The speaker’s monotonous reading of statutory fine print had a distinctly soporific impact on the delegates.',
+      cloze: 'Certain antiallergic compounds carry a pronounced _______ side effect, requiring caution when operating machinery.'
+    },
+    synonyms: ['Sedative', 'Somnolent', 'Slumbrous', 'Narcotic'],
+    antonyms: ['Stimulant', 'Invigorating', 'Energising']
+  },
+
+  // 13. Idioms & Phrasal Verbs
+  {
+    id: 'i-1',
+    word: 'Bone of Contention',
+    phonetic: '/bəʊn əv kənˈtɛn.ʃən/',
+    respelling: 'BOHN uhv kun-TEN-shuhn',
+    syllables: ['Bone of Con-ten-tion'],
+    stressIndex: 0,
+    pos: 'Idiom',
+    category: 'Idiom',
+    priority: 'high',
+    meaning: 'A subject or issue over which there is continuing, bitter disagreement.',
+    telugu: 'వివాదాస్పద అంశం, తగాదాకు కారణం (Vivadaaspada Amsham)',
+    memoryHook: 'Two growling dogs pulling furiously at the opposite ends of a dry bone.',
+    sentences: {
+      everyday: 'The allocation of the corner bedroom became a bone of contention between the roommates.',
+      editorial: 'Climate finance distribution mechanisms remained the chief bone of contention throughout the tense bilateral negotiations.',
+      cloze: 'The unresolved delimitation of agricultural water quotas has long been a major _______ between the riparian states.'
+    },
+    synonyms: ['Apple of discord', 'Point of dispute', 'Stumbling block'],
+    antonyms: ['Point of consensus', 'Olive branch']
+  },
+  {
+    id: 'i-2',
+    word: 'At Loggerheads',
+    phonetic: '/æt ˈlɒɡ.ə.hɛdz/',
+    respelling: 'at LOG-er-hedz',
+    syllables: ['At Log-ger-heads'],
+    stressIndex: 0,
+    pos: 'Idiom',
+    category: 'Idiom',
+    priority: 'high',
+    meaning: 'In violent or stubborn disagreement; clashing directly with someone.',
+    telugu: 'తీవ్ర వైరం, పగ, ఒకరితో ఒకరు తీవ్ర విభేదాలలో ఉండుట (Teevra Vibhedalu)',
+    memoryHook: 'Two heavy wooden bighorn rams locked together by their curved horns on a narrow ledge.',
+    sentences: {
+      everyday: 'The neighbours were at loggerheads over the overgrown oak branches crossing the boundary fence.',
+      editorial: 'The municipal corporation and the pollution board were at loggerheads over who was responsible for ambient sensor maintenance.',
+      cloze: 'The treasury and the oversight committee found themselves _______ over the proposed capital expenditure allocation.'
+    },
+    synonyms: ['At daggers drawn', 'At odds', 'Locking horns', 'Crossing swords'],
+    antonyms: ['In harmony', 'In total agreement', 'In sync']
+  },
+  {
+    id: 'i-3',
+    word: 'Pull the wool over someone\'s eyes',
+    phonetic: '/pʊl ðə wʊl ˈəʊ.vər/',
+    respelling: 'PULL the WOOL over...',
+    syllables: ['Pull the wool'],
+    stressIndex: 0,
+    pos: 'Idiom',
+    category: 'Idiom',
+    priority: 'high',
+    meaning: 'To deceive someone by concealing the true facts or motives.',
+    telugu: 'కళ్లకు గంతలు కట్టు, మోసం చేయు (Kallaku Ganthalu Kattu, Mosam Cheyu)',
+    memoryHook: 'A heavy woollen winter knit pulled down over someone’s eyeglasses, plunging them into total darkness.',
+    sentences: {
+      everyday: 'Don’t try to pull the wool over my eyes; I know you didn’t complete your assignment.',
+      editorial: 'Fossil fuel syndicates attempted to pull the wool over public eyes by classifying offset investments as net-zero reductions.',
+      cloze: 'Independent forensic investigators made it impossible for dishonest promoters to _______ of statutory auditors.'
+    },
+    synonyms: ['Lead someone up the garden path', 'Take for a ride', 'Hoodwink'],
+    antonyms: ['Lay bare the truth', 'Disclose fully', 'Enlighten']
+  },
+  {
+    id: 'i-4',
+    word: 'Flowering under pressure',
+    phonetic: '/ˈflaʊ.ər.ɪŋ ˈʌn.dər ˈprɛʃ.ər/',
+    respelling: 'FLOW-er-ing UN-der PRESH-er',
+    syllables: ['Flow-er-ing un-der pres-sure'],
+    stressIndex: 0,
+    pos: 'Idiom / Phrase',
+    category: 'Idiom',
+    priority: 'high',
+    meaning: 'Performing at one’s highest capability, displaying poise and resilience during stressful crises.',
+    telugu: 'తీవ్ర ఒత్తిడిలోనూ అత్యుత్తమ ప్రతిభను కనబరచుట (Ottidilonu Prathibha Chupatam)',
+    memoryHook: 'A rare mountain lotus blooming radiantly upon a frosty crag amidst a howling gale.',
+    sentences: {
+      everyday: 'Instead of panicking during the overtime shootout, the young goalkeeper showed her talent, flowering under pressure.',
+      editorial: 'Central bank governors demonstrated true mettle, flowering under pressure to stabilise domestic interbank liquidity.',
+      cloze: 'The examination panel specifically looks for candidates who excel at _______ during intense group interviews.'
+    },
+    synonyms: ['Thriving in adversity', 'Rising to the occasion', 'Keeping cool'],
+    antonyms: ['Crumbing under strain', 'Buckling', 'Panicking']
+  },
+  {
+    id: 'i-5',
+    word: 'Pack a punch',
+    phonetic: '/pæk ə pʌntʃ/',
+    respelling: 'PACK a PUNCH',
+    syllables: ['Pack a punch'],
+    stressIndex: 0,
+    pos: 'Idiom',
+    category: 'Idiom',
+    priority: 'medium',
+    meaning: 'To have a strong, immediate, and memorable impact or effect.',
+    telugu: 'తీవ్రమైన ప్రభావాన్ని చూపు, సూటిగా తాకు (Teevramaina Prabhavanni Chupu)',
+    memoryHook: 'A short, perfectly crafted headline printed in bold black ink that stops everyone in their tracks.',
+    sentences: {
+      everyday: 'Despite its compact runtime, the short documentary packs a punch on ocean preservation.',
+      editorial: 'A concise editorial that avoids rhetorical fluff can pack a punch in shifting public environmental consciousness.',
+      cloze: 'The closing paragraph of the monetary policy statement _______ by warning against fiscal complacency.'
+    },
+    synonyms: ['Deliver an impact', 'Hit hard', 'Resonate deeply'],
+    antonyms: ['Fall flat', 'Carry no weight']
+  },
+  {
+    id: 'i-6',
+    word: 'Rule with an iron fist',
+    phonetic: '/ruːl wɪð ən ˈaɪən fɪst/',
+    respelling: 'RULE with an EYE-urn FIST',
+    syllables: ['Rule with an i-ron fist'],
+    stressIndex: 0,
+    pos: 'Idiom',
+    category: 'Idiom',
+    priority: 'medium',
+    meaning: 'To govern, manage, or control people in an exceptionally harsh, authoritarian manner.',
+    telugu: 'ఉక్కుపాదంతో అణచివేయు, కఠినంగా పాలించు (Ukku Padamtho Paalinchu)',
+    memoryHook: 'A gauntleted steel fist crashing onto an oak council table enforcing complete silence.',
+    sentences: {
+      everyday: 'The stern headmaster ruled the academy with an iron fist for thirty uncompromising years.',
+      editorial: 'Modern participatory democracies collapse when administrative leaders seek to rule with an iron fist rather than forge consensus.',
+      cloze: 'Rather than seeking to _______, modern branch leaders prioritize empathetic mentorship and psychological safety.'
+    },
+    synonyms: ['Rule tyrannically', 'Exercise despotic control', 'Heavy-handed governance'],
+    antonyms: ['Laissez-faire leadership', 'Democratic management', 'Gentle guidance']
+  }
+];
+
+// Exam Questions Pool (SBI PO / IBPS PO / RBI Grade B Pattern)
+const QUIZ_QUESTIONS = [
+  {
+    id: 'q-1',
+    type: 'Vocabulary MCQ',
+    difficulty: 'SBI PO Mains',
+    prompt: 'Choose the word that is most nearly OPPOSITE in meaning to the word ACCOLADES as used in competitive examinations.',
+    options: [
+      'Plaudits and eulogies',
+      'Censures and condemnations',
+      'Commendations and laurels',
+      'Idiosyncrasies and quirks'
+    ],
+    correctIndex: 1,
+    explanation: 'Accolades means awards, honours, or expressions of praise for achievement. Its direct antonyms are censures, condemnations, and reprimands (harsh criticisms). Options A and C are synonyms, while D refers to personal quirks.'
+  },
+  {
+    id: 'q-2',
+    type: 'Cloze Test / Contextual Usage',
+    difficulty: 'IBPS PO Prelims',
+    prompt: 'Select the most appropriate pair of words to fill the blanks meaningfully:\n\n"Rather than addressing the water contamination with _______ explanations, the municipal commissioner instituted a thorough _______ into industrial effluent discharge."',
+    options: [
+      'glib ... probe',
+      'facile ... dupe',
+      'sincere ... reprimand',
+      'nefarious ... accolade'
+    ],
+    correctIndex: 0,
+    explanation: '"Glib" means speaking easily in an insincere, shallow way. "Probe" means a deep, thorough investigation. This pair creates the only logical contrast with "rather than addressing... with glib explanations, instituted a thorough probe."'
+  },
+  {
+    id: 'q-3',
+    type: 'Antonym Identification',
+    difficulty: 'RBI Grade B',
+    prompt: 'Identify the word which is most SIMILAR in meaning to TEEMING in the context of the sentence:\n\n"The coastal wetlands are teeming with migratory avian species every November."',
+    options: [
+      'Desolate',
+      'Depleted',
+      'Brimming',
+      'Sparse'
+    ],
+    correctIndex: 2,
+    explanation: '"Teeming" means filled to overflowing or swarming with living things. "Brimming" is an exact synonym. Desolate, depleted, and sparse are direct antonyms denoting emptiness.'
+  },
+  {
+    id: 'q-4',
+    type: 'Idioms & Phrases',
+    difficulty: 'SBI PO Mains',
+    prompt: 'Which idiom best completes the sentence?\n\n"The allocation of the riparian river water quotas has been a _______ between the neighbouring states for over three decades."',
+    options: [
+      'square peg in a round hole',
+      'bone of contention',
+      'feather in the cap',
+      'baker’s dozen'
+    ],
+    correctIndex: 1,
+    explanation: '"Bone of contention" means an issue over which there is persistent, bitter disagreement. "Square peg in a round hole" means a misfit; "feather in the cap" means an achievement.'
+  },
+  {
+    id: 'q-5',
+    type: 'Vocabulary In Context',
+    difficulty: 'SSC CGL Tier II',
+    prompt: 'What is the precise meaning of the word NEFARIOUS as featured in the editorial analysis?',
+    options: [
+      'Extremely wicked, immoral, or criminal in intent',
+      'Generous and willing to help distressed citizens',
+      'Speaking rapidly and without careful consideration',
+      'Unusual in a charming and distinctive manner'
+    ],
+    correctIndex: 0,
+    explanation: '"Nefarious" means extremely wicked, evil, or criminal. Option B defines benevolent; Option C touches upon glibness; Option D describes quirky or idiosyncratic.'
+  },
+  {
+    id: 'q-6',
+    type: 'Error Spotting / Word Confusion',
+    difficulty: 'IBPS PO Mains',
+    prompt: 'Identify the grammatically and contextually correct usage of DEVISE and DEVICE:',
+    options: [
+      'The bank will device a new scheme using an encrypted devise.',
+      'The bank will devise a new scheme using an encrypted device.',
+      'The device of monetary easing was hard to device.',
+      'A smart devise is used to device solutions.'
+    ],
+    correctIndex: 1,
+    explanation: '"Devise" with an "s" is the VERB (to plan or formulate), whereas "Device" with a "c" is the NOUN (an apparatus or instrument). Therefore, "devise a new scheme using an encrypted device" is grammatically flawless.'
+  },
+  {
+    id: 'q-7',
+    type: 'Synonym Matching',
+    difficulty: 'SBI PO Mains',
+    prompt: 'Choose the word that is closest in meaning to DISSIMILITUDE:',
+    options: [
+      'Congruence',
+      'Parity',
+      'Disparity',
+      'Resemblance'
+    ],
+    correctIndex: 2,
+    explanation: '"Dissimilitude" denotes unlikeness, diversity, or disparity. "Congruence", "Parity", and "Resemblance" all signify equality, similarity, or likeness.'
+  },
+  {
+    id: 'q-8',
+    type: 'Idiom Replacement',
+    difficulty: 'RBI Grade B',
+    prompt: 'In the sentence: "The two finance ministries were in strong, intractable disagreement over tariff exemptions," the underlined phrase can be replaced by:',
+    options: [
+      'At loggerheads',
+      'Resting on their laurels',
+      'Full to the brim',
+      'Like two peas in a pod'
+    ],
+    correctIndex: 0,
+    explanation: '"At loggerheads" means in violent or stubborn conflict. "Resting on laurels" means relying on past glory; "Full to the brim" means completely filled.'
+  },
+  {
+    id: 'q-9',
+    type: 'Reading Comprehension Inference',
+    difficulty: 'SBI PO Mains',
+    prompt: 'Based on the 10th Nov editorial on firecrackers, why did ambient PM2.5 levels remain dangerously trapped above 1,000 µg/m³?',
+    options: [
+      'Due to high gale-force winds driving smoke into the bay.',
+      'Slackening winds and atmospheric dryness created a thermal inversion layer trapping multi-source pollutants.',
+      'Monitoring sensors had an electronic malfunction due to celebratory sound waves.',
+      'The Supreme Court ordered all monitoring equipment to be shut down during Deepavali.'
+    ],
+    correctIndex: 1,
+    explanation: 'Paragraph 3 explains that post-monsoon dryness and slackening wind speeds create a meteorological temperature inversion lid that traps particulate matter from vehicles, stubble, and firecrackers.'
+  },
+  {
+    id: 'q-10',
+    type: 'Vocabulary In Context',
+    difficulty: 'IBPS Clerk Mains',
+    prompt: 'Select the option that best illustrates the word UNCONGENIAL:',
+    options: [
+      'An invigorating morning jog in a pine forest.',
+      'A warm, supportive mentorship meeting with a senior manager.',
+      'A cramped, noisome, and hostile office environment that impedes focus.',
+      'A generous festival bonus disbursed ahead of the holidays.'
+    ],
+    correctIndex: 2,
+    explanation: '"Uncongenial" means inhospitable, unpleasant, or unsuitable to someone’s nature or well-being. A cramped, hostile work environment is the definition of uncongenial.'
+  }
+];
+
+// Current State Tracking
+let currentFlashcardIndex = 0;
+let currentFlashcardDeck = [];
+let currentQuizQuestionIndex = 0;
+let quizScore = 0;
+let currentLabWord = null;
+
+// ================= INITIALIZATION & PERSISTENCE =================
+
+window.addEventListener('DOMContentLoaded', async () => {
+  await loadSavedState();
+  initApp();
+
+  // Signal Notebook App Host that rendering is complete
+  if (window.notebookAppApi && typeof window.notebookAppApi.notifyAppReady === 'function') {
+    window.notebookAppApi.notifyAppReady();
+  }
+});
+
+async function loadSavedState() {
+  if (window.notebookAppApi && typeof window.notebookAppApi.getAppState === 'function') {
+    try {
+      const saved = await window.notebookAppApi.getAppState();
+      if (saved && typeof saved === 'object') {
+        if (Array.isArray(saved.userMasteredIds)) appData.userMasteredIds = saved.userMasteredIds;
+        if (Array.isArray(saved.userPracticeIds)) appData.userPracticeIds = saved.userPracticeIds;
+        if (typeof saved.userStreak === 'number') appData.userStreak = saved.userStreak;
+        if (Array.isArray(saved.customLessons)) appData.customLessons = saved.customLessons;
+        if (saved.theme) appData.theme = saved.theme;
+        if (saved.accent) appData.accent = saved.accent;
+        if (saved.audioRate) appData.audioRate = saved.audioRate;
+        if (saved.activeDate) appData.activeDate = saved.activeDate;
+      }
+    } catch (err) {
+      console.warn('Failed to load state from notebookAppApi:', err);
+    }
+  }
+
+  // Apply loaded theme
+  applyTheme(appData.theme);
+}
+
+async function persistState() {
+  if (window.notebookAppApi && typeof window.notebookAppApi.setAppState === 'function') {
+    try {
+      await window.notebookAppApi.setAppState({
+        userMasteredIds: appData.userMasteredIds,
+        userPracticeIds: appData.userPracticeIds,
+        userStreak: appData.userStreak,
+        customLessons: appData.customLessons,
+        theme: appData.theme,
+        accent: appData.accent,
+        audioRate: appData.audioRate,
+        activeDate: appData.activeDate
+      });
+    } catch (err) {
+      console.warn('Failed to persist state:', err);
+    }
+  }
+}
+
+function initApp() {
+  // Update Streak Counters
+  const streakEl = document.getElementById('sidebarStreakCount');
+  if (streakEl) streakEl.textContent = appData.userStreak;
+
+  // Render Lessons into Switchers
+  updateEditorialSwitcherTabs();
+  renderActiveEditorial();
+
+  // Render Vocab
+  renderVocabCards();
+
+  // Init Flashcards
+  initFlashcards('all');
+
+  // Init Pronunciation Lab
+  initPronunciationLab();
+
+  // Init Quiz
+  initQuiz();
+
+  // Update Dashboard stats
+  updateDashboardStats();
+
+  // Lucide icons render
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+}
+
+// ================= NAVIGATION & VIEW SWITCHING =================
+
+function switchTab(tabId) {
+  appData.activeTab = tabId;
+
+  // Update sidebar buttons
+  const navBtns = document.querySelectorAll('.nav-item-btn');
+  navBtns.forEach(btn => {
+    btn.classList.remove('active');
+    const text = btn.textContent.toLowerCase();
+    if (tabId === 'dashboard' && text.includes('dashboard')) btn.classList.add('active');
+    else if (tabId === 'editorials' && text.includes('editorials')) btn.classList.add('active');
+    else if (tabId === 'vocab' && text.includes('vocabulary')) btn.classList.add('active');
+    else if (tabId === 'flashcards' && text.includes('flashcard')) btn.classList.add('active');
+    else if (tabId === 'pronunciation' && text.includes('pronunciation')) btn.classList.add('active');
+    else if (tabId === 'quiz' && text.includes('quiz')) btn.classList.add('active');
+    else if (tabId === 'cms' && text.includes('add daily')) btn.classList.add('active');
+  });
+
+  // Hide all views
+  const views = document.querySelectorAll('.tab-view');
+  views.forEach(v => v.classList.remove('active'));
+
+  // Show target view
+  const target = document.getElementById('view' + tabId.charAt(0).toUpperCase() + tabId.slice(1));
+  if (target) {
+    target.classList.add('active');
+  }
+
+  // Scroll to top
+  const viewport = document.querySelector('.main-viewport');
+  if (viewport) viewport.scrollTop = 0;
+
+  // Close mobile sidebar if open
+  closeMobileSidebar();
+
+  // Refresh icons
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+}
+
+function toggleMobileSidebar() {
+  const sidebar = document.getElementById('sidebarNav');
+  if (sidebar) sidebar.classList.toggle('open');
+}
+
+function closeMobileSidebar() {
+  const sidebar = document.getElementById('sidebarNav');
+  if (sidebar) sidebar.classList.remove('open');
+}
+
+// ================= DATE SELECTION & LESSON MERGING =================
+
+function getAllLessons() {
+  return [...DEFAULT_LESSONS, ...appData.customLessons];
+}
+
+function handleDateSelectChange(val) {
+  appData.activeDate = val;
+  persistState();
+
+  updateEditorialSwitcherTabs();
+  renderActiveEditorial();
+  renderVocabCards();
+  initFlashcards('all');  updateDashboardStats();
+
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+}
+
+// ================= THEME & AUDIO PREFERENCES =================
+
+function toggleTheme() {
+  appData.theme = (appData.theme === 'light') ? 'dark' : 'light';
+  applyTheme(appData.theme);
+  persistState();
+}
+
+function applyTheme(theme) {
+  const html = document.documentElement;
+  html.setAttribute('data-theme', theme);
+  const icon = document.getElementById('themeIcon');
+  if (icon) {
+    icon.setAttribute('data-lucide', theme === 'dark' ? 'sun' : 'moon');
+  }
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+}
+
+function toggleAccentMode() {
+  appData.accent = (appData.accent === 'en-GB') ? 'en-US' : 'en-GB';
+  const label = document.getElementById('accentLabel');
+  if (label) {
+    label.textContent = (appData.accent === 'en-GB') ? 'UK Accent (en-GB)' : 'US Accent (en-US)';
+  }
+  persistState();
+}
+
+function toggleAudioSpeed() {
+  if (appData.audioRate === 1.0) appData.audioRate = 0.75;
+  else if (appData.audioRate === 0.75) appData.audioRate = 0.6;
+  else appData.audioRate = 1.0;
+
+  const label = document.getElementById('speedLabel');
+  if (label) {
+    label.textContent = appData.audioRate + 'x';
+  }
+  persistState();
+}
+
+// Web Speech API Voice Synthesis
+function playSpeech(text, customRate = null) {
+  if (!('speechSynthesis' in window)) {
+    console.warn('Browser does not support Speech Synthesis');
+    return;
+  }
+  window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(text);
+  utterance.lang = appData.accent;
+  utterance.rate = customRate || appData.audioRate;
+
+  // Attempt matching specific voice if voices loaded
+  const voices = window.speechSynthesis.getVoices();
+  if (voices && voices.length > 0) {
+    const isUK = appData.accent === 'en-GB';
+    const voiceMatch = voices.find(v => {
+      if (isUK) return v.lang.includes('GB') || v.name.includes('United Kingdom') || v.name.includes('UK');
+      return v.lang.includes('US') || v.name.includes('United States') || v.name.includes('US');
+    });
+    if (voiceMatch) utterance.voice = voiceMatch;
+  }
+
+  window.speechSynthesis.speak(utterance);
+}
+
+// ================= EDITORIALS MODULE =================
+
+let activeEditorialId = null;
+
+function updateEditorialSwitcherTabs() {
+  const container = document.getElementById('editorialSwitcherTabs');
+  if (!container) return;
+
+  const all = getAllLessons();
+  const filtered = (appData.activeDate === 'all')
+    ? all
+    : all.filter(l => l.date === appData.activeDate);
+
+  const displayList = (filtered.length > 0) ? filtered : all;
+  if (!activeEditorialId || !displayList.some(l => l.id === activeEditorialId)) {
+    activeEditorialId = displayList[0].id;
+  }
+
+  container.innerHTML = displayList.map(l => `
+    <button type="button" class="filter-chip ${l.id === activeEditorialId ? 'active' : ''}" onclick="selectEditorial('${l.id}')">
+      ${l.date}: ${escapeHtml(l.title.substring(0, 32))}...
+    </button>
+  `).join('');
+}
+
+function selectEditorial(id) {
+  activeEditorialId = id;
+  updateEditorialSwitcherTabs();
+  renderActiveEditorial();
+}
+
+function renderActiveEditorial() {
+  const displayEl = document.getElementById('editorialContentDisplay');
+  if (!displayEl) return;
+
+  const all = getAllLessons();
+  const current = all.find(l => l.id === activeEditorialId) || all[0];
+  if (!current) return;
+
+  // Format paragraphs with clickable vocabulary
+  const formattedParagraphsHtml = current.paragraphs.map((p, idx) => {
+    let annotatedText = escapeHtml(p);
+
+    // Replace key vocabulary words with interactive spans
+    VOCAB_DATABASE.forEach(v => {
+      const regex = new RegExp(`\\b(${v.word})\\b`, 'gi');
+      annotatedText = annotatedText.replace(regex, `<span class="interactive-vocab-term" onclick="openVocabModal('${v.id}')">$1</span>`);
+    });
+
+    return `
+      <div class="editorial-paragraph">
+        <span class="paragraph-marker">[¶${idx + 1}]</span>
+        ${annotatedText}
+      </div>
+    `;
+  }).join('');
+
+  // Paragraph Breakdown HTML
+  const breakdownHtml = (current.paragraphBreakdown || []).map(b => `
+    <div style="border-bottom: 1px dashed var(--outline-variant); padding-bottom: var(--space-xs); margin-bottom: var(--space-xs);">
+      <div style="font-family: var(--font-label); font-size: 0.75rem; color: var(--secondary); font-weight: 600;">
+        ${escapeHtml(b.paraNum)} • ${escapeHtml(b.title)}
+      </div>
+      <ul style="margin: 0.25rem 0 0 1rem; padding: 0; font-size: 0.84rem; color: var(--on-surface-variant);">
+        ${b.points.map(pt => `<li>${escapeHtml(pt)}</li>`).join('')}
+      </ul>
+    </div>
+  `).join('');
+
+  // RC Questions HTML
+  const rcHtml = (current.rcQuestions || []).map((rc, qIdx) => `
+    <div class="figure-card" style="margin-top: var(--space-md);">
+      <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--secondary); font-weight: 700; text-transform: uppercase;">
+        Exam RC Question 0${qIdx + 1}
+      </div>
+      <div style="font-weight: 600; font-size: 0.95rem; margin: 0.35rem 0 0.75rem 0;">
+        ${escapeHtml(rc.question)}
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 0.4rem;">
+        ${rc.options.map((opt, oIdx) => `
+          <button type="button" class="quiz-option-btn" onclick="checkRcAnswer(this, ${oIdx}, ${rc.correctIndex}, '${escapeHtml(rc.explanation)}')">
+            <span class="index-num">${String.fromCharCode(65 + oIdx)}</span>
+            <span>${escapeHtml(opt)}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="quiz-explanation-box" style="display: none; margin-top: var(--space-sm);"></div>
+    </div>
+  `).join('');
+
+  displayEl.innerHTML = `
+    <div style="margin-bottom: var(--space-lg);">
+      <div class="dossier-bar" style="margin-bottom: var(--space-xs);">
+        <span class="dossier-pill">${escapeHtml(current.difficulty || 'Mains Exam Level')}</span>
+        <span class="dossier-meta">${escapeHtml(current.date)} • ${escapeHtml(current.source)} • ${escapeHtml(current.readingTime)}</span>
+        <span class="dossier-meta-end">Tone: ${escapeHtml(current.tone)}</span>
+      </div>
+      <h2 class="editorial-title" style="font-size: 1.85rem;">${escapeHtml(current.title)}</h2>
+      <p class="editorial-standfirst">${escapeHtml(current.standfirst)}</p>
+    </div>
+
+    <div class="editorial-content-flow">
+      <!-- Left: Reading pane with annotated words -->
+      <div class="editorial-reading-pane">
+        <div style="font-family: var(--font-label); font-size: 0.75rem; color: var(--on-surface-variant); margin-bottom: var(--space-md); text-transform: uppercase; letter-spacing: var(--label-tracking);">
+          Full Editorial Text (Click highlighted terms for instant definitions)
+        </div>
+        ${formattedParagraphsHtml}
+
+        <!-- Beginner summary -->
+        <div class="aside-box" style="margin-top: var(--space-xl);">
+          <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--secondary); font-weight: 700; text-transform: uppercase; margin-bottom: 0.3rem;">
+            Beginner-Friendly Executive Summary
+          </div>
+          <p style="font-size: 0.9rem; margin: 0; color: var(--on-surface);">
+            ${escapeHtml(current.beginnerSummary)}
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: Detailed Conceptual & Telugu Breakdown -->
+      <div class="editorial-analysis-pane">
+        <!-- Telugu Notes -->
+        <div class="telugu-box">
+          <div class="telugu-header">తెలుగు తాత్పర్యం &amp; సంక్షిప్త విశ్లేషణ (Telugu Breakdown)</div>
+          <p style="margin: 0; color: var(--on-surface);">
+            ${escapeHtml(current.teluguSummary)}
+          </p>
+        </div>
+
+        <!-- Central Argument & Tone -->
+        <div class="analysis-card">
+          <div class="analysis-card-title">
+            <i data-lucide="compass" style="width: 18px; height: 18px; color: var(--secondary);"></i>
+            <span>Central Thesis &amp; Argument</span>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--on-surface-variant); margin: 0 0 0.5rem 0;">
+            ${escapeHtml(current.centralArgument)}
+          </p>
+          <div style="font-family: var(--font-label); font-size: 0.75rem; color: var(--tertiary); font-weight: 600;">
+            Author's Tone: ${escapeHtml(current.authorTone || current.tone)}
+          </div>
+        </div>
+
+        <!-- Paragraph by Paragraph Synthesis -->
+        <div class="analysis-card">
+          <div class="analysis-card-title">
+            <i data-lucide="list-checks" style="width: 18px; height: 18px; color: var(--secondary);"></i>
+            <span>Paragraph-by-Paragraph Breakdown</span>
+          </div>
+          ${breakdownHtml}
+        </div>
+
+        <!-- RC Questions -->
+        <div>
+          <div style="font-family: var(--font-label); font-size: 0.75rem; color: var(--secondary); font-weight: 700; text-transform: uppercase; margin-bottom: 0.25rem;">
+            Exam Reading Comprehension Drill
+          </div>
+          ${rcHtml}
+        </div>
+      </div>
+    </div>
+  `;
+
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+}
+
+function checkRcAnswer(btnEl, selectedIdx, correctIdx, explanation) {
+  const parent = btnEl.closest('.figure-card');
+  if (!parent) return;
+
+  const buttons = parent.querySelectorAll('.quiz-option-btn');
+  buttons.forEach(b => {
+    b.disabled = true;
+    b.classList.remove('correct', 'incorrect');
+  });
+
+  if (selectedIdx === correctIdx) {
+    btnEl.classList.add('correct');
+  } else {
+    btnEl.classList.add('incorrect');
+    if (buttons[correctIdx]) buttons[correctIdx].classList.add('correct');
+  }
+
+  const expBox = parent.querySelector('.quiz-explanation-box');
+  if (expBox) {
+    expBox.style.display = 'block';
+    expBox.innerHTML = `<strong>Explanation:</strong> ${explanation}`;
+  }
+}
+
+// ================= ADVANCED VOCABULARY BANK =================
+
+let vocabCategoryFilter = 'all';
+let vocabStatusFilter = 'all';
+
+function setVocabCategoryFilter(category, btn) {
+  vocabCategoryFilter = category;
+  const parent = btn.closest('.vocab-filter-group');
+  if (parent) {
+    parent.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  renderVocabCards();
+}
+
+function setVocabStatusFilter(status, btn) {
+  vocabStatusFilter = (vocabStatusFilter === status) ? 'all' : status;
+  const parent = btn.closest('.vocab-filter-group');
+  if (parent) {
+    parent.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    if (vocabStatusFilter !== 'all') btn.classList.add('active');
+    else {
+      const allBtn = parent.querySelector('.filter-chip');
+      if (allBtn) allBtn.classList.add('active');
+    }
+  }
+  renderVocabCards();
+}
+
+function handleVocabFilterChange() {
+  renderVocabCards();
+}
+
+function renderVocabCards() {
+  const container = document.getElementById('vocabCardGrid');
+  if (!container) return;
+
+  const searchInput = document.getElementById('vocabSearchInput');
+  const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+  const filtered = VOCAB_DATABASE.filter(item => {
+    // Search query
+    if (query) {
+      const matchWord = item.word.toLowerCase().includes(query);
+      const matchDef = item.meaning.toLowerCase().includes(query);
+      const matchTel = (item.telugu || '').toLowerCase().includes(query);
+      const matchSyn = (item.synonyms || []).some(s => s.toLowerCase().includes(query));
+      if (!matchWord && !matchDef && !matchTel && !matchSyn) return false;
+    }
+
+    // Category filter
+    if (vocabCategoryFilter !== 'all') {
+      if (vocabCategoryFilter === 'Idiom') {
+        if (item.category !== 'Idiom') return false;
+      } else if (!item.category.toLowerCase().includes(vocabCategoryFilter.toLowerCase())) {
+        return false;
+      }
+    }
+
+    // Status filter
+    const isMastered = appData.userMasteredIds.includes(item.id);
+    if (vocabStatusFilter === 'mastered' && !isMastered) return false;
+    if (vocabStatusFilter === 'pending' && isMastered) return false;
+
+    return true;
+  });
+
+  const countDisplay = document.getElementById('vocabActiveCountDisplay');
+  if (countDisplay) {
+    countDisplay.textContent = `Showing ${filtered.length} of ${VOCAB_DATABASE.length} Words`;
+  }
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div style="grid-column: 1 / -1; text-align: center; padding: var(--space-2xl); background-color: var(--surface-container-low); border: var(--card-border); border-radius: var(--rounded-lg);">
+        <i data-lucide="search-x" style="width: 32px; height: 32px; color: var(--on-surface-variant); margin-bottom: 0.5rem;"></i>
+        <h3 style="font-family: var(--font-headline); margin: 0 0 0.5rem 0;">No matching vocabulary terms</h3>
+        <p style="color: var(--on-surface-variant); font-size: 0.88rem; margin: 0 0 1rem 0;">Try broadening your search query or reset active filters.</p>
+        <button type="button" class="action-btn-secondary" onclick="resetVocabFilters()">Reset All Filters</button>
+      </div>
+    `;
+    if (window.lucide && typeof window.lucide.createIcons === 'function') {
+      window.lucide.createIcons();
+    }
+    return;
+  }
+
+  container.innerHTML = filtered.map(item => {
+    const isMastered = appData.userMasteredIds.includes(item.id);
+    const priorityClass = (item.priority === 'high') ? 'priority-high' : 'priority-medium';
+
+    return `
+      <div class="vocab-card" id="card-${item.id}">
+        <div class="vocab-header-row">
+          <div>
+            <span class="vocab-word-title">${escapeHtml(item.word)}</span>
+            <span class="vocab-phonetic">${escapeHtml(item.phonetic || '')}</span>
+          </div>
+          <div style="display: flex; gap: var(--space-xs);">
+            <span class="vocab-pos-badge">${escapeHtml(item.pos)}</span>
+            <span class="vocab-priority-badge ${priorityClass}">${escapeHtml((item.priority || 'high').toUpperCase())}</span>
+          </div>
+        </div>
+
+        <p class="vocab-def">${escapeHtml(item.meaning)}</p>
+
+        <div class="vocab-telugu">
+          <strong>తెలుగు:</strong> ${escapeHtml(item.telugu)}
+        </div>
+
+        <div class="vocab-memory-illustration">
+          <div class="vocab-memory-icon">
+            <i data-lucide="eye" style="width: 14px; height: 14px;"></i>
+          </div>
+          <div>${escapeHtml(item.memoryHook || 'Visual mental anchor for exam recall')}</div>
+        </div>
+
+        <!-- 3 Contextual sentences -->
+        <div class="vocab-sentences-block">
+          <div class="sentence-item">
+            <span class="sentence-tag">Everyday:</span> ${escapeHtml(item.sentences.everyday)}
+          </div>
+          <div class="sentence-item">
+            <span class="sentence-tag">Editorial:</span> ${escapeHtml(item.sentences.editorial)}
+          </div>
+          <div class="sentence-item">
+            <span class="sentence-tag">Cloze Test:</span> ${escapeHtml(item.sentences.cloze)}
+          </div>
+        </div>
+
+        <!-- Synonyms & Antonyms -->
+        <div class="vocab-syn-ant-row">
+          <div>
+            <strong style="color: var(--secondary);">Synonyms:</strong>
+            ${(item.synonyms || []).map(s => `<span class="index-num" style="font-size: 0.68rem; margin: 0 0.15rem;">${escapeHtml(s)}</span>`).join('')}
+          </div>
+          ${item.antonyms && item.antonyms.length > 0 ? `
+            <div>
+              <strong style="color: var(--error);">Antonyms:</strong>
+              ${item.antonyms.map(a => `<span class="index-num" style="font-size: 0.68rem; margin: 0 0.15rem; color: var(--error);">${escapeHtml(a)}</span>`).join('')}
+            </div>
+          ` : ''}
+        </div>
+
+        <!-- Action bar -->
+        <div class="vocab-action-bar">
+          <button type="button" class="btn-audio-speak" onclick="playSpeech('${escapeHtml(item.word)}')">
+            <i data-lucide="volume-2" style="width: 14px; height: 14px;"></i>
+            <span>Speak</span>
+          </button>
+
+          <button type="button" class="btn-master-toggle ${isMastered ? 'mastered' : ''}" onclick="toggleWordMastered('${item.id}')">
+            <i data-lucide="${isMastered ? 'check-check' : 'circle'}" style="width: 14px; height: 14px;"></i>
+            <span>${isMastered ? 'Mastered ✓' : 'Mark Mastered'}</span>
+          </button>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+}
+
+function resetVocabFilters() {
+  vocabCategoryFilter = 'all';
+  vocabStatusFilter = 'all';
+  const searchInput = document.getElementById('vocabSearchInput');
+  if (searchInput) searchInput.value = '';
+  renderVocabCards();
+}
+
+function toggleWordMastered(id) {
+  const index = appData.userMasteredIds.indexOf(id);
+  if (index > -1) {
+    appData.userMasteredIds.splice(index, 1);
+  } else {
+    appData.userMasteredIds.push(id);
+    // remove from practice if present
+    const pIdx = appData.userPracticeIds.indexOf(id);
+    if (pIdx > -1) appData.userPracticeIds.splice(pIdx, 1);
+  }
+
+  persistState();
+  renderVocabCards();
+  updateDashboardStats();
+}
+
+// ================= INTERACTIVE WORD MODAL =================
+
+function openVocabModal(vocabId) {
+  const item = VOCAB_DATABASE.find(v => v.id === vocabId);
+  if (!item) return;
+
+  const overlay = document.getElementById('vocabModalOverlay');
+  const sheet = document.getElementById('modalSheetContent');
+  if (!overlay || !sheet) return;
+
+  sheet.innerHTML = `
+    <div style="display: flex; align-items: baseline; gap: var(--space-sm); margin-bottom: var(--space-xs);">
+      <h3 style="font-family: var(--font-headline); font-size: 1.65rem; margin: 0;">${escapeHtml(item.word)}</h3>
+      <span style="font-family: var(--font-label); color: var(--secondary);">${escapeHtml(item.phonetic || '')}</span>
+      <span class="vocab-pos-badge" style="margin-left: auto;">${escapeHtml(item.pos)}</span>
+    </div>
+
+    <div style="font-size: 0.8rem; color: var(--on-surface-variant); margin-bottom: var(--space-md); font-family: var(--font-label);">
+      Phonetic Guide: ${escapeHtml(item.respelling || '')}
+    </div>
+
+    <p style="font-size: 1rem; color: var(--on-surface); line-height: 1.5; margin: 0 0 var(--space-md) 0;">
+      ${escapeHtml(item.meaning)}
+    </p>
+
+    <div class="telugu-box" style="margin-bottom: var(--space-md);">
+      <div class="telugu-header">తెలుగు అర్థం (Telugu Translation)</div>
+      <div style="font-weight: 600; color: var(--on-surface);">${escapeHtml(item.telugu)}</div>
+    </div>
+
+    <div class="vocab-memory-illustration" style="margin-bottom: var(--space-md);">
+      <div class="vocab-memory-icon">
+        <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
+      </div>
+      <div><strong>Visual Memory Hook:</strong> ${escapeHtml(item.memoryHook || '')}</div>
+    </div>
+
+    <div style="background-color: var(--surface-container); padding: var(--space-sm) var(--space-md); border-radius: var(--rounded); margin-bottom: var(--space-md); font-size: 0.85rem;">
+      <div style="font-weight: 600; color: var(--secondary); margin-bottom: 0.25rem;">Editorial Context:</div>
+      <div style="font-style: italic;">"${escapeHtml(item.sentences.editorial)}"</div>
+    </div>
+
+    <div style="display: flex; gap: var(--space-md); align-items: center; justify-content: space-between;">
+      <button type="button" class="action-btn-primary" onclick="playSpeech('${escapeHtml(item.word)}')">
+        <i data-lucide="volume-2" style="width: 16px; height: 16px;"></i>
+        <span>Listen Pronunciation</span>
+      </button>
+
+      <button type="button" class="btn-master-toggle ${appData.userMasteredIds.includes(item.id) ? 'mastered' : ''}" onclick="toggleWordMastered('${item.id}'); closeVocabModal();">
+        <i data-lucide="${appData.userMasteredIds.includes(item.id) ? 'check-check' : 'circle'}" style="width: 14px; height: 14px;"></i>
+        <span>${appData.userMasteredIds.includes(item.id) ? 'Mastered ✓' : 'Mark Mastered'}</span>
+      </button>
+    </div>
+  `;
+
+  overlay.classList.add('active');
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+}
+
+function closeVocabModal() {
+  const overlay = document.getElementById('vocabModalOverlay');
+  if (overlay) overlay.classList.remove('active');
+}
+
+// ================= FLASHCARD SYSTEM =================
+
+function initFlashcards(filterType = 'all') {
+  let deck = [...VOCAB_DATABASE];
+
+  if (filterType === 'pending') {
+    deck = deck.filter(w => !appData.userMasteredIds.includes(w.id));
+  } else if (filterType === 'high') {
+    deck = deck.filter(w => w.priority === 'high');
+  } else if (filterType === 'idioms') {
+    deck = deck.filter(w => w.category === 'Idiom');
+  }
+
+  currentFlashcardDeck = (deck.length > 0) ? deck : [...VOCAB_DATABASE];
+  currentFlashcardIndex = 0;
+  displayCurrentFlashcard();
+}
+
+function displayCurrentFlashcard() {
+  const box = document.getElementById('flashcardBox');
+  if (box) box.classList.remove('flipped');
+
+  if (currentFlashcardDeck.length === 0) return;
+  const item = currentFlashcardDeck[currentFlashcardIndex];
+  if (!item) return;
+
+  // Counter
+  const counter = document.getElementById('flashcardCounter');
+  if (counter) {
+    counter.textContent = `Card ${currentFlashcardIndex + 1} of ${currentFlashcardDeck.length}`;
+  }
+
+  // Front elements
+  const frontPos = document.getElementById('fcFrontPos');
+  const frontPriority = document.getElementById('fcFrontPriority');
+  const frontWord = document.getElementById('fcFrontWord');
+  const frontPhonetic = document.getElementById('fcFrontPhonetic');
+  const frontMemoryHook = document.getElementById('fcFrontMemoryHook');
+
+  if (frontPos) frontPos.textContent = item.pos || 'VOCABULARY';
+  if (frontPriority) {
+    frontPriority.textContent = `${(item.priority || 'HIGH').toUpperCase()} EXAM PRIORITY`;
+    frontPriority.className = `vocab-priority-badge ${(item.priority === 'high') ? 'priority-high' : 'priority-medium'}`;
+  }
+  if (frontWord) frontWord.textContent = item.word;
+  if (frontPhonetic) frontPhonetic.textContent = `${item.phonetic || ''} • (${item.respelling || ''})`;
+  if (frontMemoryHook) frontMemoryHook.textContent = `Visual Hook: ${item.memoryHook || 'Mental memory scene'}`;
+
+  // Back elements
+  const backWordTitle = document.getElementById('fcBackWordTitle');
+  const backDef = document.getElementById('fcBackDef');
+  const backTelugu = document.getElementById('fcBackTelugu');
+  const backSynonyms = document.getElementById('fcBackSynonyms');
+  const backAntonyms = document.getElementById('fcBackAntonyms');
+  const backExample = document.getElementById('fcBackExample');
+
+  if (backWordTitle) backWordTitle.textContent = item.word;
+  if (backDef) backDef.textContent = item.meaning;
+  if (backTelugu) backTelugu.textContent = item.telugu;
+  if (backSynonyms) backSynonyms.textContent = (item.synonyms || []).join(', ') || 'N/A';
+  if (backAntonyms) backAntonyms.textContent = (item.antonyms || []).join(', ') || 'N/A';
+  if (backExample) backExample.textContent = item.sentences.editorial || item.sentences.everyday;
+
+  // Render dots
+  const dotsContainer = document.getElementById('fcProgressDots');
+  if (dotsContainer) {
+    const total = Math.min(currentFlashcardDeck.length, 12);
+    let html = '';
+    for (let i = 0; i < total; i++) {
+      const active = (i === currentFlashcardIndex % total) ? 'background-color: var(--secondary);' : 'background-color: var(--surface-container-high);';
+      html += `<div style="width: 8px; height: 8px; border-radius: 50%; ${active}"></div>`;
+    }
+    dotsContainer.innerHTML = html;
+  }
+}
+
+function toggleFlashcardFlip() {
+  const box = document.getElementById('flashcardBox');
+  if (box) box.classList.toggle('flipped');
+}
+
+function nextFlashcard() {
+  if (currentFlashcardIndex < currentFlashcardDeck.length - 1) {
+    currentFlashcardIndex++;
+  } else {
+    currentFlashcardIndex = 0;
+  }
+  displayCurrentFlashcard();
+}
+
+function prevFlashcard() {
+  if (currentFlashcardIndex > 0) {
+    currentFlashcardIndex--;
+  } else {
+    currentFlashcardIndex = currentFlashcardDeck.length - 1;
+  }
+  displayCurrentFlashcard();
+}
+
+function shuffleFlashcards() {
+  for (let i = currentFlashcardDeck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [currentFlashcardDeck[i], currentFlashcardDeck[j]] = [currentFlashcardDeck[j], currentFlashcardDeck[i]];
+  }
+  currentFlashcardIndex = 0;
+  displayCurrentFlashcard();
+}
+
+function setFlashcardStatus(mastered) {
+  const item = currentFlashcardDeck[currentFlashcardIndex];
+  if (!item) return;
+
+  if (mastered) {
+    if (!appData.userMasteredIds.includes(item.id)) appData.userMasteredIds.push(item.id);
+    const pIdx = appData.userPracticeIds.indexOf(item.id);
+    if (pIdx > -1) appData.userPracticeIds.splice(pIdx, 1);
+  } else {
+    if (!appData.userPracticeIds.includes(item.id)) appData.userPracticeIds.push(item.id);
+    const mIdx = appData.userMasteredIds.indexOf(item.id);
+    if (mIdx > -1) appData.userMasteredIds.splice(mIdx, 1);
+  }
+
+  persistState();
+  updateDashboardStats();
+  nextFlashcard();
+}
+
+function speakFlashcardWord() {
+  const item = currentFlashcardDeck[currentFlashcardIndex];
+  if (item) playSpeech(item.word);
+}
+
+// ================= PRONUNCIATION LAB =================
+
+function initPronunciationLab() {
+  const select = document.getElementById('labWordSelect');
+  if (!select) return;
+
+  select.innerHTML = VOCAB_DATABASE.map(v => `
+    <option value="${v.id}">${escapeHtml(v.word)} (${escapeHtml(v.respelling || '')})</option>
+  `).join('');
+
+  if (VOCAB_DATABASE.length > 0) {
+    loadLabWord(VOCAB_DATABASE[0].id);
+  }
+}
+
+function loadLabWord(id) {
+  currentLabWord = VOCAB_DATABASE.find(v => v.id === id) || VOCAB_DATABASE[0];
+  if (!currentLabWord) return;
+
+  const titleEl = document.getElementById('labWordTitle');
+  const ipaEl = document.getElementById('labWordIpa');
+  const respellEl = document.getElementById('labWordRespelling');
+  const syllablesContainer = document.getElementById('labSyllablesContainer');
+  const drillSentence = document.getElementById('labDrillSentence');
+  const teluguTip = document.getElementById('labTeluguTip');
+
+  if (titleEl) titleEl.textContent = currentLabWord.word;
+  if (ipaEl) ipaEl.textContent = currentLabWord.phonetic || '';
+  if (respellEl) respellEl.textContent = `Phonetic Breakdown: ${currentLabWord.respelling || ''}`;
+
+  if (syllablesContainer) {
+    const syllables = currentLabWord.syllables || [currentLabWord.word];
+    const stressIdx = currentLabWord.stressIndex !== undefined ? currentLabWord.stressIndex : 0;
+
+    syllablesContainer.innerHTML = syllables.map((s, idx) => `
+      <button type="button" class="syllable-chip ${idx === stressIdx ? 'stressed' : ''}" onclick="speakSyllable('${escapeHtml(s)}')">
+        ${escapeHtml(s)}
+      </button>
+    `).join('');
+  }
+
+  if (drillSentence) {
+    drillSentence.textContent = `"${currentLabWord.sentences.editorial || currentLabWord.sentences.everyday}"`;
+  }
+
+  if (teluguTip) {
+    teluguTip.textContent = `ఉచ్చారణ నియమం: '${currentLabWord.word}' పదాన్ని పలికేటప్పుడు ఒత్తిడి మరియు ఉచ్చారణను సరిగ్గా పాటించాలి. దీనిని బ్యాంకింగ్ GD/ఇంటర్వ్యూలలో నమ్మకంతో ఉపయోగించండి.`;
+  }
+}
+
+function speakCurrentLabWord(rate = 1.0) {
+  if (currentLabWord) {
+    playSpeech(currentLabWord.word, rate);
+  }
+}
+
+function speakSyllable(syllable) {
+  playSpeech(syllable, 0.8);
+}
+
+function repeatLabWordThreeTimes() {
+  if (!currentLabWord) return;
+  let count = 0;
+  function step() {
+    if (count < 3) {
+      playSpeech(currentLabWord.word, 0.9);
+      count++;
+      setTimeout(step, 1100);
+    }
+  }
+  step();
+}
+
+// ================= EXAM QUIZ MODULE =================
+
+function initQuiz() {
+  currentQuizQuestionIndex = 0;
+  quizScore = 0;
+  displayQuizQuestion();
+}
+
+function displayQuizQuestion() {
+  const card = document.getElementById('quizCardBody');
+  const promptEl = document.getElementById('quizQuestionPrompt');
+  const optionsEl = document.getElementById('quizOptionsContainer');
+  const explanationBox = document.getElementById('quizExplanationBox');
+  const nextBtn = document.getElementById('btnNextQuizQuestion');
+  const progressEl = document.getElementById('quizProgressStatus');
+  const scoreCounter = document.getElementById('quizScoreCounter');
+  const totalCounter = document.getElementById('quizTotalQuestionsCounter');
+  const typeBadge = document.getElementById('quizTypeBadge');
+  const diffBadge = document.getElementById('quizDifficultyBadge');
+
+  if (scoreCounter) scoreCounter.textContent = quizScore;
+  if (totalCounter) totalCounter.textContent = QUIZ_QUESTIONS.length;
+  if (explanationBox) explanationBox.style.display = 'none';
+  if (nextBtn) nextBtn.style.display = 'none';
+
+  if (currentQuizQuestionIndex >= QUIZ_QUESTIONS.length) {
+    // Show summary
+    showQuizSummary();
+    return;
+  }
+
+  const q = QUIZ_QUESTIONS[currentQuizQuestionIndex];
+  if (!q) return;
+
+  if (progressEl) progressEl.textContent = `Question ${currentQuizQuestionIndex + 1} of ${QUIZ_QUESTIONS.length}`;
+  if (typeBadge) typeBadge.textContent = q.type || 'EXAM QUESTION';
+  if (diffBadge) diffBadge.textContent = `Difficulty: ${q.difficulty || 'SBI PO Mains'}`;
+  if (promptEl) promptEl.innerHTML = escapeHtml(q.prompt).replace(/\n/g, '<br>');
+
+  if (optionsEl) {
+    optionsEl.innerHTML = q.options.map((opt, idx) => `
+      <button type="button" class="quiz-option-btn" onclick="submitQuizAnswer(this, ${idx}, ${q.correctIndex})">
+        <span class="index-num">${String.fromCharCode(65 + idx)}</span>
+        <span>${escapeHtml(opt)}</span>
+      </button>
+    `).join('');
+  }
+}
+
+function submitQuizAnswer(btnEl, selectedIdx, correctIdx) {
+  const container = document.getElementById('quizOptionsContainer');
+  if (!container) return;
+
+  const buttons = container.querySelectorAll('.quiz-option-btn');
+  buttons.forEach(b => {
+    b.disabled = true;
+    b.classList.remove('correct', 'incorrect');
+  });
+
+  const q = QUIZ_QUESTIONS[currentQuizQuestionIndex];
+  const isCorrect = (selectedIdx === correctIdx);
+
+  if (isCorrect) {
+    btnEl.classList.add('correct');
+    quizScore++;
+    const scoreCounter = document.getElementById('quizScoreCounter');
+    if (scoreCounter) scoreCounter.textContent = quizScore;
+  } else {
+    btnEl.classList.add('incorrect');
+    if (buttons[correctIdx]) buttons[correctIdx].classList.add('correct');
+  }
+
+  // Show detailed rationale  const explanationBox = document.getElementById('quizExplanationBox');
+  const explanationText = document.getElementById('quizExplanationText');
+  if (explanationBox && explanationText) {
+    explanationBox.style.display = 'block';
+    explanationText.innerHTML = `<strong>${isCorrect ? 'Correct! ✓' : 'Incorrect ✗'}</strong> ${escapeHtml(q.explanation)}`;
+  }
+
+  const nextBtn = document.getElementById('btnNextQuizQuestion');
+  if (nextBtn) nextBtn.style.display = 'inline-flex';
+
+  // Log attempt
+  appData.quizAttempts.push({
+    questionId: q.id,
+    isCorrect: isCorrect,
+    timestamp: new Date().toISOString()
+  });
+
+  persistState();
+  updateDashboardStats();
+}
+
+function advanceQuizQuestion() {
+  currentQuizQuestionIndex++;
+  displayQuizQuestion();
+}
+
+function resetActiveQuiz() {
+  initQuiz();
+}
+
+function showQuizSummary() {
+  const promptEl = document.getElementById('quizQuestionPrompt');
+  const optionsEl = document.getElementById('quizOptionsContainer');
+  const explanationBox = document.getElementById('quizExplanationBox');
+  const nextBtn = document.getElementById('btnNextQuizQuestion');
+  const progressEl = document.getElementById('quizProgressStatus');
+
+  if (progressEl) progressEl.textContent = 'Assessment Complete';
+  if (explanationBox) explanationBox.style.display = 'none';
+  if (nextBtn) nextBtn.style.display = 'none';
+
+  const accuracy = Math.round((quizScore / QUIZ_QUESTIONS.length) * 100);
+
+  if (promptEl) {
+    promptEl.innerHTML = `Exam Assessment Complete!`;
+  }
+
+  if (optionsEl) {
+    optionsEl.innerHTML = `
+      <div style="text-align: center; padding: var(--space-xl); background-color: var(--surface-container); border-radius: var(--rounded-lg);">
+        <div style="font-family: var(--font-headline); font-size: 2.5rem; font-weight: 700; color: ${accuracy >= 70 ? 'var(--positive)' : 'var(--secondary)'}; margin-bottom: 0.25rem;">
+          ${quizScore} / ${QUIZ_QUESTIONS.length}
+        </div>
+        <div style="font-family: var(--font-label); font-size: 0.85rem; color: var(--on-surface-variant); text-transform: uppercase; margin-bottom: 1.5rem;">
+          Overall Accuracy: ${accuracy}% (${accuracy >= 80 ? 'Distinction Standard' : accuracy >= 60 ? 'Mains Cutoff Cleared' : 'Needs Reinforcement'})
+        </div>
+        <div style="display: flex; gap: var(--space-md); justify-content: center;">
+          <button type="button" class="action-btn-primary" onclick="initQuiz()">
+            <i data-lucide="rotate-ccw" style="width: 16px; height: 16px;"></i>
+            <span>Retake Assessment</span>
+          </button>
+          <button type="button" class="action-btn-secondary" onclick="switchTab('flashcards')">
+            <i data-lucide="layers" style="width: 16px; height: 16px;"></i>
+            <span>Revise with Flashcards</span>
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+}
+
+// ================= CMS & CONTENT UPDATE ENGINE =================
+
+function setCmsMode(mode) {
+  const visualForm = document.getElementById('cmsVisualForm');
+  const jsonMode = document.getElementById('cmsJsonMode');
+  const btnVisual = document.getElementById('btnCmsModeVisual');
+  const btnJson = document.getElementById('btnCmsModeJson');
+
+  if (mode === 'visual') {
+    if (visualForm) visualForm.style.display = 'block';
+    if (jsonMode) jsonMode.style.display = 'none';
+    if (btnVisual) btnVisual.classList.add('active');
+    if (btnJson) btnJson.classList.remove('active');
+  } else {
+    if (visualForm) visualForm.style.display = 'none';
+    if (jsonMode) jsonMode.style.display = 'block';
+    if (btnVisual) btnVisual.classList.remove('active');
+    if (btnJson) btnJson.classList.add('active');
+    loadSampleJsonTemplate();
+  }
+}
+
+function handleCmsVisualSubmit(e) {
+  e.preventDefault();
+
+  const dateVal = document.getElementById('cmsInputDate').value;
+  const titleVal = document.getElementById('cmsInputTitle').value;
+  const standfirstVal = document.getElementById('cmsInputStandfirst').value;
+  const textVal = document.getElementById('cmsInputText').value;
+  const teluguSummaryVal = document.getElementById('cmsInputTeluguSummary').value;
+  const toneVal = document.getElementById('cmsInputTone').value;
+  const vocabRawVal = document.getElementById('cmsInputVocabRaw').value;
+
+  const paras = textVal.split(/\n\s*\n/).map(p => p.trim()).filter(Boolean);
+
+  // Build new Lesson Object
+  const newLesson = {
+    id: 'lesson-' + dateVal + '-' + Date.now(),
+    date: dateVal,
+    title: titleVal,
+    standfirst: standfirstVal || 'Daily editorial analysis and critical reading comprehension exercise.',
+    source: 'Custom Daily Editorial Entry',
+    readingTime: Math.max(3, Math.ceil(textVal.split(/\s+/).length / 150)) + ' min read',
+    tone: toneVal || 'Analytical & Critical',
+    difficulty: 'SBI PO Mains Level',
+    paragraphs: paras,
+    paragraphBreakdown: paras.map((p, idx) => ({
+      paraNum: `0${idx + 1}`,
+      title: `Key Takeaway ${idx + 1}`,
+      points: [p.substring(0, 110) + '...']
+    })),
+    centralArgument: 'Core structural argument extracted from today\'s editorial analysis.',
+    beginnerSummary: standfirstVal || 'A beginner-friendly breakdown of today\'s major national discussion point.',
+    teluguSummary: teluguSummaryVal || 'ఈ రోజు ఎడిటోరియల్ విశ్లేషణ మరియు పోటీ పరీక్షలకు ముఖ్యమైన అంశాలు.',
+    rcQuestions: [
+      {
+        id: 'rc-custom-' + Date.now(),
+        question: `What is the primary objective argued in "${titleVal}"?`,
+        options: [
+          'To introduce structural policy transparency and verifiable accountability.',
+          'To minimize regulatory scrutiny across public financial institutions.',
+          'To reduce funding for ambient monitoring programs.',
+          'To postpone examinations indefinitely.'
+        ],
+        correctIndex: 0,
+        explanation: 'The passage argues for disciplined structural policy and accountability.'
+      }
+    ]
+  };
+
+  // Process any custom vocabulary lines
+  if (vocabRawVal.trim()) {
+    const lines = vocabRawVal.split('\n').filter(Boolean);
+    lines.forEach((line, idx) => {
+      const parts = line.split('|').map(s => s.trim());
+      if (parts.length >= 2) {
+        const word = parts[0];
+        const pos = parts[1] || 'Noun';
+        const meaning = parts[2] || 'Definition pending';
+        const telugu = parts[3] || 'వివరణ';
+        const syns = parts[4] ? parts[4].split(',').map(s => s.trim()) : [];
+
+        VOCAB_DATABASE.unshift({
+          id: 'v-custom-' + Date.now() + '-' + idx,
+          word: word,
+          phonetic: '/' + word.toLowerCase() + '/',
+          respelling: word.toUpperCase(),
+          syllables: [word],
+          stressIndex: 0,
+          pos: pos,
+          category: 'Editorial',
+          priority: 'high',
+          meaning: meaning,
+          telugu: telugu,
+          memoryHook: `Visual memory anchor for ${word}`,
+          sentences: {
+            everyday: `In everyday usage, ${word} is applied in context.`,
+            editorial: `The editorial emphasized that "${word}" captures the essence of the ongoing reform.`,
+            cloze: `The regulatory panel used the term _______ to articulate its findings.`
+          },
+          synonyms: syns,
+          antonyms: []
+        });
+      }
+    });
+  }
+
+  // Push to App Data & Persist
+  appData.customLessons.unshift(newLesson);
+  appData.activeDate = dateVal;
+
+  // Update date selector
+  const select = document.getElementById('globalDateSelect');
+  if (select) {
+    const opt = document.createElement('option');
+    opt.value = dateVal;
+    opt.textContent = `${dateVal} (Custom Lesson)`;
+    select.insertBefore(opt, select.firstChild);
+    select.value = dateVal;
+  }
+
+  persistState();
+
+  // Alert and redirect to Editorials view
+  alert(`Lesson for ${dateVal} successfully published to your permanent learning portal!`);
+  switchTab('editorials');
+  updateEditorialSwitcherTabs();
+  renderActiveEditorial();
+  renderVocabCards();
+  initFlashcards('all');
+  updateDashboardStats();
+}
+
+function loadSampleLessonIntoCms() {
+  document.getElementById('cmsInputDate').value = '2026-11-11';
+  document.getElementById('cmsInputTitle').value = 'Monetary Policy Stance: Navigating Inflationary Pressures & Growth Equilibrium';
+  document.getElementById('cmsInputStandfirst').value = 'The Reserve Bank of India balances liquidity discipline against burgeoning credit demand in the non-banking financial sector.';
+  document.getElementById('cmsInputText').value = `The Monetary Policy Committee's (MPC) latest deliberations spotlight the precarious tightrope central banks must walk during periods of uneven post-festival demand. While headline inflation has moderated marginally beneath statutory tolerance bands, persistent food-price volatility threatens to unmoor consumer inflation expectations.\n\nIn this environment, an impetuous reduction in policy repo rates could prove detrimental. Liquidity across the interbank settlement grid remains tightly contested, and credit growth continues to outpace domestic deposit accumulation. Governor-led directives must preserve macroeconomic equilibrium rather than bowing to short-term commercial lobbying.\n\nUltimately, genuine economic resilience stems from sound macro-prudential safeguards rather than superficial liquidity surges. Bank boards must ensure risk-weighted capital buffers are maintained with utmost fidelity.`;
+  document.getElementById('cmsInputTeluguSummary').value = `ద్రవ్య విధాన కమిటీ (MPC) ద్రవ్యోల్బణ ఒత్తిళ్లు మరియు ఆర్థిక వృద్ధి సమతుల్యతను కొనసాగించడంపై దృష్టి సారించింది. మార్కెట్ ఒత్తిళ్లకు తలొగ్గి వడ్డీ రేట్లను తొందరపడి తగ్గించకుండా, బ్యాంకులలో డిపాజిట్లు మరియు రుణాల మధ్య సమతుల్యతను కాపాడాలని ఈ ఎడిటోరియల్ స్పష్టం చేస్తోంది.`;
+  document.getElementById('cmsInputTone').value = 'Analytical, Pragmatic & Prudent Macroeconomic Guidance';
+  document.getElementById('cmsInputVocabRaw').value = `Impetuous | Adjective | Acting quickly and without thought or care | తొందరపాటుతో కూడిన | Rash, Hasty, Precipitous\nEquilibrium | Noun | A state in which opposing forces are balanced | సమతుల్యత, స్థిరత్వం | Balance, Symmetry, Equipoise\nPrudential | Adjective | Involving or showing care and foresight | దూరదృష్టితో కూడిన | Circumspect, Judicious, Cautious`;
+}
+
+function loadSampleJsonTemplate() {
+  const sample = {
+    date: "2026-11-12",
+    title: "Green Hydrogen Multilateral Alliances",
+    standfirst: "How clean fuel corridors can bridge global energy security gaps.",
+    paragraphs: [
+      "Cross-border energy corridors are transforming traditional trade diplomacy...",
+      "Developing nations demand equitable technology transfer to prevent resource exploitation..."
+    ],
+    teluguSummary: "హరిత హైడ్రోజన్ ఇంధన రవాణా మరియు అంతర్జాతీయ ఇంధన భద్రతపై విశ్లేషణ.",
+    vocabulary: [
+      {
+        word: "Pragmatic",
+        pos: "Adjective",
+        meaning: "Dealing with things sensibly and realistically.",
+        telugu: "ఆచరణాత్మకమైన",
+        synonyms: ["Practical", "Sensible"]
+      }
+    ]
+  };
+  const ta = document.getElementById('cmsJsonTextarea');
+  if (ta) ta.value = JSON.stringify(sample, null, 2);
+}
+
+function handleCmsJsonSubmit() {
+  const ta = document.getElementById('cmsJsonTextarea');
+  if (!ta) return;
+  try {
+    const parsed = JSON.parse(ta.value);
+    if (!parsed.date || !parsed.title || !parsed.paragraphs) {
+      alert('Invalid JSON Schema. Ensure date, title, and paragraphs are present.');
+      return;
+    }
+
+    const newLesson = {
+      id: 'lesson-' + parsed.date + '-' + Date.now(),
+      date: parsed.date,
+      title: parsed.title,
+      standfirst: parsed.standfirst || 'Daily English editorial breakdown.',
+      source: 'JSON Import Entry',
+      readingTime: '4 min read',
+      tone: 'Objective & Analytical',
+      difficulty: 'Bank PO Mains Level',
+      paragraphs: parsed.paragraphs,
+      paragraphBreakdown: parsed.paragraphs.map((p, i) => ({
+        paraNum: `0${i + 1}`,
+        title: `Takeaway ${i + 1}`,
+        points: [p.substring(0, 100)]
+      })),
+      centralArgument: 'Imported editorial analysis argument.',
+      beginnerSummary: parsed.standfirst || 'Imported lesson overview.',
+      teluguSummary: parsed.teluguSummary || 'దిగుమతి చేసుకున్న ఎడిటోరియల్ పాఠ్యాంశం.',
+      rcQuestions: []
+    };
+
+    if (Array.isArray(parsed.vocabulary)) {
+      parsed.vocabulary.forEach((v, idx) => {
+        VOCAB_DATABASE.unshift({
+          id: 'v-json-' + Date.now() + '-' + idx,
+          word: v.word,
+          phonetic: '/' + v.word.toLowerCase() + '/',
+          respelling: v.word.toUpperCase(),
+          syllables: [v.word],
+          stressIndex: 0,
+          pos: v.pos || 'Noun',
+          category: 'Editorial',
+          priority: 'high',
+          meaning: v.meaning || '',
+          telugu: v.telugu || '',
+          memoryHook: `Visual memory anchor for ${v.word}`,
+          sentences: {
+            everyday: `Example sentence for ${v.word}.`,
+            editorial: `Editorial context sentence for ${v.word}.`,
+            cloze: `Cloze test sentence for ${v.word}.`
+          },
+          synonyms: v.synonyms || [],
+          antonyms: v.antonyms || []
+        });
+      });
+    }
+
+    appData.customLessons.unshift(newLesson);
+    appData.activeDate = parsed.date;
+    persistState();
+
+    alert(`Successfully imported lesson for ${parsed.date}!`);
+    switchTab('editorials');
+    updateEditorialSwitcherTabs();
+    renderActiveEditorial();
+    renderVocabCards();
+    updateDashboardStats();
+  } catch (err) {
+    alert('JSON Syntax Error: ' + err.message);
+  }
+}
+
+function exportDataBackup() {
+  const exportPayload = {
+    appVersion: '1.0',
+    exportTimestamp: new Date().toISOString(),
+    state: appData,
+    customLessons: appData.customLessons,
+    vocabularyCount: VOCAB_DATABASE.length
+  };
+
+  const jsonString = JSON.stringify(exportPayload, null, 2);
+
+  // Trigger File Download via shim if available
+  if (window.notebookAppApi && typeof window.notebookAppApi.triggerFileDownload === 'function') {
+    window.notebookAppApi.triggerFileDownload({
+      content: jsonString,
+      contentType: 'text/plain',
+      encoding: 'UTF-8',
+      filename: `daily_english_backup_${new Date().toISOString().slice(0, 10)}.json`
+    });
+  } else {
+    // Copy to clipboard fallback
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(jsonString).then(() => {
+        alert('Database export JSON copied to clipboard!');
+      });
+    }
+  }
+}
+
+// ================= DASHBOARD METRICS =================
+
+function updateDashboardStats() {
+  const totalEl = document.getElementById('statTotalVocab');
+  const masteredEl = document.getElementById('statMasteredVocab');
+  const pendingEl = document.getElementById('statPendingVocab');
+  const pctEl = document.getElementById('statMasteredPct');
+  const accuracyEl = document.getElementById('statQuizAccuracy');
+  const heroTitle = document.getElementById('heroEditorialTitle');
+  const listContainer = document.getElementById('dashboardLessonList');
+
+  const total = VOCAB_DATABASE.length;
+  const mastered = appData.userMasteredIds.length;
+  const pending = Math.max(0, total - mastered);
+  const pct = Math.round((mastered / total) * 100);
+
+  if (totalEl) totalEl.textContent = total;
+  if (masteredEl) masteredEl.textContent = mastered;
+  if (pendingEl) pendingEl.textContent = pending;
+  if (pctEl) pctEl.textContent = pct + '%';
+
+  if (accuracyEl && appData.quizAttempts.length > 0) {
+    const correctCount = appData.quizAttempts.filter(a => a.isCorrect).length;
+    const acc = Math.round((correctCount / appData.quizAttempts.length) * 100);
+    accuracyEl.textContent = acc + '%';
+  }
+
+  // Dashboard Lesson Highlights
+  const all = getAllLessons();
+  if (all.length > 0 && heroTitle) {
+    heroTitle.textContent = all[0].title;
+  }
+
+  if (listContainer) {
+    listContainer.innerHTML = all.slice(0, 4).map((l, idx) => `
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 0.65rem 0.85rem; background-color: var(--surface-container); border-radius: var(--rounded); cursor: pointer;" onclick="selectEditorial('${l.id}'); switchTab('editorials');">
+        <div>
+          <div style="font-family: var(--font-label); font-size: 0.72rem; color: var(--secondary); font-weight: 600;">
+            ${escapeHtml(l.date)} • ${escapeHtml(l.source)}
+          </div>
+          <div style="font-weight: 600; font-size: 0.9rem; color: var(--on-surface);">
+            ${escapeHtml(l.title)}
+          </div>
+        </div>
+        <i data-lucide="chevron-right" style="width: 16px; height: 16px; color: var(--on-surface-variant); flex-shrink: 0;"></i>
+      </div>
+    `).join('');
+  }
+
+  if (window.lucide && typeof window.lucide.createIcons === 'function') {
+    window.lucide.createIcons();
+  }
+}
+
+// ================= UTILITIES =================
+
+function escapeHtml(text) {
+  if (typeof text !== 'string') return '';
+  return text
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+}
+</script>
+
+</body>
+</html>
